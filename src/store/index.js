@@ -1,27 +1,26 @@
 import {createStore} from 'vuex';
 
-import catsList from './categories/categories';
-import wordsList from './words/words';
-import teamsList from './teams/teams';
+import categories from '../data/categories';
+import words from '../data/words';
+import teams from '../data/teams';
 
 export const store = createStore({
-    // modules: {
-        // catsList
-        // teamsList
-    // },
+    modules: {
+
+    },
     state() {
         return {
             gameName: 'Pantomim Game',
             totalRounds: 3,
             round: 1,
             turn: 0,
-            teams: teamsList,
-            words: wordsList,
+            teams: teams,
+            words: words,
             autoTime: true,
             time: 45,
             gameTypes: ['عادی'],
             gameType: 'عادی',
-            categories: catsList,
+            categories: categories,
             pts: [2, 4, 6]
         }
     },
@@ -86,9 +85,9 @@ export const store = createStore({
             state.time = 45;
             state.gameTypes = ['عادی'];
             state.gameType = 'عادی';
-            state.words = wordsList;
-            state.teams = teamsList;
-            state.categories = catsList;
+            state.words = words;
+            state.teams = teams;
+            state.categories = categories;
             // console.log(teamsList);
         },
         setNumberOfRounds(state, step) {

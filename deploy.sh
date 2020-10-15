@@ -2,12 +2,9 @@ set -e
 
 npm run build
 
-cd dist
+#cd dist
 
-git init
-git add -A
-git commit -m 'deploy'
-
-git push -f git@github.com:ArKhosrojerdi/ArKhosrojerdi.github.io master:gh-pages
+git add dist && git commit -m "change dist file"
+git subtree push --prefix dist origin gh-pages
 
 cd -

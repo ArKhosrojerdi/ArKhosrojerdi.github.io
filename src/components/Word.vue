@@ -62,12 +62,9 @@
 
             <transition name="fade">
               <div v-if="fail" class="alert-body d-flex flex-column flex-1">
-                <div class="pt-3 pb-2 mx-auto row alert-fail">
-                  <h1 class="mb-md-0 mb-2 d-flex justify-content-center align-items-center col-12">
-                    <i class="fas fa-skull"></i>
-                  </h1>
-                  <h1 class="mb-0 col-12">
-                    ریدی!
+                <div class="py-2 row alert-fail col-12 mx-auto">
+                  <h1 class="mx-auto">
+                    باختی که!
                   </h1>
                 </div>
 
@@ -78,11 +75,8 @@
 
             <transition name="fade2">
               <div v-if="success" class="alert-body d-flex flex-column flex-1">
-                <div class="pt-3 pb-2 mx-auto row alert-success">
-                  <h1 class="mb-md-0 mb-2 d-flex justify-content-center align-items-center col-12">
-                    <i class="fas fa-award"></i>
-                  </h1>
-                  <h1 class="mb-0 col-12">
+                <div class="py-2 row alert-success col-12 mx-auto">
+                  <h1 class="mx-auto">
                     ایول!
                   </h1>
                 </div>
@@ -329,7 +323,7 @@ export default {
   background-color: darken(#F24B6A, 10%);
   color: #efefef;
   border-radius: .5rem;
-  box-shadow: 0 8px 8px 0 darken(#efefef, 10%);
+  box-shadow: 0 4px 4px 0 darken(#efefef, 10%);
   border-bottom: 4px solid darken(#F24B6A, 20%);
 }
 
@@ -337,7 +331,7 @@ export default {
   background-color: darken(#44A666, 10%);
   color: #efefef;
   border-radius: .5rem;
-  box-shadow: 0 8px 8px 0 darken(#efefef, 10%);
+  box-shadow: 0 4px 4px 0 darken(#efefef, 10%);
   border-bottom: 4px solid darken(#44A666, 20%);
 }
 

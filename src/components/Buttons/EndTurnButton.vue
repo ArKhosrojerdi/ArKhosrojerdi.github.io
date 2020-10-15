@@ -7,7 +7,7 @@
       </button>
     </router-link>
     <router-link to="/table" v-else>
-      <button class="nav-btn btn-border-tx-none mt-auto" @click="nextTurn">
+      <button class="nav-btn btn-border-tx-none mt-auto text-center" @click="nextTurn">
         <!--                    <i class="fa fa-angle-double-right"></i>-->
         باشه
       </button>
