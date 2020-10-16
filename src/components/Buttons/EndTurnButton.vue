@@ -1,13 +1,13 @@
 <template>
   <div>
     <router-link to="/result" v-if="lastTurn">
-      <button class="nav-btn btn-border-tx-none mt-auto">
+      <button class="nav-btn btn-border-tx-none mt-auto px-2">
         <!--                    <i class="fa fa-angle-double-right"></i>-->
         باشه
       </button>
     </router-link>
     <router-link to="/table" v-else>
-      <button class="nav-btn btn-border-tx-none mt-auto text-center" @click="nextTurn">
+      <button class="nav-btn btn-border-tx-none mt-auto px-2" @click="nextTurn">
         <!--                    <i class="fa fa-angle-double-right"></i>-->
         باشه
       </button>
@@ -46,7 +46,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .nav-btn {
   border: 4px solid darken(#F24B6A, 20%);
   background-color: #F24B6A;
@@ -56,7 +56,7 @@ export default {
   font-size: 24px;
   line-height: 100%;
   height: 4rem;
-  min-width: 4rem;
+  width: 4rem;
   box-shadow: 0 4px 4px 0 darken(#EFEFEF, 10%);
 }
 

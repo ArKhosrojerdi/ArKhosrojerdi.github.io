@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-6 col-md-9 col-sm-12 col-12 d-flex flex-column flex-1 mx-auto">
+  <div class="d-flex flex-column flex-1">
     <div>
       <h2 class="text-gray m-0 mb-2">
         {{ toPersian(totalRounds) }}
@@ -23,17 +23,17 @@
     <div class="d-flex flex-column flex-1">
       <div class="mt-auto d-flex justify-content-between">
         <router-link to="/categories">
-          <button class="nav-btn btn-border-tr-none wink">
+          <button class="nav-btn btn-border-tr-none wink px-2">
             <i class="fa fa-angle-double-right"></i>
           </button>
         </router-link>
         <router-link to="/info">
-          <button class="nav-btn btn-border-tx-none">
+          <button class="nav-btn btn-border-tx-none px-2">
             <i class="fas fa-info-circle"></i>
           </button>
         </router-link>
         <router-link to="/">
-          <button class="nav-btn btn-border-tl-none" @click="initGame">
+          <button class="nav-btn btn-border-tl-none px-2" @click="initGame">
             <i class="fa fa-power-off"></i>
           </button>
         </router-link>
@@ -181,6 +181,10 @@ export default {
 
 .text-gray {
   color: #2c3e50;
+}
+
+.text-gray#text {
+  line-height: 0;
 }
 
 .d-flex.flex-column.flex-1 {

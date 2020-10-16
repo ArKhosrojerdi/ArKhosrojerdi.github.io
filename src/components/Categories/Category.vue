@@ -7,7 +7,7 @@
         <div class="h-100 w-100 d-flex flex-row align-items-center">
           <router-link to="/word" v-for="(pt, ind) in pts" :key="ind" :class="{'mr-auto': ind === 0}"
                        class="ml-2">
-            <button class="btn-point btn-border-tl-none" :disabled="checkPoint(index, pt)"
+            <button class="btn-point btn-border-tl-none px-2" :disabled="checkPoint(index, pt)"
                     @click="pushCategory({catId: cat.id, point: pt})">
               {{ toPersian(pt) }}
             </button>
@@ -86,7 +86,6 @@ export default {
   border-radius: .5rem;
   font-weight: 700;
   font-size: 24px;
-  padding: 0;
   box-shadow: 0 0 4px 0 darken(#CFCFCF, 10%);
   outline: none;
 }

@@ -1,7 +1,6 @@
 <template>
   <div class="d-flex flex-column align-items-center justify-content-center flex-1">
-    <div class="w-100">
-      <ul class="d-flex flex-column justify-content-center align-content-center p-0 mb-0">
+      <ul class="d-flex flex-column justify-content-center align-content-center p-0 mb-0 w-100">
         <li class="d-flex align-items-center justify-content-center mb-2 green">
           <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
             <div class="col-4">
@@ -46,7 +45,7 @@
             </div>
           </div>
         </li>
-        <li class="d-flex align-items-center justify-content-center mb-2 red">
+        <li class="d-flex align-items-center justify-content-center red">
           <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
             <div class="col-4">
               <h4 class="m-0">
@@ -60,9 +59,9 @@
         </li>
       </ul>
 
-      <div class="d-flex flex-row align-items-center justify-content-end h-100 w-100">
+      <div class="d-flex flex-row align-items-center justify-content-end h-100 w-100 mt-2">
         <div class="col-4">
-          <h2 class="m-0">
+          <h2 class="m-0" :class="totalPoint > 0 ? 'text-green' : 'text-red'">
             <b>
               <span v-if="totalPoint > 0">+</span>
               {{ toPersian(totalPoint) }}
@@ -72,7 +71,6 @@
       </div>
 
     </div>
-  </div>
 </template>
 
 <script>
@@ -137,6 +135,10 @@ ul li {
   color: darken(#44A666, 15%);
 }
 
+.text-green {
+  color: #44A666;
+}
+
 .red {
   background-color: #F24B6A;
   border-bottom: 4px solid darken(#F24B6A, 22%);
@@ -144,6 +146,10 @@ ul li {
 
 .text-dark-red {
   color: darken(#F24B6A, 22%);
+}
+
+.text-red {
+  color: #F24B6A;
 }
 
 /* Extra small devices (phones, 576px and down) */

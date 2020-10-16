@@ -5,11 +5,6 @@
         <div class="game-settings">
           <div class="my-4 mx-auto col-lg-6 col-md-9 col-sm-12 col-12 d-flex flex-column flex-1">
             <div v-if="!fail && !success" class="d-flex flex-column flex-1">
-<!--              <div>-->
-<!--                <h1 class="mb-1 text-muted"><i class="fas fa-microscope"></i></h1>-->
-<!--                <h3 class="text-muted">{{ catName }}</h3>-->
-<!--                <hr class="m-0">-->
-<!--              </div>-->
 
               <WordHeader :catName="catName" :catId="catId"/>
 
@@ -34,10 +29,10 @@
                 </div>
               </div>
 
-              <div v-if="!hasStarted" class="d-flex flex-row"
-                   :class="{'justify-content-between': changed === 0, 'justify-content-center hide': changed}">
+              <div v-if="!hasStarted" class="d-flex flex-row hide"
+                   :class="{'justify-content-between': changed === 0, 'justify-content-center': changed === 1}">
                 <button @click="start" class="nav-btn mt-auto px-2"
-                        :class="{'btn-border-tr-none': changed === 0, 'btn-border-tx-none': changed}">
+                        :class="{'btn-border-tr-none': changed === 0, 'btn-border-tx-none': changed === 1}">
                   <i class="fas fa-play"></i>
                 </button>
                 <button v-if="changed === 0" @click="changeWord" class="nav-btn mt-auto px-2"
@@ -48,13 +43,13 @@
               </div>
 
               <div v-else class="d-flex align-content-between align-items-between justify-content-between">
-                <button class="nav-btn btn-border-tr-none mt-md-0 mt-auto" @click="succeed">
+                <button class="nav-btn btn-border-tr-none mt-auto px-2" @click="succeed">
                   <i class="fas fa-check"></i>
                 </button>
-                <button class="nav-btn btn-border-tx-none mt-md-0 mt-auto" @click="submitFault">
+                <button class="nav-btn btn-border-tx-none mt-auto px-2" @click="submitFault">
                   <i class="fas fa-exclamation-triangle"></i>
                 </button>
-                <button class="nav-btn btn-border-tl-none mt-md-0 mt-auto" @click="failed">
+                <button class="nav-btn btn-border-tl-none mt-auto px-2" @click="failed">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
@@ -258,20 +253,24 @@ export default {
   line-height: 100%;
   height: 4rem;
   min-width: 4rem;
+  max-width: 4rem;
   box-shadow: 0 4px 4px 0 darken(#EFEFEF, 10%);
 }
 
 .justify-content-center.hide {
+  -webkit-animation: hide .2s linear;
+  -moz-animation: hide .2s linear;
+  -o-animation: hide .2s linear;
   animation: hide .2s linear;
 }
 
 @keyframes hide {
   0% {
-    transform: translateX(calc(+50% - 2rem));
+    transform: translateX(-webkit-calc(+50% - 2rem));
   }
 
   100% {
-    transform: translateX(calc(-50% + 2rem));
+    transform: translateX(-webkit-calc(-50% + 2rem));
     align-self: center;
   }
 }

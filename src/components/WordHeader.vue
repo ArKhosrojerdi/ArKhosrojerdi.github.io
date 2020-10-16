@@ -1,8 +1,7 @@
 <template>
   <div>
-    <h1 class="mb-1 text-muted h-100"><i class="fas" :class="'fa-' + catIcons[catId]"></i>
-    </h1>
-    <h3 class="text-muted">{{ catName }}</h3>
+    <h2 class="mb-1 text-muted h-100"><i class="fas" :class="'fa-' + catIcons[catId]"></i></h2>
+    <h4 class="text-muted">{{ catName }}</h4>
     <hr class="m-0">
   </div>
 </template>
