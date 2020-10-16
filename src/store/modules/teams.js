@@ -1,11 +1,11 @@
-import teams from '../../data/teams';
+import teams from '@/data/teams';
 
 const state = {
-    teams: teams
+    teams: []
 };
 
 const mutations = {
-    initTeams(state) {
+    'INIT_TEAMS'(state) {
         state.teams = teams;
     }
 }

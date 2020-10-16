@@ -2,25 +2,21 @@ import {createStore} from 'vuex';
 
 import categories from '../data/categories';
 import words from '../data/words';
-import teams from '../data/teams';
 
 export const store = createStore({
-    modules: {
-
-    },
     state() {
         return {
             gameName: 'Pantomim Game',
-            totalRounds: 3,
-            round: 1,
+            totalRounds: 0,
+            round: 0,
             turn: 0,
-            teams: teams,
-            words: words,
+            teams: [],
+            words: [],
             autoTime: true,
-            time: 45,
-            gameTypes: ['عادی'],
-            gameType: 'عادی',
-            categories: categories,
+            time: 0,
+            gameTypes: [],
+            gameType: '',
+            categories: [],
             pts: [2, 4, 6]
         }
     },
@@ -61,7 +57,8 @@ export const store = createStore({
         getTeamsPoints(state) {
             let points, secs, arrRound = [];
             for (let i = 0; i < state.teams.length; i++) {
-                points = 0, secs = 0;
+                points = 0;
+                secs = 0;
                 for (let j = 0; j < state.teams[i].log.length; j++) {
                     points += state.teams[i].log[j].round.point;
                     secs += state.teams[i].log[j].round.sec;
@@ -77,6 +74,12 @@ export const store = createStore({
         }
     },
     mutations: {
+        initTeams(state) {
+            state.teams = [
+                {id: 0, name: 'تیم ۱', eliminated: false, log: []},
+                {id: 1, name: 'تیم ۲', eliminated: false, log: []}
+            ];
+        },
         initGame(state) {
             state.totalRounds = 3;
             state.round = 1;
@@ -86,9 +89,7 @@ export const store = createStore({
             state.gameTypes = ['عادی'];
             state.gameType = 'عادی';
             state.words = words;
-            state.teams = teams;
             state.categories = categories;
-            // console.log(teamsList);
         },
         setNumberOfRounds(state, step) {
             state.totalRounds += step;
@@ -162,6 +163,7 @@ export const store = createStore({
     actions: {
         initGame({commit}) {
             commit("initGame")
+            commit("initTeams")
         },
         setNumberOfRounds({commit}, step) {
             commit("setNumberOfRounds", step)

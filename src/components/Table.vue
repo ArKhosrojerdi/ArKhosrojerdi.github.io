@@ -33,7 +33,7 @@
           </button>
         </router-link>
         <router-link to="/">
-          <button class="nav-btn btn-border-tl-none px-2" @click="initGame">
+          <button class="nav-btn btn-border-tl-none px-2" @click="init()">
             <i class="fa fa-power-off"></i>
           </button>
         </router-link>
@@ -57,7 +57,7 @@ export default {
     this.table = this.getTable();
   },
   methods: {
-    initGame() {
+    init() {
       this.initGame();
     },
     toPersian(n) {

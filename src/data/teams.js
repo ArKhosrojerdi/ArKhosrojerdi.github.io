@@ -1,4 +1,4 @@
-export const teams = [
+export default [
     {
         id: 0,
         name: 'تیم ۱',
@@ -19,6 +19,4 @@ export const teams = [
         eliminated: false,
         log: []
     }
-]
-
-export default teams;
+];

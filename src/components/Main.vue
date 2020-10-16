@@ -120,7 +120,13 @@ export default {
       interval: false,
     };
   },
+  created() {
+    this.initializeGame();
+  },
   methods: {
+    initializeGame() {
+      this.initGame();
+    },
     toPersian(n) {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
@@ -210,7 +216,8 @@ export default {
       'removeTeam',
       'setAutoTime',
       'setTime',
-      'setGameType'
+      'setGameType',
+      'initGame'
     ])
   },
   computed: {
