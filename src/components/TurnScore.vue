@@ -1,76 +1,87 @@
 <template>
-  <div class="d-flex flex-column align-items-center justify-content-center flex-1">
-    <ul class="d-flex flex-column justify-content-center align-content-center p-0 mb-0 w-100">
-      <li class="d-flex align-items-center justify-content-center mb-2 green">
-        <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
-          <div class="col-4">
-            <h4 class="m-0">
-              <b><span v-if="point > 0">+</span>{{ toPersian(point) }}</b>
-            </h4>
+  <div class="d-flex flex-column align-items-center justify-content-center flex-1 w-100">
+    <div class="d-flex flex-column justify-content-center align-content-center mt-auto w-100">
+      <ul class="w-100 p-0 mb-0">
+        <li class="d-flex align-items-center justify-content-center mb-2 green">
+          <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
+            <div class="col-4">
+              <h4 class="m-0">
+                <b><span v-if="point > 0">+</span>{{ toPersian(point) }}</b>
+              </h4>
+            </div>
+            <div class="col-4">
+              <i class="fas fa-star text-dark-green"></i>
+            </div>
           </div>
-          <div class="col-4">
-            <i class="fas fa-star text-dark-green"></i>
+        </li>
+        <li class="d-flex align-items-center justify-content-center mb-2 red">
+          <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
+            <div class="col-4">
+              <h4 class="m-0">
+                <b>{{ toPersian(-changed) }}</b>
+              </h4>
+            </div>
+            <div class="col-4">
+              <i class="fas fa-sync-alt text-dark-red"></i>
+            </div>
           </div>
-        </div>
-      </li>
-      <li class="d-flex align-items-center justify-content-center mb-2 red">
-        <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
-          <div class="col-4">
-            <h4 class="m-0">
-              <b>{{ toPersian(-changed) }}</b>
-            </h4>
+        </li>
+        <li class="d-flex align-items-center justify-content-center mb-2 green">
+          <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
+            <div class="col-4">
+              <h4 class="m-0">
+                <b><span v-if="point > 0">+</span>{{ toPersian(parseInt(savedTime / 15)) }}</b>
+              </h4>
+            </div>
+            <div class="col-4 px-0">
+              <h6 class="m-0">
+                <b class="rtl text-dark-green">
+                  {{ toPersian(savedTime) }}
+                  ثانیه
+                </b>
+              </h6>
+            </div>
+            <div class="col-4">
+              <i class="fas fa-stopwatch text-dark-green"></i>
+            </div>
           </div>
-          <div class="col-4">
-            <i class="fas fa-sync-alt text-dark-red"></i>
+        </li>
+        <li class="d-flex align-items-center justify-content-center red">
+          <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
+            <div class="col-4">
+              <h4 class="m-0">
+                <b>{{ toPersian(-faults) }}</b>
+              </h4>
+            </div>
+            <div class="col-4">
+              <i class="fas fa-exclamation-triangle text-dark-red"></i>
+            </div>
           </div>
-        </div>
-      </li>
-      <li class="d-flex align-items-center justify-content-center mb-2 green">
-        <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
-          <div class="col-4">
-            <h4 class="m-0">
-              <b><span v-if="point > 0">+</span>{{ toPersian(parseInt(savedTime / 15)) }}</b>
-            </h4>
-          </div>
-          <div class="col-4 px-0">
-            <h6 class="m-0">
-              <b class="rtl text-dark-green">
-                {{ toPersian(savedTime) }}
-                ثانیه
-              </b>
-            </h6>
-          </div>
-          <div class="col-4">
-            <i class="fas fa-stopwatch text-dark-green"></i>
-          </div>
-        </div>
-      </li>
-      <li class="d-flex align-items-center justify-content-center red">
-        <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
-          <div class="col-4">
-            <h4 class="m-0">
-              <b>{{ toPersian(-faults) }}</b>
-            </h4>
-          </div>
-          <div class="col-4">
-            <i class="fas fa-exclamation-triangle text-dark-red"></i>
-          </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
 
-    <div class="d-flex flex-row align-items-center justify-content-end h-100 w-100 mt-2">
-      <div class="col-4">
-        <h2 class="m-0" :class="totalPoint() > 0 ? 'text-green' : 'text-red'">
-          <b>
-            <span v-if="totalPoint() > 0">+</span>
-            {{ toPersian(totalPoint()) }}
-          </b>
-        </h2>
+      <div class="h-100 w-100 mt-3 mt-sm-4 row px-0 mx-0 justify-content-between">
+        <div class="col-4">
+          <h2 class="m-0">
+            <b>
+              <i class="fas fa-chart-bar" :class="totalPoint() > 0 ? 'text-green' : 'text-red'"></i>
+            </b>
+          </h2>
+        </div>
+        <div class="col-4">
+          <h2 class="m-0" :class="totalPoint() > 0 ? 'text-green' : 'text-red'">
+            <b>
+              <span v-if="totalPoint() > 0">+</span>
+              {{ toPersian(totalPoint()) }}
+            </b>
+          </h2>
+        </div>
       </div>
     </div>
 
-    <EndTurnButton :points="points" :savedTime="savedTime"/>
+    <div class="mt-auto">
+      <EndTurnButton :points="points" :savedTime="savedTime"/>
+    </div>
   </div>
 </template>
 
