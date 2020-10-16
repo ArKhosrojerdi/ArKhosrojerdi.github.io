@@ -1,84 +1,90 @@
 <template>
   <div class="d-flex flex-column align-items-center justify-content-center flex-1">
-      <ul class="d-flex flex-column justify-content-center align-content-center p-0 mb-0 w-100">
-        <li class="d-flex align-items-center justify-content-center mb-2 green">
-          <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
-            <div class="col-4">
-              <h4 class="m-0">
-                <b><span v-if="point > 0">+</span>{{ toPersian(point) }}</b>
-              </h4>
-            </div>
-            <div class="col-4">
-              <i class="fas fa-star text-dark-green"></i>
-            </div>
+    <ul class="d-flex flex-column justify-content-center align-content-center p-0 mb-0 w-100">
+      <li class="d-flex align-items-center justify-content-center mb-2 green">
+        <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
+          <div class="col-4">
+            <h4 class="m-0">
+              <b><span v-if="point > 0">+</span>{{ toPersian(point) }}</b>
+            </h4>
           </div>
-        </li>
-        <li class="d-flex align-items-center justify-content-center mb-2 red">
-          <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
-            <div class="col-4">
-              <h4 class="m-0">
-                <b>{{ toPersian(-changed) }}</b>
-              </h4>
-            </div>
-            <div class="col-4">
-              <i class="fas fa-sync-alt text-dark-red"></i>
-            </div>
+          <div class="col-4">
+            <i class="fas fa-star text-dark-green"></i>
           </div>
-        </li>
-        <li class="d-flex align-items-center justify-content-center mb-2 green">
-          <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
-            <div class="col-4">
-              <h4 class="m-0">
-                <b><span v-if="point > 0">+</span>{{ toPersian(parseInt(savedTime / 15)) }}</b>
-              </h4>
-            </div>
-            <div class="col-4 px-0">
-              <h6 class="m-0">
-                <b class="rtl text-dark-green">
-                  {{ toPersian(savedTime) }}
-                  ثانیه
-                </b>
-              </h6>
-            </div>
-            <div class="col-4">
-              <i class="fas fa-stopwatch text-dark-green"></i>
-            </div>
-          </div>
-        </li>
-        <li class="d-flex align-items-center justify-content-center red">
-          <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
-            <div class="col-4">
-              <h4 class="m-0">
-                <b>{{ toPersian(-faults) }}</b>
-              </h4>
-            </div>
-            <div class="col-4">
-              <i class="fas fa-exclamation-triangle text-dark-red"></i>
-            </div>
-          </div>
-        </li>
-      </ul>
-
-      <div class="d-flex flex-row align-items-center justify-content-end h-100 w-100 mt-2">
-        <div class="col-4">
-          <h2 class="m-0" :class="totalPoint > 0 ? 'text-green' : 'text-red'">
-            <b>
-              <span v-if="totalPoint > 0">+</span>
-              {{ toPersian(totalPoint) }}
-            </b>
-          </h2>
         </div>
-      </div>
+      </li>
+      <li class="d-flex align-items-center justify-content-center mb-2 red">
+        <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
+          <div class="col-4">
+            <h4 class="m-0">
+              <b>{{ toPersian(-changed) }}</b>
+            </h4>
+          </div>
+          <div class="col-4">
+            <i class="fas fa-sync-alt text-dark-red"></i>
+          </div>
+        </div>
+      </li>
+      <li class="d-flex align-items-center justify-content-center mb-2 green">
+        <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
+          <div class="col-4">
+            <h4 class="m-0">
+              <b><span v-if="point > 0">+</span>{{ toPersian(parseInt(savedTime / 15)) }}</b>
+            </h4>
+          </div>
+          <div class="col-4 px-0">
+            <h6 class="m-0">
+              <b class="rtl text-dark-green">
+                {{ toPersian(savedTime) }}
+                ثانیه
+              </b>
+            </h6>
+          </div>
+          <div class="col-4">
+            <i class="fas fa-stopwatch text-dark-green"></i>
+          </div>
+        </div>
+      </li>
+      <li class="d-flex align-items-center justify-content-center red">
+        <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
+          <div class="col-4">
+            <h4 class="m-0">
+              <b>{{ toPersian(-faults) }}</b>
+            </h4>
+          </div>
+          <div class="col-4">
+            <i class="fas fa-exclamation-triangle text-dark-red"></i>
+          </div>
+        </div>
+      </li>
+    </ul>
 
+    <div class="d-flex flex-row align-items-center justify-content-end h-100 w-100 mt-2">
+      <div class="col-4">
+        <h2 class="m-0" :class="totalPoint() > 0 ? 'text-green' : 'text-red'">
+          <b>
+            <span v-if="totalPoint() > 0">+</span>
+            {{ toPersian(totalPoint()) }}
+          </b>
+        </h2>
+      </div>
     </div>
+
+    <EndTurnButton :points="points" :savedTime="savedTime"/>
+  </div>
 </template>
 
 <script>
+import EndTurnButton from './Buttons/EndTurnButton.vue';
+
 export default {
-  computed: {
-    totalPoint() {
-      return this.point + parseInt(this.savedTime / 15) - this.changed - this.faults;
+  data() {
+    return {
+      points: 0
     }
+  },
+  components: {
+    EndTurnButton
   },
   props: [
     'faults',
@@ -86,11 +92,17 @@ export default {
     'savedTime',
     'point'
   ],
+  created() {
+    this.points = this.point - (this.changed + this.faults);
+  },
   methods: {
     toPersian(n) {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
     },
+    totalPoint() {
+      return this.point + parseInt(this.savedTime / 15) - (this.changed + this.faults);
+    }
   }
 }
 </script>

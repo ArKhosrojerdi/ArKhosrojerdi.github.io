@@ -68,7 +68,6 @@ export const store = createStore({
             return arrRound;
         },
         getIsLastTurn(state) {
-            console.log(state.round, state.totalRounds, state.turn, state.teams.length - 1)
             if (state.round === state.totalRounds && state.turn === state.teams.length - 1)
                 return true;
         }

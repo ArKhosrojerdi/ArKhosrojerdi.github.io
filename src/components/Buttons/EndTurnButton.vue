@@ -7,7 +7,7 @@
       </button>
     </router-link>
     <router-link to="/table" v-else>
-      <button class="nav-btn btn-border-tx-none mt-auto px-2" @click="nextTurn">
+      <button class="nav-btn btn-border-tx-none mt-auto px-2" @click="nextTurn()">
         <!--                    <i class="fa fa-angle-double-right"></i>-->
         باشه
       </button>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import {mapMutations} from 'vuex';
 
 export default {
@@ -25,17 +25,24 @@ export default {
       lastTurn: false
     }
   },
-  props: ['point'],
+  props: [
+    'points',
+    'savedTime'
+  ],
   created() {
     this.lastTurn = this.isLastTurn();
+    this.addPoint({point: this.points, time: this.savedTime});
   },
   methods: {
     isLastTurn() {
       return this.getIsLastTurn();
     },
-    nextTurn(point) {
-      this.nextTurn(point)
+    nextTurn() {
+      this.nextTurn();
     },
+    ...mapActions([
+      'addPoint'
+    ]),
     ...mapGetters([
       'getIsLastTurn'
     ]),

@@ -5,7 +5,6 @@
         <div class="game-settings">
           <div class="my-4 mx-auto col-lg-6 col-md-9 col-sm-12 col-12 d-flex flex-column flex-1">
             <div v-if="!fail && !success" class="d-flex flex-column flex-1">
-
               <WordHeader :catName="catName" :catId="catId"/>
 
               <div class="d-flex flex-column flex-1">
@@ -14,17 +13,15 @@
                 </h1>
               </div>
 
-              <div>
-                <div class="mt-auto mb-4">
-                  <h5>{{ toPersian(timer) }}
-                    ثانیه
-                  </h5>
-                  <div class="progress ltr" :class="{'warn': timer <= 15}">
-                    <div class="progress-bar" :class="{'bg-danger': timer <= 15}" role="progressbar"
-                         :style="{'width': volume() + '%'}"
-                         :aria-valuenow="volume"
-                         aria-valuemin="0" aria-valuemax="100">
-                    </div>
+              <div class="mt-auto mb-4">
+                <h5>{{ toPersian(timer) }}
+                  ثانیه
+                </h5>
+                <div class="progress ltr" :class="{'warn': timer <= 15}">
+                  <div class="progress-bar" :class="{'bg-danger': timer <= 15}" role="progressbar"
+                       :style="{'width': volume() + '%'}"
+                       :aria-valuenow="volume"
+                       aria-valuemin="0" aria-valuemax="100">
                   </div>
                 </div>
               </div>
@@ -64,7 +61,6 @@
                 </div>
 
                 <TurnScore :faults="faults" :changed="changed" :savedTime="0" :point="0"/>
-                <EndTurnButton :point="point"/>
               </div>
             </transition>
 
@@ -77,7 +73,6 @@
                 </div>
 
                 <TurnScore :faults="faults" :changed="changed" :savedTime="savedTime" :point="point"/>
-                <EndTurnButton :point="point"/>
               </div>
             </transition>
           </div>
@@ -92,7 +87,6 @@ import {mapState} from 'vuex';
 import {mapActions} from 'vuex';
 import {mapGetters} from 'vuex';
 
-import EndTurnButton from './Buttons/EndTurnButton.vue';
 import TurnScore from './TurnScore.vue';
 import WordHeader from './WordHeader.vue';
 
@@ -113,7 +107,6 @@ export default {
     }
   },
   components: {
-    EndTurnButton,
     TurnScore,
     WordHeader
   },
@@ -163,28 +156,17 @@ export default {
       stop();
       this.fail = true;
       this.point = 0;
-      this.point -= this.faults;
-      if (this.changed === 1)
-        this.point--;
-      this.addPoint({point: this.point, time: 0});
     },
     succeed() {
       stop();
-      this.point -= this.faults;
-      if (this.changed === 1)
-        this.point--;
       this.savedTime = this.timer;
-      console.log(this.point)
-      this.addPoint({point: this.point, time: this.timer});
       if (this.point > 0)
         this.success = true;
       else this.fail = true;
-      // this.point += parseInt(this.timer / 15);
     },
     volume() {
       return this.timer * 100 / this.time;
     },
-
     getCatName() {
       return this.getCategoryName();
     },
