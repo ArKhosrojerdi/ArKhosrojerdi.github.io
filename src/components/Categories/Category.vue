@@ -8,7 +8,7 @@
           <router-link to="/word" v-for="(pt, ind) in pts" :key="ind" :class="{'mr-auto': ind === 0}"
                        class="ml-2">
             <button class="btn-point btn-border-tl-none px-2" :disabled="checkPoint(index, pt)"
-                    @click="pushCategory({catId: cat.id, point: pt})">
+                    @click="findWord({catId: cat.id, point: pt})">
               {{ toPersian(pt) }}
             </button>
           </router-link>
@@ -57,11 +57,11 @@ export default {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
     },
-    pushCategory(cat) {
-      this.pushCategory({catId: cat.catId, point: cat.point})
+    findWord(cat) {
+      this.findWord({catId: cat.catId, point: cat.point})
     },
     ...mapActions([
-      'pushCategory'
+      'findWord'
     ])
   }
 }

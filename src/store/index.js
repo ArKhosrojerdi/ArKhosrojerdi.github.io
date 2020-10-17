@@ -17,18 +17,19 @@ export const store = createStore({
             gameTypes: [],
             gameType: '',
             categories: [],
-            pts: [2, 4, 6]
+            pts: [2, 4, 6],
+            playedWords: []
         }
     },
     getters: {
         fetchWord(state) {
             let indLog = state.teams[state.turn].log.length - 1;
             let wordId = state.teams[state.turn].log[indLog].wordId;
-            let word = state.words.filter(word => word.id === wordId);
-            let catId = word[0].cat.catId;
-            let point = word[0].cat.point;
-            let name = word[0].name;
-            let id = word[0].id;
+            let word = state.words.filter(word => word.id === wordId)[0];
+            let catId = word.cat.catId;
+            let point = word.cat.point;
+            let name = word.name;
+            let id = word.id;
 
             return {
                 id: id,
@@ -38,13 +39,12 @@ export const store = createStore({
             };
         },
         getWordsPlayed(state) {
-            let playedWords = [];
             for (let i = 0; i < state.teams.length; i++)
                 for (let j = 0; j < state.teams[i].log.length; j++)
-                    if (playedWords.indexOf(state.teams[i].log[j].wordId) === -1)
-                        playedWords.push(state.teams[i].log[j].wordId);
+                    if (state.playedWords.indexOf(state.teams[i].log[j].wordId) === -1)
+                        state.playedWords.push(state.teams[i].log[j].wordId);
 
-            return playedWords;
+            return state.playedWords;
         },
         getCategoryName(state, getters) {
             let lastWord = getters['fetchWord'];
@@ -53,6 +53,14 @@ export const store = createStore({
                     return true;
             })
             return category[0].name;
+        },
+        getCategoryId(state, getters) {
+            let lastWord = getters['fetchWord'];
+            let category = state.categories.filter(function (cat) {
+                if (cat.id === lastWord.catId)
+                    return true;
+            })
+            return category[0].id;
         },
         getTeamsPoints(state) {
             let points, secs, arrRound = [];
@@ -110,12 +118,8 @@ export const store = createStore({
         setGameType(state, gameType) {
             state.gameType = gameType;
         },
-        pushCategory(state, cat) {
-            let validWord = state.words.filter(function (word) {
-                if (word.cat.catId === cat.catId && word.cat.point === cat.point) {
-                    return true
-                }
-            });
+        findWord(state, cat) {
+            let validWord = state.words[cat.catId].filter(word => (word.cat.catId === cat.catId && word.cat.point === cat.point));
             let randomValidWordId = validWord[Math.floor(Math.random() * validWord.length)].id;
             state.teams[state.turn].log.push(
                 {
@@ -185,8 +189,8 @@ export const store = createStore({
         removeCategoryOption({commit}, cat) {
             commit("removeCategoryOption", cat)
         },
-        pushCategory({commit}, cat) {
-            commit("pushCategory", cat)
+        findWord({commit}, cat) {
+            commit("findWord", cat)
         },
         addPoint({commit}, point) {
             commit("addPoint", point)
@@ -211,7 +215,8 @@ export const store = createStore({
                 }
                 flag = false;
             }
-            let wordId = state.words.filter(word => cat.rndId.id === word.id);
+            let catId = getters.getCategoryId();
+            let wordId = state.words[catId].filter(word => cat.rndId.id === word.id);
             commit("changeLastWordPlayed", wordId[0].id);
             return wordId[0].name;
         },
