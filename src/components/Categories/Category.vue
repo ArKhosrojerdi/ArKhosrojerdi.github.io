@@ -38,6 +38,8 @@ export default {
   },
   methods: {
     checkPoint(catId, point) {
+      if (catId === 9 || catId === 10 || catId === 11 || catId === 15 || catId === 16)
+        return true;
       let team = this.teams[this.turn];
       for (let i = 0; i < team.log.length; i++) {
         let word = this.words.filter(function (word) {
