@@ -43,17 +43,16 @@
       <h6>تعداد دورها</h6>
       <div class="d-flex num-bar">
         <button class="btn-set btn-inc px-2"
-                :disabled="totalRounds >= 20" @click="setNumberOfRounds(1)" @mousedown.prevent="incTotalRounds(1)"
-                @mouseleave="stop" @mouseup="stop" @touchstart.prevent="incTotalRounds(1)" @touchend="stop"
+                :disabled="totalRounds >= 20" @mousedown="incTotalRounds(1)"
+                @mouseleave="stop" @mouseup="stop" @touchstart="incTotalRounds(1)" @touchend="stop"
                 @touchcancel="stop"
                 :class="{active:interval}">
           <i class="fa fa-plus"></i>
         </button>
         <h3 class="m-auto">{{ toPersian(totalRounds) }}</h3>
         <button class="btn-set btn-dec px-2"
-                :disabled="totalRounds <= 3" @click="setNumberOfRounds(-1)"
-                @mousedown.prevent="decTotalRounds(-1)"
-                @mouseleave="stop" @mouseup="stop" @touchstart.prevent="decTotalRounds(-1)" @touchend="stop"
+                :disabled="totalRounds <= 3" @mousedown="decTotalRounds(-1)"
+                @mouseleave="stop" @mouseup="stop" @touchstart="decTotalRounds(-1)" @touchend="stop"
                 @touchcancel="stop"
                 :class="{active:interval}">
           <i class="fa fa-minus"></i>
@@ -74,16 +73,14 @@
       <transition name="fade" mode="out-in">
         <div v-if="!autoTime" class="mt-2">
           <div class="d-flex num-bar">
-            <button class="btn-set btn-inc px-2" :disabled="time >= 300" @click="setTime(15)"
-                    @mousedown.prevent="incTime(15)"
-                    @mouseleave="stop" @mouseup="stop" @touchstart.prevent="incTime(15)" @touchend="stop"
+            <button class="btn-set btn-inc px-2" :disabled="time >= 300" @mousedown="incTime(15)"
+                    @mouseleave="stop" @mouseup="stop" @touchstart="incTime(15)" @touchend="stop"
                     @touchcancel="stop">
               <i class="fa fa-plus"></i>
             </button>
             <h3 class="m-auto">{{ toPersian(time) }} ثانیه</h3>
-            <button class="btn-set btn-dec px-2" :disabled="time <= 30" @click="setTime(-15)"
-                    @mousedown.prevent="decTime(-15)"
-                    @mouseleave="stop" @mouseup="stop" @touchstart.prevent="decTime(-15)" @touchend="stop"
+            <button class="btn-set btn-dec px-2" :disabled="time <= 30" @mousedown="decTime(-15)"
+                    @mouseleave="stop" @mouseup="stop" @touchstart="decTime(-15)" @touchend="stop"
                     @touchcancel="stop">
               <i class="fa fa-minus"></i>
             </button>
@@ -144,68 +141,55 @@ export default {
       clearInterval(this.interval);
       this.interval = false;
     },
+    setTotalRounds(step) {
+      this.setNumberOfRounds(step);
+    },
     incTime(step) {
-      if (this.time < 300)
-        this.setTime(step);
       if (!this.interval) {
         this.interval = setInterval(() => {
           if (this.time >= 30) {
-            clearInterval(this.interval)
-            this.interval = false;
+            this.stop();
           } else {
-            this.setTime(step);
+            this.setTime(step)
           }
-        }, 150);
+        }, 125)
       }
     },
     incTotalRounds(step) {
-      if (this.totalRounds < 20)
-        this.setTotalRounds(step);
       if (!this.interval) {
-        this.interval = setInterval(function () {
-          console.log(step, this.interval);
-          if (this.totalRounds >= 3) {
-            clearInterval(this.interval)
-            this.interval = false;
+        this.interval = setInterval(() => {
+          if (this.totalRounds >= 20) {
+            this.stop();
           } else {
-            this.setTotalRounds(step);
+            this.setTotalRounds(step)
           }
-        }, 150);
+        }, 125)
       }
     },
     decTime(step) {
-      if (this.time > 30)
-        this.setTime(step);
       if (!this.interval) {
         this.interval = setInterval(() => {
           if (this.time <= 300) {
-            clearInterval(this.interval)
-            this.interval = false;
+            this.stop();
           } else {
-            this.setTime(step);
+            this.setTime(step)
           }
-        }, 150);
+        }, 125)
       }
     },
     decTotalRounds(step) {
-      if (this.totalRounds > 3)
-        this.setTotalRounds(step);
       if (!this.interval) {
         this.interval = setInterval(() => {
-          if (this.totalRounds <= 20) {
-            clearInterval(this.interval)
-            this.interval = false;
+          if (this.totalRounds <= 3) {
+            this.stop();
           } else {
-            this.setTotalRounds(step);
+            this.setTotalRounds(step)
           }
-        }, 150);
+        }, 125)
       }
     },
     setTime(step) {
       this.setTime(step);
-    },
-    setTotalRounds(step) {
-      this.setNumberOfRounds(step);
     },
     setAutoTime(value) {
       this.setAutoTime(value)
