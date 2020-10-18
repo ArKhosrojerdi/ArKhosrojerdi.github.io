@@ -1,85 +1,83 @@
 <template>
-  <div class="">
-    <transition name="fade-word" mode="out-in">
-      <div class="container main-page col-12 col-lg-6 col-sm-9 rounded-sm-0">
-        <div class="game-settings">
-          <div class="my-4 mx-auto col-lg-9 col-md-9 col-sm-12 col-12 d-flex flex-column flex-1">
-            <div v-if="!fail && !success" class="d-flex flex-column flex-1">
-              <WordHeader :catName="catName" :catId="catId"/>
+  <!--    <transition name="fade-word" mode="out-in">-->
+  <div class="container main-page col-12 col-lg-6 col-sm-9 rounded-sm-0">
+    <div class="game-settings">
+      <div class="my-4 mx-auto col-lg-9 col-md-9 col-sm-12 col-12 d-flex flex-column flex-1">
+        <div v-if="!fail && !success" class="d-flex flex-column flex-1">
+          <WordHeader :catName="catName" :catId="catId"/>
 
-              <div class="d-flex flex-column flex-1">
-                <h1 class="my-auto">
-                  <b>{{ word }}</b>
-                </h1>
-              </div>
+          <div class="d-flex flex-column flex-1">
+            <h1 class="my-auto">
+              <b>{{ word }}</b>
+            </h1>
+          </div>
 
-              <div class="mt-auto mb-4">
-                <h5>{{ toPersian(timer) }}
-                  ثانیه
-                </h5>
-                <div class="progress ltr" :class="{'warn': timer <= 15}">
-                  <div class="progress-bar" :class="{'bg-danger': timer <= 15}" role="progressbar"
-                       :style="{'width': volume() + '%'}"
-                       :aria-valuenow="volume"
-                       aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-
-              <div v-if="!hasStarted" class="d-flex flex-row hide"
-                   :class="{'justify-content-between': changed === 0, 'justify-content-center': changed === 1}">
-                <button @click="start" class="nav-btn mt-auto px-2"
-                        :class="{'btn-border-tr-none': changed === 0, 'btn-border-tx-none': changed === 1}">
-                  <i class="fas fa-play"></i>
-                </button>
-                <button v-if="changed === 0" @click="fetchNewWord" class="nav-btn mt-auto px-2"
-                        :class="{'btn-border-tl-none': changed === 0}">
-                  <i class="fas fa-sync-alt"></i>
-                </button>
-
-              </div>
-
-              <div v-else class="d-flex align-content-between align-items-between justify-content-between">
-                <button class="nav-btn btn-border-tr-none mt-auto px-2" @click="succeed">
-                  <i class="fas fa-check"></i>
-                </button>
-                <button class="nav-btn btn-border-tx-none mt-auto px-2" @click="submitFault">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </button>
-                <button class="nav-btn btn-border-tl-none mt-auto px-2" @click="failed">
-                  <i class="fas fa-times"></i>
-                </button>
+          <div class="mt-auto mb-4">
+            <h5>{{ toPersian(timer) }}
+              ثانیه
+            </h5>
+            <div class="progress ltr" :class="{'warn': timer <= 15}">
+              <div class="progress-bar" :class="{'bg-danger': timer <= 15}" role="progressbar"
+                   :style="{'width': volume() + '%'}"
+                   :aria-valuenow="volume"
+                   aria-valuemin="0" aria-valuemax="100">
               </div>
             </div>
+          </div>
 
-            <transition name="fade">
-              <div v-if="fail" class="alert-body d-flex flex-column flex-1">
-                <div class="py-2 row alert-fail col-12 mx-auto">
-                  <h1 class="mx-auto">
-                    باختی که!
-                  </h1>
-                </div>
+          <div v-if="!hasStarted" class="d-flex flex-row hide"
+               :class="{'justify-content-between': changed === 0, 'justify-content-center': changed === 1}">
+            <button @click="start" class="nav-btn mt-auto px-2"
+                    :class="{'btn-border-tr-none': changed === 0, 'btn-border-tx-none': changed === 1}">
+              <i class="fas fa-play"></i>
+            </button>
+            <button v-if="changed === 0" @click="fetchNewWord" class="nav-btn mt-auto px-2"
+                    :class="{'btn-border-tl-none': changed === 0}">
+              <i class="fas fa-sync-alt"></i>
+            </button>
 
-                <TurnScore :faults="faults" :changed="changed" :savedTime="0" :point="0"/>
-              </div>
-            </transition>
+          </div>
 
-            <transition name="fade2">
-              <div v-if="success" class="alert-body d-flex flex-column flex-1">
-                <div class="py-2 row alert-success col-12 mx-auto">
-                  <h1 class="mx-auto">
-                    ایول!
-                  </h1>
-                </div>
-
-                <TurnScore :faults="faults" :changed="changed" :savedTime="savedTime" :point="point"/>
-              </div>
-            </transition>
+          <div v-else class="d-flex align-content-between align-items-between justify-content-between">
+            <button class="nav-btn btn-border-tr-none mt-auto px-2" @click="succeed">
+              <i class="fas fa-check"></i>
+            </button>
+            <button class="nav-btn btn-border-tx-none mt-auto px-2" @click="submitFault">
+              <i class="fas fa-exclamation-triangle"></i>
+            </button>
+            <button class="nav-btn btn-border-tl-none mt-auto px-2" @click="failed">
+              <i class="fas fa-times"></i>
+            </button>
           </div>
         </div>
+
+        <transition name="fade">
+          <div v-if="fail" class="alert-body d-flex flex-column flex-1">
+            <div class="py-2 row alert-fail col-12 mx-auto">
+              <h1 class="mx-auto">
+                باختی که!
+              </h1>
+            </div>
+
+            <TurnScore :faults="faults" :changed="changed" :savedTime="0" :point="0"/>
+          </div>
+        </transition>
+
+        <transition name="fade2">
+          <div v-if="success" class="alert-body d-flex flex-column flex-1">
+            <div class="py-2 row alert-success col-12 mx-auto">
+              <h1 class="mx-auto">
+                ایول!
+              </h1>
+            </div>
+
+            <TurnScore :faults="faults" :changed="changed" :savedTime="savedTime" :point="point"/>
+          </div>
+        </transition>
       </div>
-    </transition>
+    </div>
   </div>
+  <!--    </transition>-->
 </template>
 
 <script>
