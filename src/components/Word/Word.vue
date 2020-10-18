@@ -212,7 +212,6 @@ export default {
 }
 
 .main-page {
-  overflow: auto;
   border-radius: 2rem;
   padding: 15px;
   z-index: 100;
@@ -223,7 +222,6 @@ export default {
   min-height: 38rem;
   background-color: #EFEFEF;
   border-radius: 2rem;
-  position: relative;
 }
 
 .nav-btn {
@@ -377,26 +375,26 @@ export default {
 /* Extra small devices (phones, 576px and down) */
 @media only screen and (max-width: 575.98px) {
   .main-page {
-    border-radius: 0;
+    border-radius: 2rem;
     box-shadow: none;
   }
 
   .game-settings {
-    border-radius: 0 0 .5rem .5rem;
-    max-height: 100vh !important;
+    border-radius: .5rem;
+    min-height: calc(100vh - 30px);
   }
 }
 
 /* Small devices (portrait tablets and large phones, 576px and up) */
 @media only screen and (min-width: 576px) and (max-width: 767.98px) {
   .main-page {
-    border-radius: 0;
+    border-radius: 2rem;
     box-shadow: none;
   }
 
   .game-settings {
-    border-radius: 0 0 .5rem .5rem;
-    min-height: 100vh !important;
+    border-radius: .5rem;
+    min-height: calc(100vh - 30px);
   }
 }
 
