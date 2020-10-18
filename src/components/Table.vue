@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column flex-1">
+  <div class="d-flex flex-column flex-1 col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 mx-auto p-0">
     <div>
       <h2 class="text-gray m-0 mb-2">
         {{ toPersian(totalRounds) }}
@@ -202,12 +202,15 @@ export default {
 @keyframes wink {
   from {
     transform: scale(1);
+    box-shadow: 0 2px 2px darken(#EFEFEF, 5%);
   }
   50% {
-    transform: scale(1.15);
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px 1px darken(#EFEFEF, 20%);
   }
   to {
     transform: scale(1);
+    box-shadow: 0 2px 2px darken(#EFEFEF, 5%);
   }
 }
 </style>

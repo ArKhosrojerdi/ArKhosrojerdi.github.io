@@ -3,7 +3,7 @@
     <transition name="fade-word" mode="out-in">
       <div class="container main-page col-12 col-lg-6 col-sm-9 rounded-sm-0">
         <div class="game-settings">
-          <div class="my-4 mx-auto col-lg-6 col-md-9 col-sm-12 col-12 d-flex flex-column flex-1">
+          <div class="my-4 mx-auto col-lg-9 col-md-9 col-sm-12 col-12 d-flex flex-column flex-1">
             <div v-if="!fail && !success" class="d-flex flex-column flex-1">
               <WordHeader :catName="catName" :catId="catId"/>
 

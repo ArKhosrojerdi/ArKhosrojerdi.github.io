@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column flex-1">
+  <div class="d-flex flex-column flex-1 col-xl-6 col-lg-9 col-md-9 col-sm-12 col-12 mx-auto p-0">
     <div>
       <h6>نوع بازی</h6>
       <div>
@@ -482,17 +482,6 @@ export default {
   border-right: none;
 }
 
-//.fade-enter-active,
-//.fade-leave-active {
-//  transition: all .2s ease-in-out;
-//}
-//
-//.fade-enter-from,
-//.fade-leave-to {
-//  opacity: 0;
-//  transform: translateY(.5rem);
-//}
-
 .d-flex .flex-column .flex-1 {
   flex: 1;
 }
@@ -500,15 +489,15 @@ export default {
 @keyframes wink {
   from {
     transform: scale(1);
-    box-shadow: 0 2px 4px 0 darken(#EFEFEF, 5%);
+    box-shadow: 0 2px 2px darken(#EFEFEF, 5%);
   }
   50% {
     transform: scale(1.1);
-    box-shadow: 0 8px 12px 0 darken(#EFEFEF, 20%);
+    box-shadow: 0 3px 8px 1px darken(#EFEFEF, 20%);
   }
   to {
     transform: scale(1);
-    box-shadow: 0 2px 4px 0 darken(#EFEFEF, 5%);
+    box-shadow: 0 2px 2px darken(#EFEFEF, 5%);
   }
 }
 
