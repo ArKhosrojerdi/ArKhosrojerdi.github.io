@@ -381,7 +381,11 @@ export default {
 
   .game-settings {
     border-radius: .5rem;
-    min-height: calc(100vh - 30px);
+    min-height: calc(100vh - 30px) !important;
+  }
+
+  .alert-body {
+    min-height: calc(100vh - 30px) !important;
   }
 }
 
@@ -395,6 +399,9 @@ export default {
   .game-settings {
     border-radius: .5rem;
     min-height: calc(100vh - 30px);
+  }
+  .alert-body {
+    min-height: calc(100vh - 30px) !important;
   }
 }
 
