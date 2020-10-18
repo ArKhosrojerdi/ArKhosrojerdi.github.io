@@ -450,7 +450,7 @@ export default {
 
 .time-option {
   height: 100%;
-  width: 48%;
+  width: 49.5%;
   background-color: darken(#efefef, 10%);
   border-radius: .5rem;
   border: 4px solid darken(#efefef, 20%);
