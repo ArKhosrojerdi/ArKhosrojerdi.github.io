@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Main from "../components/Main.vue";
 import Table from "../components/Table.vue";
 import Categories from "../components/Categories/Categories.vue";
-import Word from "../components/Word.vue";
+import Word from "../components/Word/Word.vue";
 import Info from "../components/Info.vue";
 import Result from "../components/Result.vue";
 
@@ -27,9 +27,7 @@ const routes = [
                 name: "Categories",
                 component: Categories,
             },
-
         ]
-
     },
     {
         path: "/word",

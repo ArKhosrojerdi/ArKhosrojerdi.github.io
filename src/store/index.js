@@ -18,49 +18,23 @@ export const store = createStore({
             gameType: '',
             categories: [],
             pts: [2, 4, 6],
-            playedWords: []
+            playedWords: [],
+            currentCat: {},
+            currentWord: {}
         }
     },
     getters: {
-        fetchWord(state) {
-            let indLog = state.teams[state.turn].log.length - 1;
-            let wordId = state.teams[state.turn].log[indLog].wordId;
-            let word = state.words.filter(word => word.id === wordId)[0];
-            let catId = word.cat.catId;
-            let point = word.cat.point;
-            let name = word.name;
-            let id = word.id;
-
-            return {
-                id: id,
-                name: name,
-                catId: catId,
-                point: point
-            };
-        },
         getWordsPlayed(state) {
-            for (let i = 0; i < state.teams.length; i++)
-                for (let j = 0; j < state.teams[i].log.length; j++)
-                    if (state.playedWords.indexOf(state.teams[i].log[j].wordId) === -1)
-                        state.playedWords.push(state.teams[i].log[j].wordId);
-
             return state.playedWords;
         },
-        getCategoryName(state, getters) {
-            let lastWord = getters['fetchWord'];
-            let category = state.categories.filter(function (cat) {
-                if (cat.id === lastWord.catId)
-                    return true;
-            })
-            return category[0].name;
+        getCategoryName(state) {
+            return state.currentCat.name;
         },
-        getCategoryId(state, getters) {
-            let lastWord = getters['fetchWord'];
-            let category = state.categories.filter(function (cat) {
-                if (cat.id === lastWord.catId)
-                    return true;
-            })
-            return category[0].id;
+        getCategoryId(state) {
+            return state.currentCat.id;
+        },
+        getCategoryPoint(state) {
+            return state.currentCat.point;
         },
         getTeamsPoints(state) {
             let points, secs, arrRound = [];
@@ -78,7 +52,15 @@ export const store = createStore({
         getIsLastTurn(state) {
             if (state.round === state.totalRounds && state.turn === state.teams.length - 1)
                 return true;
-        }
+        },
+        getCurrentCat(state) {
+            return state.currentCat;
+        },
+        getRandomWord(state) {
+            let cat = state.currentCat;
+            let validWord = state.words[cat.id].filter(word => (word.cat.catId === cat.id && word.cat.point === cat.point));
+            return validWord[Math.floor(Math.random() * validWord.length)].id;
+        },
     },
     mutations: {
         initTeams(state) {
@@ -98,16 +80,20 @@ export const store = createStore({
             state.words = words;
             state.categories = categories;
         },
+        setCurrentCat(state, cat) {
+            state.currentCat = cat;
+        },
+        addWordToPlayedWords(state, wordId) {
+            state.playedWords.push(wordId);
+        },
         setNumberOfRounds(state, step) {
             state.totalRounds += step;
         },
         addTeam(state) {
-            let newId = state.teams.length;
-            state.teams.push({id: newId, name: '', eliminated: false, log: []})
+            state.teams.push({id: state.teams.length, name: '', eliminated: false, log: []})
         },
         removeTeam(state) {
-            let lastId = state.teams.length;
-            state.teams.splice(lastId - 1, 1)
+            state.teams.splice(state.teams.length - 1, 1)
         },
         setAutoTime(state, value) {
             state.autoTime = value
@@ -117,27 +103,6 @@ export const store = createStore({
         },
         setGameType(state, gameType) {
             state.gameType = gameType;
-        },
-        findWord(state, cat) {
-            let validWord = state.words[cat.catId].filter(word => (word.cat.catId === cat.catId && word.cat.point === cat.point));
-            let randomValidWordId = validWord[Math.floor(Math.random() * validWord.length)].id;
-            state.teams[state.turn].log.push(
-                {
-                    wordId: randomValidWordId,
-                    round: {sec: 0, point: 0}
-                }
-            );
-        },
-        getRandomWord(state, cat) {
-            let wordInCategory = state.words.filter(function (word) {
-                if (word.cat.catId === cat.catId && word.cat.point === cat.point) {
-                    return true
-                }
-            });
-            let randomValidWordId = wordInCategory[Math.floor(Math.random() * wordInCategory.length)].id;
-            cat.rndId = {
-                id: randomValidWordId
-            };
         },
         nextTurn(state) {
             let teamsLen = state.teams.length - 1;
@@ -161,7 +126,14 @@ export const store = createStore({
         changeLastWordPlayed(state, newWordId) {
             let team = state.teams[state.turn]
             team.log[team.log.length - 1].wordId = newWordId;
+            team.log[team.log.length - 1].catId = state.currentCat.id;
         },
+        setCurrentWord(state, word) {
+            state.currentWord = {
+                id: word.id,
+                name: word.name
+            }
+        }
     },
     actions: {
         initGame({commit}) {
@@ -186,39 +158,54 @@ export const store = createStore({
         setGameType({commit}, gameType) {
             commit("setGameType", gameType)
         },
-        removeCategoryOption({commit}, cat) {
-            commit("removeCategoryOption", cat)
+        setCurrentCat({commit}, cat) {
+            commit("setCurrentCat", cat)
         },
-        findWord({commit}, cat) {
-            commit("findWord", cat)
-        },
-        addPoint({commit}, point) {
-            commit("addPoint", point)
-        },
-        getRandomWord({commit}, cat) {
-            commit("getRandomWord", cat)
-        },
-        fetchNewWord({state, commit, getters}) {
-            let oldWord = getters.fetchWord;
-            let cat = {
-                catId: oldWord.catId,
-                point: oldWord.point
-            }
-
-            let playedWords = getters.getWordsPlayed;
-
+        findWord({state, commit, getters}) {
+            let wordId;
             let flag = true;
             while (flag) {
-                commit("getRandomWord", cat);
-                if (playedWords.includes(cat.rndId.id)) {
+                wordId = getters.getRandomWord;
+                if (state.playedWords.includes(wordId)) {
+                    state.playedWords.pop();
                     continue;
                 }
                 flag = false;
             }
-            let catId = getters.getCategoryId();
-            let wordId = state.words[catId].filter(word => cat.rndId.id === word.id);
-            commit("changeLastWordPlayed", wordId[0].id);
-            return wordId[0].name;
+            state.teams[state.turn].log.push(
+                {
+                    wordId: wordId,
+                    catId: state.currentCat.id,
+                    round: {sec: 0, point: 0}
+                }
+            );
+
+            commit("setCurrentWord", {
+                id: wordId,
+                name: state.words[state.currentCat.id].filter(word => word.id === wordId)[0].name
+            })
+            state.playedWords.push(wordId);
+        },
+        addPoint({commit}, point) {
+            commit("addPoint", point)
+        },
+        changeWord({state, commit, getters}) {
+            state.playedWords.pop();
+
+            let wordId;
+            let flag = true;
+            while (flag) {
+                wordId = getters.getRandomWord;
+                if (state.playedWords.includes(wordId)) {
+                    continue;
+                }
+                flag = false;
+            }
+            state.playedWords.push(wordId);
+            commit("changeLastWordPlayed", wordId);
+            console.log(state.teams)
+            state.currentWord.id = wordId;
+            state.currentWord.name = state.words[state.currentCat.id].filter(word => word.id === wordId)[0].name;
         },
     }
 })

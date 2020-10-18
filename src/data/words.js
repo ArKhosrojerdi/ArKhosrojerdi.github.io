@@ -479,7 +479,8 @@ export default [
                 catId: 0,
                 point: 6
             }
-        }],
+        }
+    ],
     [
         {
             id: 60,
@@ -784,7 +785,8 @@ export default [
                 catId: 1,
                 point: 6
             }
-        }],
+        }
+    ],
     [
         {
             id: 98,
@@ -1025,7 +1027,8 @@ export default [
                 catId: 2,
                 point: 6
             }
-        }],
+        }
+    ],
     [
         {
             id: 128,
@@ -1370,7 +1373,8 @@ export default [
                 catId: 3,
                 point: 2
             }
-        }],
+        }
+    ],
     [
         {
             id: 171,
@@ -1611,7 +1615,8 @@ export default [
                 catId: 4,
                 point: 2
             }
-        }],
+        }
+    ],
     [
         {
             id: 201,
@@ -2220,7 +2225,8 @@ export default [
                 catId: 5,
                 point: 2
             }
-        }],
+        }
+    ],
     [
         {
             id: 277,
@@ -2733,7 +2739,8 @@ export default [
                 catId: 6,
                 point: 6
             }
-        }],
+        }
+    ],
     [
         {
             id: 341,
@@ -3086,7 +3093,8 @@ export default [
                 catId: 7,
                 point: 6
             }
-        }],
+        }
+    ],
     [
         {
             id: 385,
@@ -3455,7 +3463,8 @@ export default [
                 catId: 8,
                 point: 6
             }
-        }],
+        }
+    ],
     [],
     [
         {
@@ -3801,7 +3810,8 @@ export default [
                 catId: 10,
                 point: 5
             }
-        }],
+        }
+    ],
     [
         {
             id: 474,
@@ -3890,7 +3900,8 @@ export default [
                 catId: 11,
                 point: 2
             }
-        }],
+        }
+    ],
     [
         {
             id: 485,
@@ -4219,7 +4230,8 @@ export default [
                 catId: 12,
                 point: 6
             }
-        }],
+        }
+    ],
     [
         {
             id: 526,
@@ -4484,7 +4496,8 @@ export default [
                 catId: 13,
                 point: 6
             }
-        }],
+        }
+    ],
     [
         {
             id: 559,
@@ -4653,7 +4666,8 @@ export default [
                 catId: 14,
                 point: 4
             }
-        }],
+        }
+    ],
     [],
     [],
     [
@@ -4920,7 +4934,8 @@ export default [
                 catId: 17,
                 point: 6
             }
-        }],
+        }
+    ],
     [
         {
             id: 613,
@@ -5185,7 +5200,8 @@ export default [
                 catId: 18,
                 point: 6
             }
-        }],
+        }
+    ],
     [
         {
             id: 646,

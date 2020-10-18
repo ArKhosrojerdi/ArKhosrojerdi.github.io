@@ -32,7 +32,7 @@
                         :class="{'btn-border-tr-none': changed === 0, 'btn-border-tx-none': changed === 1}">
                   <i class="fas fa-play"></i>
                 </button>
-                <button v-if="changed === 0" @click="changeWord" class="nav-btn mt-auto px-2"
+                <button v-if="changed === 0" @click="fetchNewWord" class="nav-btn mt-auto px-2"
                         :class="{'btn-border-tl-none': changed === 0}">
                   <i class="fas fa-sync-alt"></i>
                 </button>
@@ -87,13 +87,14 @@ import {mapState} from 'vuex';
 import {mapActions} from 'vuex';
 import {mapGetters} from 'vuex';
 
-import TurnScore from './TurnScore.vue';
+import TurnScore from '../TurnScore.vue';
 import WordHeader from './WordHeader.vue';
 
 export default {
   data() {
     return {
-      word: '',
+      word: {},
+      wordId: 0,
       hasStarted: false,
       timer: 0,
       fail: false,
@@ -112,12 +113,12 @@ export default {
   },
   created() {
     this.timer = this.time;
-    let word = this.fetchWord();
-    this.catId = word.catId;
-    this.point = word.point;
-    this.word = word.name;
-    this.wordId = word.id;
+    this.findWord();
+    this.word = this.currentWord.name;
+    this.wordId = this.currentWord.id;
+    this.catId = this.getCategoryId();
     this.catName = this.getCatName();
+    this.point = this.getCategoryPoint();
   },
   methods: {
     toPersian(n) {
@@ -170,23 +171,28 @@ export default {
     getCatName() {
       return this.getCategoryName();
     },
-    changeWord() {
+    fetchNewWord() {
       this.changed = 1;
-      this.fetchNewWord().then(response => this.word = response);
+      this.changeWord();
+      this.wordId = this.currentWord.id;
+      this.word = this.currentWord.name;
     },
     ...mapGetters([
-      'fetchWord',
-      'getCategoryName'
+      'getCategoryName',
+      'getCategoryId',
+      'getCategoryPoint',
     ]),
     ...mapActions([
+      'findWord',
       'addPoint',
-      'fetchNewWord'
+      'changeWord'
     ]),
   },
   computed: {
     ...mapState([
       'time',
-      'words'
+      'words',
+      'currentWord'
     ]),
   },
 }

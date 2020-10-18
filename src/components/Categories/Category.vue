@@ -8,7 +8,7 @@
           <router-link to="/word" v-for="(pt, ind) in pts" :key="ind" :class="{'mr-auto': ind === 0}"
                        class="ml-2">
             <button class="btn-point btn-border-tl-none px-2" :disabled="checkPoint(index, pt)"
-                    @click="findWord({catId: cat.id, point: pt})">
+                    @click="setCurrentCat({id: cat.id, name: cat.name, point: pt})">
               {{ toPersian(pt) }}
             </button>
           </router-link>
@@ -20,6 +20,7 @@
 
 <script>
 import {mapState} from 'vuex';
+import {mapGetters} from 'vuex';
 import {mapActions} from 'vuex';
 
 export default {
@@ -40,9 +41,10 @@ export default {
     checkPoint(catId, point) {
       if (catId === 9 || catId === 10 || catId === 11 || catId === 15 || catId === 16)
         return true;
+
       let team = this.teams[this.turn];
       for (let i = 0; i < team.log.length; i++) {
-        let word = this.words.filter(function (word) {
+        let word = this.words[team.log[i].catId].filter(function (word) {
           if (team.log[i].wordId === word.id) {
             if (word.cat.catId === catId && word.cat.point === point) {
               return true;
@@ -57,11 +59,14 @@ export default {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
     },
-    findWord(cat) {
-      this.findWord({catId: cat.catId, point: cat.point})
+    setCurrentCat(cat) {
+      this.setCurrentCat({id: cat.id, name: cat.name, point: cat.point})
     },
+    ...mapGetters([
+      'getCategoryId'
+    ]),
     ...mapActions([
-      'findWord'
+      'setCurrentCat'
     ])
   }
 }

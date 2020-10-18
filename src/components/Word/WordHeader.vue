@@ -37,11 +37,6 @@ export default {
       'running'
     ];
   },
-  methods: {
-    getIcon() {
-      return this.catIcons[0];
-    }
-  },
   props: [
     'catId',
     'catName',

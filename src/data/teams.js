@@ -6,6 +6,7 @@ export default [
         log: [
             // {
             //     wordId: 0,
+            //     catId: 0,
             //     round: {
             //         sec: 0,
             //         point: 0
