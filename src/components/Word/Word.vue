@@ -1,6 +1,6 @@
 <template>
   <!--    <transition name="fade-word" mode="out-in">-->
-  <div class="container main-page col-12 col-lg-6 col-sm-9 rounded-sm-0">
+  <div class="container main-page d-flex flex-column col-12 col-lg-6 col-sm-9 rounded-sm-0">
     <div class="game-settings">
       <div class="my-4 mx-auto col-lg-9 col-md-9 col-sm-12 col-12 d-flex flex-column flex-1">
         <div v-if="!fail && !success" class="d-flex flex-column flex-1">
@@ -385,7 +385,7 @@ export default {
 
   .game-settings {
     border-radius: 0 0 .5rem .5rem;
-    max-height: calc(100vh - 6rem - 30px) !important;
+    max-height: 100vh !important;
   }
 }
 
@@ -398,7 +398,7 @@ export default {
 
   .game-settings {
     border-radius: 0 0 .5rem .5rem;
-    min-height: calc(100vh - 30px) !important;
+    max-height: 100vh !important;
   }
 }
 
