@@ -1,7 +1,7 @@
 <template>
   <!--    <transition name="fade-word" mode="out-in">-->
-  <div class="container main-page d-flex flex-column col-12 col-lg-6 col-sm-9 rounded-sm-0">
-    <div class="game-settings">
+  <div class="container main-page d-flex flex-column col-12 col-lg-6 col-sm-9">
+    <div class="game-settings d-flex flex-column align-content-center">
       <div class="my-4 mx-auto col-lg-9 col-md-9 col-sm-12 col-12 d-flex flex-column flex-1">
         <div v-if="!fail && !success" class="d-flex flex-column flex-1">
           <WordHeader :catName="catName" :catId="catId"/>
@@ -212,20 +212,18 @@ export default {
 }
 
 .main-page {
+  overflow: auto;
   border-radius: 2rem;
   padding: 15px;
   z-index: 100;
-  position: relative;
   box-shadow: 0 0 16px 0 darken(#2669BF, 7%);
 }
 
 .game-settings {
   min-height: 38rem;
   background-color: #EFEFEF;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
   border-radius: 2rem;
+  position: relative;
 }
 
 .nav-btn {
@@ -398,7 +396,7 @@ export default {
 
   .game-settings {
     border-radius: 0 0 .5rem .5rem;
-    max-height: 100vh !important;
+    min-height: 100vh !important;
   }
 }
 
