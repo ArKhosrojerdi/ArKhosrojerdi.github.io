@@ -119,12 +119,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary_color: #2669BF;
+$light: #EFEFEF;
+
 h5, h6, i {
   color: #CFCFCF;
 }
 
 h4 {
-  color: #EFEFEF;
+  color: $light;
 }
 
 h2 {
@@ -141,7 +144,7 @@ ul li {
   width: 100%;
   direction: ltr;
   display: inline-block;
-  box-shadow: 0 2px 4px darken(#EFEFEF, 20%);
+  box-shadow: 0 2px 4px darken($light, 20%);
 }
 
 .rtl {

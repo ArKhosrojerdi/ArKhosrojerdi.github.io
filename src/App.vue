@@ -1,25 +1,24 @@
 <template>
   <div id="app" class="mt-md-5 mt-sm-0 mt-0 rounded-sm-0">
-    <!--    <MainPage/>-->
     <router-view/>
     <!--    <Clouds/>-->
   </div>
 </template>
 
 <script>
-// import MainPage from './components/MainPage.vue';
 // import Clouds from './components/Clouds.vue'
 
 export default {
   name: 'App',
   components: {
-    // MainPage,
     // Clouds
   }
 }
 </script>
 
 <style lang="scss">
+$primary_color: #2669BF;
+
 @font-face {
   font-family: 'Yekan';
   src: url('~@/assets/fonts/yekan-font/Yekan.eot'); /* IE9 Compat Modes */
@@ -34,7 +33,7 @@ export default {
 }
 
 html, body {
-  background-color: #2669BF;
+  background-color: $primary_color;
   direction: rtl;
 }
 
@@ -44,7 +43,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: #2669BF;
+  background-color: $primary_color;
   line-height: 1;
 }
 

@@ -197,6 +197,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary_color: #2669BF;
+$light: #EFEFEF;
+
 .ltr {
   direction: ltr;
 }
@@ -215,28 +218,28 @@ export default {
   border-radius: 2rem;
   padding: 15px;
   z-index: 100;
-  box-shadow: 0 0 16px 0 darken(#2669BF, 7%);
+  box-shadow: 0 0 16px 0 darken($primary_color, 7%);
 }
 
 .game-settings {
   min-height: 38rem;
-  background-color: #EFEFEF;
+  background-color: $light;
   border-radius: 2rem;
 }
 
 .nav-btn {
   outline: none;
-  border: 4px solid darken(#F24B6A, 20%);
-  background-color: #F24B6A;
+  border: 4px solid darken($primary_color, 20%);
+  background-color: $primary_color;
   border-radius: .5rem;
-  color: #efefef;
+  color: $light;
   font-weight: 900;
   font-size: 24px;
   line-height: 100%;
   height: 4rem;
   min-width: 4rem;
   max-width: 4rem;
-  box-shadow: 0 4px 4px 0 darken(#EFEFEF, 10%);
+  box-shadow: 0 4px 4px 0 darken($light, 10%);
 }
 
 .justify-content-center.hide {
@@ -258,7 +261,7 @@ export default {
 }
 
 .nav-btn:hover {
-  box-shadow: 0 4px 8px 0 darken(#EFEFEF, 20%);
+  box-shadow: 0 4px 8px 0 darken($light, 20%);
 }
 
 .nav-btn:active {
@@ -283,9 +286,9 @@ export default {
 }
 
 .progress {
-  background-color: #cfcfcf;
+  background-color: darken($light, 12%);
   height: 1.5rem;
-  box-shadow: 0 6px 8px 0 darken(#cfcfcf, 10%);
+  box-shadow: 0 6px 8px 0 darken($light, 20%);
 }
 
 .warn {
@@ -293,7 +296,7 @@ export default {
 }
 
 .fail-container {
-  background-color: darken(#F24B6A, 10%);
+  background-color: darken($primary_color, 10%);
 }
 
 .alert-body {
@@ -301,23 +304,23 @@ export default {
 }
 
 .alert-body .alert-fail {
-  background-color: darken(#F24B6A, 10%);
-  color: #efefef;
+  background-color: darken($primary_color, 10%);
+  color: $light;
   border-radius: .5rem;
-  box-shadow: 0 4px 4px 0 darken(#efefef, 10%);
-  border-bottom: 4px solid darken(#F24B6A, 20%);
+  box-shadow: 0 4px 4px 0 darken($light, 10%);
+  border-bottom: 4px solid darken($primary_color, 20%);
 }
 
 .alert-body .alert-success {
   background-color: darken(#44A666, 10%);
-  color: #efefef;
+  color: $light;
   border-radius: .5rem;
-  box-shadow: 0 4px 4px 0 darken(#efefef, 10%);
+  box-shadow: 0 4px 4px 0 darken($light, 10%);
   border-bottom: 4px solid darken(#44A666, 20%);
 }
 
 .progress .progress-bar {
-  background-color: #2669BF;
+  background-color: $primary_color;
   transition: width 1s linear !important;
 }
 
@@ -359,7 +362,7 @@ export default {
 
 @keyframes warn {
   from {
-    box-shadow: 0 4px 8px 0 darken(#efefef, 10%);
+    box-shadow: 0 4px 8px 0 darken($light, 10%);
     opacity: 1;
   }
   50% {
@@ -367,7 +370,7 @@ export default {
     opacity: .9;
   }
   to {
-    box-shadow: 0 4px 8px 0 darken(#efefef, 10%);
+    box-shadow: 0 4px 8px 0 darken($light, 10%);
     opacity: 1;
   }
 }
@@ -410,7 +413,7 @@ export default {
 @media only screen and (min-width: 768px) and (max-width: 991.98px) {
   .main-page {
     border-radius: 2rem;
-    box-shadow: 0 0 16px 0 darken(#2669BF, 7%);
+    box-shadow: 0 0 16px 0 darken($primary_color, 7%);
   }
 }
 

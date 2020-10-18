@@ -54,21 +54,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary_color: #2669BF;
+$light: #EFEFEF;
+
 .nav-btn {
-  border: 4px solid darken(#F24B6A, 20%);
-  background-color: #F24B6A;
+  border: 4px solid darken($primary_color, 20%);
+  background-color: $primary_color;
   border-radius: .5rem;
-  color: #efefef;
+  color: $light;
   font-weight: 900;
   font-size: 24px;
   line-height: 100%;
   height: 4rem;
   width: 4rem;
-  box-shadow: 0 4px 4px 0 darken(#EFEFEF, 10%);
+  box-shadow: 0 4px 4px 0 darken($light, 10%);
 }
 
 .nav-btn:hover {
-  box-shadow: 0 4px 8px 0 darken(#EFEFEF, 20%);
+  box-shadow: 0 4px 8px 0 darken($light, 20%);
 }
 
 .nav-btn:active {

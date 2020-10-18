@@ -209,6 +209,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary_color: #2669BF;
+$light: #EFEFEF;
+
 .h-2h {
   height: 2.5rem;
 }
@@ -226,7 +229,7 @@ export default {
   border-radius: 2rem;
   padding: 15px;
   z-index: 100;
-  box-shadow: 0 0 16px 0 darken(#2669BF, 7%);
+  box-shadow: 0 0 16px 0 darken($primary_color, 7%);
 }
 
 .header-logo {
@@ -236,20 +239,20 @@ export default {
   display: flex;
   flex-direction: column;
   align-content: center;
-  box-shadow: 0 10px 4px -8px darken(#EFEFEF, 20%);
+  box-shadow: 0 10px 4px -8px darken($light, 20%);
   position: relative;
   z-index: 70;
 }
 
 .header-logo h1 {
   width: 100%;
-  color: #EFEFEF;
+  color: $light;
   margin: 0;
 }
 
 .game-settings {
   min-height: 30rem;
-  background-color: #EFEFEF;
+  background-color: $light;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -264,11 +267,11 @@ export default {
 
 .choose-game-type {
   border-radius: .5rem;
-  box-shadow: 0 0 8px 0 darken(#EFEFEF, 10%);
+  box-shadow: 0 0 8px 0 darken($light, 10%);
 }
 
 .choose-game-type:hover:enabled {
-  box-shadow: 0 0 8px 0 darken(#EFEFEF, 25%);
+  box-shadow: 0 0 8px 0 darken($light, 25%);
 }
 
 .choose-game-type:focus {
@@ -276,8 +279,8 @@ export default {
 }
 
 .choose-game-type, .choose-game-type-child {
-  background-color: #F24B6A;
-  color: #FFFFFF;
+  background-color: $primary_color;
+  color: $light;
   font-size: 20px;
   outline: none;
   border: none;
@@ -287,19 +290,15 @@ export default {
 }
 
 .choose-game-type-child {
-  border-top: 1px solid #EFEFEF;
+  border-top: 1px solid $light;
 }
 
 .choose-game-type-child:hover:enabled {
-  background-color: darken(#F24B6A, 5%);
-}
-
-.choose-game-type-child:active:enabled {
-  background-color: darken(#44A666, 5%);
+  background-color: darken($primary_color, 5%);
 }
 
 .choose-game-type-child:focus {
-  background-color: darken(#F24B6A, 5%);
+  background-color: darken($primary_color, 5%);
 }
 
 .choose-game-type-child:first-child {
@@ -307,17 +306,8 @@ export default {
   border-top: none;
 }
 
-//.choose-game-type-child:first-child {
-//  border-radius: .5rem .5rem 0 0;
-//  border-top: none;
-//}
-
-//.choose-game-type-child:last-child {
-//  border-radius: 0 0 .5rem .5rem;
-//}
-
 .game-types {
-  box-shadow: 0 0 8px 0 darken(#EFEFEF, 10%);
+  box-shadow: 0 0 8px 0 darken($light, 10%);
   padding: 0;
   margin: 0;
   //position: absolute;
@@ -332,17 +322,17 @@ export default {
 
 .btn-set {
   outline: none;
-  border: 4px solid darken(#F24B6A, 20%);
+  border: 4px solid darken($primary_color, 20%);
   border-radius: .5rem;
   height: 2.5rem;
   width: 2.5rem;
   min-width: 2.5rem;
   min-height: 2.5rem;
   display: block;
-  background-color: #F24B6A;
-  box-shadow: 0 0 8px 0 darken(#EFEFEF, 10%);
+  background-color: $primary_color;
+  box-shadow: 0 0 8px 0 darken($light, 10%);
   font-size: 16px;
-  color: #FFFFFF;
+  color: $light;
   font-weight: 900;
 }
 
@@ -352,7 +342,7 @@ export default {
 }
 
 .btn-set.btn-dec:disabled {
-  border: 4px solid darken(#F24B6A, 5%);
+  border: 4px solid darken($primary_color, 5%);
   border-bottom: none;
   border-right: none;
 }
@@ -363,14 +353,14 @@ export default {
 }
 
 .btn-set.btn-inc:disabled {
-  border: 4px solid darken(#F24B6A, 5%);
+  border: 4px solid darken($primary_color, 5%);
   border-bottom: none;
   border-left: none;
 }
 
 .btn-set:enabled:hover:enabled {
   cursor: pointer;
-  box-shadow: 0 0 8px 0 darken(#EFEFEF, 25%);
+  box-shadow: 0 0 8px 0 darken($light, 25%);
 }
 
 .btn-set:focus:active:enabled {
@@ -378,39 +368,39 @@ export default {
 }
 
 .btn-set:disabled {
-  background-color: lighten(#F24B6A, 5%);
-  border-color: darken(#F24B6A, 0%);
+  background-color: lighten($primary_color, 5%);
+  border-color: darken($primary_color, 0%);
   cursor: not-allowed;
-  color: darken(#FFFFFF, 10%);
+  color: darken($light, 10%);
 }
 
 .team-name {
-  border: 1px solid darken(#efefef, 20%);
+  border: 1px solid darken($light, 20%);
   outline: none;
   width: 100%;
   border-radius: .5rem;
   padding: 6px 8px;
   color: #202020;
-  background-color: darken(#efefef, 10%);
-  box-shadow: 0 0 2px 0 darken(#EFEFEF, 10%);
+  background-color: darken($light, 10%);
+  box-shadow: 0 0 2px 0 darken($light, 10%);
 }
 
 .team-name:focus, .team-name:active:enabled {
-  box-shadow: 0 0 8px 0 darken(#EFEFEF, 10%);
-  background-color: darken(#efefef, 5%)
+  box-shadow: 0 0 8px 0 darken($light, 10%);
+  background-color: darken($light, 5%)
 }
 
 .nav-btn {
   outline: none;
-  border: 4px solid darken(#F24B6A, 20%);
-  background-color: #F24B6A;
+  border: 4px solid darken($primary_color, 20%);
+  background-color: $primary_color;
   border-radius: .5rem;
-  color: #efefef;
+  color: $light;
   font-weight: 900;
   font-size: 24px;
   height: 4rem;
   width: 4rem;
-  box-shadow: 0 0 8px 0 darken(#EFEFEF, 10%);
+  box-shadow: 0 0 8px 0 darken($light, 10%);
 }
 
 .nav-btn.btn-border-tx-none {
@@ -424,7 +414,7 @@ export default {
 }
 
 .nav-btn:hover:enabled {
-  box-shadow: 0 8px 10px 0 darken(#EFEFEF, 20%);
+  box-shadow: 0 8px 10px 0 darken($light, 20%);
 }
 
 .nav-btn:active:enabled, .nav-btn:focus {
@@ -451,17 +441,17 @@ export default {
 .time-option {
   height: 100%;
   width: 49.5%;
-  background-color: darken(#efefef, 10%);
+  background-color: darken($light, 10%);
   border-radius: .5rem;
-  border: 4px solid darken(#efefef, 20%);
+  border: 4px solid darken($light, 20%);
   border-top: none;
   color: #404040;
   outline: none;
-  box-shadow: 0 2px 2px 0 darken(#EFEFEF, 10%);
+  box-shadow: 0 2px 2px 0 darken($light, 10%);
 }
 
 .time-option.active {
-  color: #efefef;
+  color: $light;
   background-color: #44A666;
   border-color: darken(#44A666, 10%);
 }
@@ -471,7 +461,7 @@ export default {
 }
 
 .time-option:hover:enabled {
-  box-shadow: 0 4px 4px 0 darken(#EFEFEF, 10%);
+  box-shadow: 0 4px 4px 0 darken($light, 10%);
 }
 
 .time-option:last-child {
@@ -489,15 +479,15 @@ export default {
 @keyframes wink {
   from {
     transform: scale(1);
-    box-shadow: 0 2px 2px darken(#EFEFEF, 5%);
+    box-shadow: 0 2px 2px darken($light, 5%);
   }
   50% {
     transform: scale(1.1);
-    box-shadow: 0 3px 8px 1px darken(#EFEFEF, 20%);
+    box-shadow: 0 3px 8px 1px darken($light, 20%);
   }
   to {
     transform: scale(1);
-    box-shadow: 0 2px 2px darken(#EFEFEF, 5%);
+    box-shadow: 0 2px 2px darken($light, 5%);
   }
 }
 
@@ -540,7 +530,7 @@ export default {
 @media only screen and (min-width: 768px) and (max-width: 991.98px) {
   .main-page {
     border-radius: 2rem;
-    box-shadow: 0 0 16px 0 darken(#2669BF, 7%);
+    box-shadow: 0 0 16px 0 darken($primary_color, 7%);
   }
 }
 

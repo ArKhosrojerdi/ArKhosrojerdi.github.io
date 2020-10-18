@@ -1,21 +1,19 @@
 <template>
-  <div class="">
-    <div class="container main-page d-flex flex-column col-12 col-lg-6 col-sm-9 rounded-sm-0">
-      <div class="header-logo">
-        <h1 class="my-auto">رده بندی</h1>
-      </div>
-      <div class="game-settings">
-        <div class="mx-auto col-lg-6 col-md-9 col-sm-12 col-12 py-4 d-flex flex-column flex-1">
+  <div class="container main-page d-flex flex-column col-xl-6 col-lg-6 col-md-9 col-sm-12 col-12 rounded-sm-0">
+    <div class="header-logo">
+      <h1 class="my-auto">رده بندی</h1>
+    </div>
+    <div class="game-settings">
+      <div class="mx-auto col-xl-6 col-lg-9 col-md-9 col-sm-12 col-12 py-4 d-flex flex-column flex-1">
 
-          <Ranked/>
+        <Ranked/>
 
-          <div class="mt-auto">
-            <router-link to="/">
-              <button class="nav-btn btn-border-tx-none mt-auto px-2">
-                <i class="fas fa-home"></i>
-              </button>
-            </router-link>
-          </div>
+        <div class="mt-auto">
+          <router-link to="/">
+            <button class="nav-btn btn-border-tx-none mt-auto px-2">
+              <i class="fas fa-home"></i>
+            </button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -73,13 +71,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary_color: #2669BF;
+$light: #EFEFEF;
 
 .main-page {
   border-radius: 2rem;
   padding: 15px;
   z-index: 100;
   position: relative;
-  box-shadow: 0 0 16px 0 darken(#2669BF, 7%);
+  box-shadow: 0 0 16px 0 darken($primary_color, 7%);
 }
 
 .header-logo {
@@ -89,20 +89,20 @@ export default {
   display: flex;
   flex-direction: column;
   align-content: center;
-  box-shadow: 0 10px 8px -8px darken(#EFEFEF, 10%);
+  box-shadow: 0 10px 8px -8px darken($light, 10%);
   position: relative;
   z-index: 70;
 }
 
 .header-logo h1 {
   width: 100%;
-  color: #EFEFEF;
+  color: $light;
   margin: 0;
 }
 
 .game-settings {
   min-height: 30rem;
-  background-color: #EFEFEF;
+  background-color: $light;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -121,13 +121,13 @@ export default {
 }
 
 .team.turn {
-  border-bottom: 4px solid darken(#2669BF, 15%);
-  background-color: #2669BF;
-  box-shadow: 0 4px 8px 0 darken(#EFEFEF, 20%);
+  border-bottom: 4px solid darken($primary_color, 15%);
+  background-color: $primary_color;
+  box-shadow: 0 4px 8px 0 darken($light, 20%);
 }
 
 .team.turn h4 {
-  color: #efefef;
+  color: $light;
 }
 
 .team.wait {
@@ -151,25 +151,25 @@ export default {
 }
 
 .team.pass h4 {
-  color: #efefef;
+  color: $light;
 }
 
 .nav-btn {
   outline: none;
-  border: 4px solid darken(#F24B6A, 20%);
-  background-color: #F24B6A;
+  border: 4px solid darken($primary_color, 20%);
+  background-color: $primary_color;
   border-radius: .5rem;
-  color: #efefef;
+  color: $light;
   font-weight: 900;
   font-size: 24px;
   line-height: 100%;
   height: 4rem;
   width: 4rem;
-  box-shadow: 0 0 8px 0 darken(#EFEFEF, 10%);
+  box-shadow: 0 0 8px 0 darken($light, 10%);
 }
 
 .nav-btn:hover {
-  box-shadow: 0 2px 10px 0 darken(#EFEFEF, 20%);
+  box-shadow: 0 2px 10px 0 darken($light, 20%);
 }
 
 .nav-btn:active {
@@ -258,7 +258,7 @@ export default {
 @media only screen and (min-width: 768px) and (max-width: 991.98px) {
   .main-page {
     border-radius: 2rem;
-    box-shadow: 0 0 16px 0 darken(#2669BF, 7%);
+    box-shadow: 0 0 16px 0 darken($primary_color, 7%);
   }
 }
 

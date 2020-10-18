@@ -49,8 +49,4 @@ export default {
 .d-flex.flex-column.flex-1 {
   flex: 1;
 }
-
-.fa-box-alt {
-  background-color: red !important;
-}
 </style>

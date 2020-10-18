@@ -32,6 +32,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary_color: #2669BF;
+$light: #EFEFEF;
 
 .fade-enter-active,
 .fade-leave-active {
@@ -48,25 +50,25 @@ export default {
   border-radius: 2rem;
   padding: 15px;
   z-index: 100;
-  box-shadow: 0 0 16px 0 darken(#2669BF, 7%);
+  box-shadow: 0 0 16px 0 darken($primary_color, 7%);
 }
 
 .header-logo {
   height: 8rem;
   background-color: #F24B6A;
   border-radius: 2rem 2rem 0 0;
-  box-shadow: 0 10px 8px -8px darken(#EFEFEF, 10%);
+  box-shadow: 0 10px 8px -8px darken($light, 10%);
   z-index: 70;
 }
 
 .header-logo h1 {
   width: 100%;
-  color: #EFEFEF;
+  color: $light;
 }
 
 .game-settings {
   min-height: 30rem;
-  background-color: #EFEFEF;
+  background-color: $light;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -117,7 +119,7 @@ export default {
 @media only screen and (min-width: 768px) and (max-width: 991.98px) {
   .main-page {
     border-radius: 2rem;
-    box-shadow: 0 0 16px 0 darken(#2669BF, 7%);
+    box-shadow: 0 0 16px 0 darken($primary_color, 7%);
   }
 }
 

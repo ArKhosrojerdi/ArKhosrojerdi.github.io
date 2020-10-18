@@ -73,6 +73,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary_color: #2669BF;
+$light: #EFEFEF;
+
 .categories-list {
   text-decoration: none;
 }
@@ -87,23 +90,23 @@ export default {
 .btn-point {
   height: 3rem;
   width: 3rem;
-  border: 4px solid darken(#2669BF, 10%);
-  background-color: #2669BF;
-  color: #EFEFEF;
+  border: 4px solid darken($primary_color, 10%);
+  background-color: $primary_color;
+  color: $light;
   border-radius: .5rem;
   font-weight: 700;
   font-size: 24px;
-  box-shadow: 0 0 4px 0 darken(#CFCFCF, 10%);
+  box-shadow: 0 0 3px 0 darken($light, 15%);
   outline: none;
 }
 
 .btn-point.btn-border-tl-none:disabled {
   box-shadow: none;
   cursor: not-allowed;
-  border: 4px solid #2669BF;
+  border: 4px solid $primary_color;
   border-right: none;
   border-bottom: none;
-  background-color: lighten(#2669BF, 5%);
+  background-color: lighten($primary_color, 5%);
   color: #AFAFAF;
 }
 

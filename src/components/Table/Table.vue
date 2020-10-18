@@ -44,6 +44,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary_color: #2669BF;
+$light: #EFEFEF;
+
 .ltr {
   direction: ltr;
   display: inline-block;
@@ -61,13 +64,13 @@ export default {
 }
 
 .team.turn {
-  border-bottom: 4px solid darken(#2669BF, 15%);
-  background-color: #2669BF;
-  box-shadow: 0 4px 8px 0 darken(#EFEFEF, 20%);
+  border-bottom: 4px solid darken($primary_color, 15%);
+  background-color: $primary_color;
+  box-shadow: 0 4px 8px 0 darken($light, 20%);
 }
 
 .team.turn h4 {
-  color: #efefef;
+  color: $light;
 }
 
 .team.wait {
@@ -91,7 +94,7 @@ export default {
 }
 
 .team.pass h4 {
-  color: #efefef;
+  color: $light;
 }
 
 .d-flex.flex-column.flex-1 {

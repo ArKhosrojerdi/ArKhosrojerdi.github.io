@@ -60,22 +60,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$primary_color: #2669BF;
+$light: #EFEFEF;
+
 .nav-btn {
   outline: none;
-  border: 4px solid darken(#F24B6A, 20%);
-  background-color: #F24B6A;
+  border: 4px solid darken($primary_color, 20%);
+  background-color: $primary_color;
   border-radius: .5rem;
-  color: #efefef;
+  color: $light;
   font-weight: 900;
   font-size: 24px;
   line-height: 100%;
   height: 4rem;
   width: 4rem;
-  box-shadow: 0 0 8px 0 darken(#EFEFEF, 10%);
+  box-shadow: 0 0 8px 0 darken($light, 10%);
 }
 
 .nav-btn:hover {
-  box-shadow: 0 2px 10px 0 darken(#EFEFEF, 20%);
+  box-shadow: 0 2px 10px 0 darken($light, 20%);
 }
 
 .nav-btn:active {
@@ -107,10 +110,6 @@ export default {
   color: #2c3e50;
 }
 
-.text-gray#text {
-  line-height: 0;
-}
-
 .d-flex.flex-column.flex-1 {
   flex: 1;
 }
@@ -118,15 +117,15 @@ export default {
 @keyframes wink {
   from {
     transform: scale(1);
-    box-shadow: 0 2px 2px darken(#EFEFEF, 5%);
+    box-shadow: 0 2px 2px darken($light, 5%);
   }
   50% {
     transform: scale(1.1);
-    box-shadow: 0 3px 8px 1px darken(#EFEFEF, 20%);
+    box-shadow: 0 3px 8px 1px darken($light, 20%);
   }
   to {
     transform: scale(1);
-    box-shadow: 0 2px 2px darken(#EFEFEF, 5%);
+    box-shadow: 0 2px 2px darken($light, 5%);
   }
 }
 </style>
