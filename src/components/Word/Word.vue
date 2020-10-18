@@ -385,7 +385,7 @@ export default {
 
   .game-settings {
     border-radius: 0 0 .5rem .5rem;
-    min-height: calc(100vh - 30px) !important;
+    max-height: calc(100vh - 6rem - 30px) !important;
   }
 }
 
