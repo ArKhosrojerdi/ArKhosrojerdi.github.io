@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="mt-md-5 mt-sm-0 mt-0 rounded-sm-0">
-    <router-view/>
-    <!--    <Clouds/>-->
+  <div id="app">
+    <router-view class="my-md-5 my-sm-0"/>
+<!--        <Clouds/>-->
   </div>
 </template>
 
@@ -10,9 +10,9 @@
 
 export default {
   name: 'App',
-  components: {
+  // components: {
     // Clouds
-  }
+  // }
 }
 </script>
 
@@ -38,13 +38,19 @@ html, body {
 }
 
 #app {
+  position: relative;
+  overflow: auto;
+  min-height: 100vh;
   font-family: 'Yekan', Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: $primary_color;
+  //background-color: $primary_color;
   line-height: 1;
+
+  background: rgb(38,105,191);
+  background: linear-gradient(180deg, rgba(38,105,191,1) 0%, rgba(38,140,191,1) 100%);
 }
 
 button {
