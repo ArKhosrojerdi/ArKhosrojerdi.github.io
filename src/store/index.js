@@ -70,7 +70,7 @@ export const store = createStore({
             ];
         },
         initGame(state) {
-            state.totalRounds = 1;
+            state.totalRounds = 5;
             state.round = 1;
             state.turn = 0;
             state.autoTime = true;

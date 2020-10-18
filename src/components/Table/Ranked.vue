@@ -94,9 +94,6 @@ $light: #EFEFEF;
   width: 100%;
   height: 3.5rem;
   font-size: 24px;
-  transition: all 1s;
-  position: relative;
-  overflow: hidden;
 }
 
 .team.turn {
