@@ -381,12 +381,11 @@ export default {
   .main-page {
     border-radius: 0;
     box-shadow: none;
-    height: 100vh !important;
   }
 
   .game-settings {
-    border-radius: .5rem;
-    min-height: 100%;
+    border-radius: 0 0 .5rem .5rem;
+    min-height: calc(100vh - 30px) !important;
   }
 }
 
@@ -399,7 +398,7 @@ export default {
 
   .game-settings {
     border-radius: 0 0 .5rem .5rem;
-    min-height: calc(100vh - 8rem - 30px) !important;
+    min-height: calc(100vh - 30px) !important;
   }
 }
 
