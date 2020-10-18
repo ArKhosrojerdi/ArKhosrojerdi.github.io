@@ -70,7 +70,7 @@ export const store = createStore({
             ];
         },
         initGame(state) {
-            state.totalRounds = 3;
+            state.totalRounds = 1;
             state.round = 1;
             state.turn = 0;
             state.autoTime = true;
@@ -203,7 +203,6 @@ export const store = createStore({
             }
             state.playedWords.push(wordId);
             commit("changeLastWordPlayed", wordId);
-            console.log(state.teams)
             state.currentWord.id = wordId;
             state.currentWord.name = state.words[state.currentCat.id].filter(word => word.id === wordId)[0].name;
         },

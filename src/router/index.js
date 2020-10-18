@@ -1,7 +1,7 @@
 import {createWebHistory, createRouter} from "vue-router";
 import Header from "../components/Header";
 import Main from "../components/Main.vue";
-import Table from "../components/Table.vue";
+import TableBody from "../components/Table/TableBody.vue";
 import Categories from "../components/Categories/Categories.vue";
 import Word from "../components/Word/Word.vue";
 import Info from "../components/Info.vue";
@@ -19,8 +19,8 @@ const routes = [
             },
             {
                 path: "table",
-                name: "Table",
-                component: Table,
+                name: "TableBody",
+                component: TableBody,
             },
             {
                 path: "categories",

@@ -2,7 +2,7 @@
   <div class="container main-page d-flex flex-column col-12 col-lg-6 col-sm-9 rounded-sm-0">
     <div class="header-logo d-flex flex-column align-content-center">
       <h1 class="my-auto" v-if="page === 'Main'">پانتونون</h1>
-      <h1 class="my-auto" v-else-if="page === 'Table'">جدول تیم‌ها</h1>
+      <h1 class="my-auto" v-else-if="page === 'TableBody'">جدول تیم‌ها</h1>
       <h1 class="my-auto" v-else-if="page === 'Categories'">دسته‌بندی‌‌ها</h1>
     </div>
     <div class="game-settings d-flex flex-column flex-1">

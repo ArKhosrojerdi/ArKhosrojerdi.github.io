@@ -400,6 +400,7 @@ export default {
     border-radius: .5rem;
     min-height: calc(100vh - 30px);
   }
+
   .alert-body {
     min-height: calc(100vh - 30px - 48px) !important;
   }

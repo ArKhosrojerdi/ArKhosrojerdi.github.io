@@ -6,37 +6,15 @@
       </div>
       <div class="game-settings">
         <div class="mx-auto col-lg-6 col-md-9 col-sm-12 col-12 py-4 d-flex flex-column flex-1">
-          <div>
-            <hr class="m-0 mb-4">
-          </div>
-          <div v-for="(team, index) in teams" :key="index"
-               class="d-flex flex-row align-items-center justify-content-center team mb-3 round-hrem"
-               :class="{'turn': team.id === turn, 'eliminated': team.eliminated, 'wait': !team.eliminated && team.id > turn, 'pass': !team.eliminated && team.id < turn}">
-            <h4 class="ml-auto mr-4 my-0">{{ team.name }}</h4>
-            <h4 class="mr-auto ml-4 my-0">
-              {{ toPersian(table[index].point) }}
-              <span class="mr-4">امتیاز</span>
-            </h4>
 
-          </div>
-          <div class="d-flex flex-column flex-1">
-            <div class="mt-auto d-flex justify-content-between">
-              <router-link to="/categories">
-                <button class="nav-btn btn-border-tr-none wink">
-                  <i class="fa fa-angle-double-right"></i>
-                </button>
-              </router-link>
-              <router-link to="/info">
-                <button class="nav-btn btn-border-tx-none">
-                  <i class="fas fa-info-circle"></i>
-                </button>
-              </router-link>
-              <router-link to="/">
-                <button class="nav-btn btn-border-tl-none" @click="initGame">
-                  <i class="fa fa-power-off"></i>
-                </button>
-              </router-link>
-            </div>
+          <Ranked/>
+
+          <div class="mt-auto">
+            <router-link to="/">
+              <button class="nav-btn btn-border-tx-none mt-auto px-2">
+                <i class="fas fa-home"></i>
+              </button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -49,11 +27,16 @@ import {mapState} from 'vuex';
 import {mapActions} from 'vuex';
 import {mapGetters} from 'vuex';
 
+import Ranked from './Table/Ranked.vue';
+
 export default {
   data() {
     return {
       teams: []
     }
+  },
+  components: {
+    Ranked
   },
   created() {
     this.table = this.getTable();
@@ -68,7 +51,6 @@ export default {
     },
     getTable() {
       let table = this.getTeamsPoints();
-      console.log(table);
       return table;
     },
     ...mapGetters([
@@ -91,6 +73,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .main-page {
   border-radius: 2rem;
   padding: 15px;
@@ -222,14 +205,6 @@ export default {
   flex: 1;
 }
 
-.fill {
-  display: flex;
-  -ms-flex-direction: column;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  flex: 1;
-}
-
 @keyframes wink {
   from {
     transform: scale(1);
@@ -252,10 +227,11 @@ export default {
 
   .game-settings {
     border-radius: 0 0 .5rem .5rem;
-    min-height: calc(100% - 8rem);
+    min-height: calc(100% - 6rem);
   }
 
   .header-logo {
+    height: 6rem;
     border-radius: .5rem .5rem 0 0;
   }
 }

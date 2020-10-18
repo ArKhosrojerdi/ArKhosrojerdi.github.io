@@ -1,24 +1,15 @@
 <template>
   <div class="d-flex flex-column flex-1 col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 mx-auto p-0">
     <div>
-      <h2 class="text-gray m-0 mb-2">
+      <h4 class="text-gray m-0 mb-2">
         {{ toPersian(totalRounds) }}
         <span class="mx-4">/</span>
         {{ toPersian(round) }}
-      </h2>
-      <hr class="m-0 mb-3">
-    </div>
-
-    <div v-for="(team, index) in teams" :key="index"
-         class="d-flex flex-row align-items-center justify-content-center team mb-3 round-hrem"
-         :class="{'turn': team.id === turn, 'eliminated': team.eliminated, 'wait': !team.eliminated && team.id > turn, 'pass': !team.eliminated && team.id < turn}">
-      <h4 class="ml-auto mr-4 my-0">{{ team.name }}</h4>
-      <h4 class="mr-auto ml-4 my-0">
-        <span class="ltr">{{ toPersian(table[index].point + parseInt(table[index].sec / 15)) }}</span>
-        <span class="mr-4">امتیاز</span>
       </h4>
-
+      <hr class="m-0 mb-2 mb-md-3">
     </div>
+
+    <Table/>
 
     <div class="d-flex flex-column flex-1">
       <div class="mt-auto d-flex justify-content-between">
@@ -34,7 +25,7 @@
         </router-link>
         <router-link to="/">
           <button class="nav-btn btn-border-tl-none px-2" @click="init()">
-            <i class="fa fa-power-off"></i>
+            <i class="fas fa-door-open"></i>
           </button>
         </router-link>
       </div>
@@ -43,42 +34,24 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
-import {mapActions} from 'vuex';
-import {mapGetters} from 'vuex';
+import Table from './Table.vue';
+import {mapState} from "vuex";
 
 export default {
-  data() {
-    return {
-      table: []
-    }
-  },
-  created() {
-    this.table = this.getTable();
+  components: {
+    Table
   },
   methods: {
-    init() {
-      this.initGame();
-    },
     toPersian(n) {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
     },
-    getTable() {
-      return this.getTeamsPoints();
-    },
-    ...mapGetters([
-      'getTeamsPoints'
-    ]),
-    ...mapActions([
-      'initGame'
-    ])
+    init() {
+      this.initGame();
+    }
   },
   computed: {
     ...mapState([
-      'gameName',
-      'teams',
-      'turn',
       'totalRounds',
       'round'
     ])
@@ -87,55 +60,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ltr {
-  direction: ltr;
-  display: inline-block;
-}
-
-.round-hrem {
-  border-radius: .5rem;
-}
-
-.team {
-  width: 100%;
-  height: 3.5rem;
-  font-size: 24px;
-}
-
-.team.turn {
-  border-bottom: 4px solid darken(#2669BF, 15%);
-  background-color: #2669BF;
-  box-shadow: 0 4px 8px 0 darken(#EFEFEF, 20%);
-}
-
-.team.turn h4 {
-  color: #efefef;
-}
-
-.team.wait {
-  background-color: #cfcfcf;
-}
-
-.team.wait h4 {
-  color: #808080;
-}
-
-.team.eliminated {
-  background-color: darken(#F24B6A, 10%);
-}
-
-.team.eliminated h4 {
-  color: lighten(#F24B6A, 20%);
-}
-
-.team.pass {
-  background-color: #44A666;
-}
-
-.team.pass h4 {
-  color: #efefef;
-}
-
 .nav-btn {
   outline: none;
   border: 4px solid darken(#F24B6A, 20%);
@@ -188,14 +112,6 @@ export default {
 }
 
 .d-flex.flex-column.flex-1 {
-  flex: 1;
-}
-
-.fill {
-  display: flex;
-  -ms-flex-direction: column;
-  -webkit-flex-direction: column;
-  flex-direction: column;
   flex: 1;
 }
 
