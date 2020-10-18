@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column align-items-center justify-content-center flex-1 w-100">
-    <div class="d-flex flex-column justify-content-center align-content-center mt-auto w-100">
+    <div class="d-flex flex-column justify-content-center align-content-center my-auto w-100">
       <ul class="w-100 p-0 mb-0">
         <li class="d-flex align-items-center justify-content-center mb-2 green">
           <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
@@ -79,7 +79,7 @@
       </div>
     </div>
 
-    <div class="mt-auto">
+    <div>
       <EndTurnButton :points="points" :savedTime="savedTime"/>
     </div>
   </div>

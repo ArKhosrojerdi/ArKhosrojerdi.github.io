@@ -343,9 +343,9 @@ export default {
   0% {
     transform: scale(.5);
   }
-  //66% {
-  //<!--  transform: scale(1.05);-->
-  //}
+  66% {
+    transform: scale(1.05);
+  }
   100% {
     transform: scale(1);
   }
@@ -355,9 +355,9 @@ export default {
   0% {
     transform: scale(.5);
   }
-  //66% {
-  //<!--  transform: scale(1.05);-->
-  //}
+  66% {
+    transform: scale(1.05);
+  }
   100% {
     transform: scale(1);
   }
