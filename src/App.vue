@@ -46,11 +46,11 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  //background-color: $primary_color;
+  background-color: $primary_color;
   line-height: 1;
-
-  background: rgb(38,105,191);
-  background: linear-gradient(180deg, rgba(38,105,191,1) 0%, rgba(38,140,191,1) 100%);
+  //
+  //background: rgb(38,105,191);
+  //background: linear-gradient(180deg, rgba(38,105,191,1) 0%, rgba(38,140,191,1) 100%);
 }
 
 button {

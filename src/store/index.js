@@ -81,6 +81,8 @@ export const store = createStore({
             state.categories = categories;
         },
         setCurrentCat(state, cat) {
+            if (state.autoTime)
+                state.time = cat.point * 15 + 30;
             state.currentCat = cat;
         },
         addWordToPlayedWords(state, wordId) {

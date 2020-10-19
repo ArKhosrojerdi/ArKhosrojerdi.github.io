@@ -31,7 +31,7 @@
                     :class="{'btn-border-tr-none': changed === 0, 'btn-border-tx-none': changed === 1}">
               <i class="fas fa-play"></i>
             </button>
-            <button v-if="changed === 0" @click="fetchNewWord" class="nav-btn mt-auto px-2"
+            <button v-if="changed === 0" @click="fetchNewWord" class="nav-btn nav-btn-warning mt-auto px-2"
                     :class="{'btn-border-tl-none': changed === 0}">
               <i class="fas fa-sync-alt"></i>
             </button>
@@ -42,10 +42,10 @@
             <button class="nav-btn btn-border-tr-none mt-auto px-2" @click="succeed">
               <i class="fas fa-check"></i>
             </button>
-            <button class="nav-btn btn-border-tx-none mt-auto px-2" @click="submitFault">
+            <button class="nav-btn nav-btn-warning btn-border-tx-none mt-auto px-2" @click="submitFault">
               <i class="fas fa-exclamation-triangle"></i>
             </button>
-            <button class="nav-btn btn-border-tl-none mt-auto px-2" @click="failed">
+            <button class="nav-btn nav-btn-danger btn-border-tl-none mt-auto px-2" @click="failed">
               <i class="fas fa-times"></i>
             </button>
           </div>
@@ -239,7 +239,7 @@ $light: #EFEFEF;
   height: 4rem;
   min-width: 4rem;
   max-width: 4rem;
-  box-shadow: 0 4px 4px 0 darken($light, 10%);
+  box-shadow: 0 2px 4px 0 darken($light, 10%);
 }
 
 .justify-content-center.hide {
@@ -261,7 +261,7 @@ $light: #EFEFEF;
 }
 
 .nav-btn:hover {
-  box-shadow: 0 4px 8px 0 darken($light, 20%);
+  box-shadow: 0 4px 6px 0 darken($light, 20%);
 }
 
 .nav-btn:active {
@@ -285,6 +285,16 @@ $light: #EFEFEF;
   border-right: none;
 }
 
+.nav-btn.nav-btn-warning {
+  background-color: darken(#F2C777, 5%);
+  border-color: darken(#F2C777, 20%);
+}
+
+.nav-btn.nav-btn-danger {
+  background-color: darken(#F24B6A, 5%);
+  border-color: darken(#F24B6A, 20%);
+}
+
 .progress {
   background-color: darken($light, 12%);
   height: 1.5rem;
@@ -304,19 +314,19 @@ $light: #EFEFEF;
 }
 
 .alert-body .alert-fail {
-  background-color: darken($primary_color, 10%);
+  background-color: darken(#F24B6A, 5%);
   color: $light;
   border-radius: .5rem;
   box-shadow: 0 4px 4px 0 darken($light, 10%);
-  border-bottom: 4px solid darken($primary_color, 20%);
+  border-bottom: 6px solid darken(#F24B6A, 20%);
 }
 
 .alert-body .alert-success {
-  background-color: darken(#44A666, 10%);
+  background-color: darken(#44A666, 5%);
   color: $light;
   border-radius: .5rem;
   box-shadow: 0 4px 4px 0 darken($light, 10%);
-  border-bottom: 4px solid darken(#44A666, 20%);
+  border-bottom: 6px solid darken(#44A666, 20%);
 }
 
 .progress .progress-bar {

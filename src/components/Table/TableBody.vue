@@ -24,7 +24,7 @@
           </button>
         </router-link>
         <router-link to="/">
-          <button class="nav-btn btn-border-tl-none px-2" @click="init()">
+          <button class="nav-btn nav-btn-danger btn-border-tl-none px-2" @click="init()">
             <i class="fas fa-door-open"></i>
           </button>
         </router-link>
@@ -100,6 +100,11 @@ $light: #EFEFEF;
 .nav-btn.btn-border-tr-none {
   border-top: none;
   border-right: none;
+}
+
+.nav-btn.nav-btn-danger {
+  background-color: darken(#F24B6A, 5%);
+  border-color: darken(#F24B6A, 20%);
 }
 
 .wink {
