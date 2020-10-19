@@ -31,11 +31,10 @@
                     :class="{'btn-border-tr-none': changed === 0, 'btn-border-tx-none': changed === 1}">
               <i class="fas fa-play"></i>
             </button>
-            <button v-if="changed === 0" @click="fetchNewWord" class="nav-btn nav-btn-warning mt-auto px-2"
-                    :class="{'btn-border-tl-none': changed === 0}">
+            <button v-if="changed === 0" @click="fetchNewWord"
+                    class="nav-btn btn-border-tl-none nav-btn-warning mt-auto px-2">
               <i class="fas fa-sync-alt"></i>
             </button>
-
           </div>
 
           <div v-else class="d-flex align-content-between align-items-between justify-content-between">
@@ -239,24 +238,6 @@ $light: #EFEFEF;
   box-shadow: 0 2px 4px 0 darken($light, 10%);
 }
 
-.justify-content-center.hide {
-  -webkit-animation: hide .2s linear;
-  -moz-animation: hide .2s linear;
-  -o-animation: hide .2s linear;
-  animation: hide .2s linear;
-}
-
-@keyframes hide {
-  0% {
-    transform: translateX(-webkit-calc(+50% - 2rem));
-  }
-
-  100% {
-    transform: translateX(-webkit-calc(-50% + 2rem));
-    align-self: center;
-  }
-}
-
 .nav-btn:hover {
   box-shadow: 0 4px 6px 0 darken($light, 20%);
 }
@@ -335,12 +316,27 @@ $light: #EFEFEF;
   flex: 1;
 }
 
+.hide.justify-content-center {
+  animation: hide .4s ease-in;
+}
+
 .fade-enter-active, .fade-leave-active {
   animation: fade .2s ease-in;
 }
 
 .fade2-enter-active, .fade2-leave-active {
   animation: fade .2s ease-in;
+}
+
+@keyframes hide {
+  from {
+    margin-left: -webkit-calc(100% - 4rem);
+    margin-left: -moz-calc(100% - 4rem);
+    margin-left: calc(100% - 4rem);
+  }
+  to {
+    margin-left: 0;
+  }
 }
 
 @keyframes fade {

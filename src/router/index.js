@@ -32,16 +32,17 @@ const routes = [
                 name: "Result",
                 component: Result,
             },
+            {
+                path: "info",
+                name: "Info",
+                component: Info,
+            },
         ]
     },
     {
         path: "/word",
         name: "Word",
         component: Word,
-    },
-    {
-        path: "/info",
-        component: Info,
     },
 ];
 

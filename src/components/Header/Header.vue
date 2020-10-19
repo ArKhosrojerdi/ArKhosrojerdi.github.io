@@ -4,6 +4,7 @@
     <h1 class="my-auto" v-else-if="page === 'TableBody'">جدول تیم‌ها</h1>
     <h1 class="my-auto" v-else-if="page === 'Categories'">دسته‌بندی‌‌ها</h1>
     <h1 class="my-auto" v-else-if="page === 'Result'">رده‌بندی</h1>
+    <h1 class="my-auto" v-else-if="page === 'Info'">قوانین</h1>
   </div>
 </template>
 
