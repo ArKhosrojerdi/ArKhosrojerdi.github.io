@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primary_color: #2669BF;
+$primary_color: #2669bf;
 $light: #EFEFEF;
 
 .fade-enter-active,
