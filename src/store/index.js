@@ -191,8 +191,6 @@ export const store = createStore({
             commit("addPoint", point)
         },
         changeWord({state, commit, getters}) {
-            state.playedWords.pop();
-
             let wordId;
             let flag = true;
             while (flag) {
