@@ -317,7 +317,7 @@ $light: #EFEFEF;
 }
 
 .hide.justify-content-center {
-  animation: hide .4s ease-in;
+  animation: hide .2s ease;
 }
 
 .fade-enter-active, .fade-leave-active {
