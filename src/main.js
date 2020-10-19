@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/src/jquery.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import '../public/fontawesome-free-5.15.1-web/css/all.min.css';
+import './registerServiceWorker'
 
 const app = createApp(App);
 app.use(router);
