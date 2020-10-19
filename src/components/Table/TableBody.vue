@@ -24,7 +24,7 @@
           </button>
         </router-link>
         <router-link to="/">
-          <button class="nav-btn nav-btn-danger btn-border-tl-none px-2" @click="init()">
+          <button class="nav-btn nav-btn-danger btn-border-tl-none px-2" @click="init">
             <i class="fas fa-door-open"></i>
           </button>
         </router-link>
@@ -36,6 +36,7 @@
 <script>
 import Table from './Table.vue';
 import {mapState} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
   components: {
@@ -47,9 +48,12 @@ export default {
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
     },
     init() {
-      this.initGame();
+      this.initGame;
     }
   },
+  ...mapActions([
+      'initGame'
+  ]),
   computed: {
     ...mapState([
       'totalRounds',
