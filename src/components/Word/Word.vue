@@ -41,9 +41,19 @@
             <button class="nav-btn btn-border-tr-none mt-auto px-2" @click="succeed">
               <i class="fas fa-check"></i>
             </button>
-            <button class="nav-btn nav-btn-warning btn-border-tx-none mt-auto px-2" @click="submitFault">
-              <i class="fas fa-exclamation-triangle"></i>
-            </button>
+
+            <transition name="warning" mode="out-in">
+              <div v-if="!alert" class="d-inline-block">
+                <button class="nav-btn nav-btn-warning btn-border-tx-none mt-auto px-2"
+                        @click="submitFault">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </button>
+              </div>
+              <div v-else class="alert-fault px-2 d-flex flex-column justify-content-center mx-2 mx-md-4">
+                خطا ثبت شد!
+              </div>
+            </transition>
+
             <button class="nav-btn nav-btn-danger btn-border-tl-none mt-auto px-2" @click="failed">
               <i class="fas fa-times"></i>
             </button>
@@ -102,6 +112,7 @@ export default {
       changed: 0,
       faults: 0,
       savedTime: 0,
+      alert: false
     }
   },
   components: {
@@ -126,9 +137,15 @@ export default {
       return this.toPersian(Math.abs(this.point));
     },
     submitFault() {
-      if (this.faults === 0)
+      this.alert = true;
+      setTimeout(() => {
+        this.alert = false;
+      }, 3000);
+      if (this.faults === 0) {
         this.faults++;
-      else this.faults *= 2;
+      } else {
+        this.faults *= 2;
+      }
     },
     start() {
       this.hasStarted = true;
@@ -195,6 +212,27 @@ export default {
 <style lang="scss" scoped>
 $primary_color: #2669BF;
 $light: #EFEFEF;
+
+.warning-enter-active, .warning-leave-active {
+  transition: all .2s ease;
+}
+
+.warning-enter, .warning-leave-to {
+  transform: translateY(1rem);
+  opacity: 0;
+}
+
+.alert-fault {
+  background-color: darken(#F2C777, 5%);
+  border-bottom: 4px solid darken(#F2C777, 20%);
+  color: #EFEFEF;
+  border-radius: .5rem;
+  height: 4rem;
+  font-size: 20px;
+  display: inline-block;
+  font-weight: 700;
+  box-shadow: 0 2px 4px 0 darken($light, 10%);
+}
 
 .ltr {
   direction: ltr;
