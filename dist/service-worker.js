@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a44da9628155fe17c84622483e79d4b3.js"
+  "/precache-manifest.42f655fa0c4b59b4d836e05c67062b0a.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "Pantomim"});
