@@ -22,11 +22,11 @@
       <h6>تعداد تیم‌ها</h6>
       <div class="num-bar">
         <div class="d-flex">
-          <button class="btn-set btn-inc px-2" @click="addTeam()" :disabled="teams.length >= 6">
+          <button class="btn-set btn-inc px-2" @click="addTeam" :disabled="teams.length >= 6">
             <i class="fa fa-plus"></i>
           </button>
           <h3 class="m-auto w-100">{{ toPersian(teams.length) }}</h3>
-          <button class="btn-set btn-dec px-2" @click="removeTeam()" :disabled="teams.length <= 2">
+          <button class="btn-set btn-dec px-2" @click="removeTeam" :disabled="teams.length <= 2">
             <i class="fa fa-minus"></i>
           </button>
         </div>
@@ -42,12 +42,12 @@
     <div class="mt-4">
       <h6>تعداد دورها</h6>
       <div class="d-flex num-bar">
-        <button class="btn-set btn-inc px-2" :disabled="totalRounds >= 20" @click="setTotalRounds(1)"
+        <button class="btn-set btn-inc px-2" :disabled="totalRounds >= 20" @click="setNumberOfRounds(1)"
                 :class="{active:interval}">
           <i class="fa fa-plus"></i>
         </button>
         <h3 class="m-auto">{{ toPersian(totalRounds) }}</h3>
-        <button class="btn-set btn-dec px-2" :disabled="totalRounds <= 3" @click="setTotalRounds(-1)"
+        <button class="btn-set btn-dec px-2" :disabled="totalRounds <= 3" @click="setNumberOfRounds(-1)"
                 :class="{active:interval}">
           <i class="fa fa-minus"></i>
         </button>
@@ -104,36 +104,20 @@ export default {
   data() {
     return {
       gameTypesAppended: false,
-      interval: false,
-
+      interval: false
     };
   },
   created() {
-    this.initializeGame();
+    this.initGame();
   },
   methods: {
-    initializeGame() {
-      this.initGame();
-    },
     toPersian(n) {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
     },
-    setGameType(gameType) {
-      this.setGameType(gameType)
-    },
-    addTeam() {
-      this.addTeam();
-    },
-    removeTeam() {
-      this.removeTeam();
-    },
     stop() {
       clearInterval(this.interval);
       this.interval = false;
-    },
-    setTotalRounds(step) {
-      this.setNumberOfRounds(step);
     },
     incTime(step) {
       if (!this.interval) {
@@ -146,17 +130,17 @@ export default {
         }, 125)
       }
     },
-    incTotalRounds(step) {
-      if (!this.interval) {
-        this.interval = setInterval(() => {
-          if (this.totalRounds >= 20) {
-            this.stop();
-          } else {
-            this.setTotalRounds(step)
-          }
-        }, 125)
-      }
-    },
+    // incTotalRounds(step) {
+    //   if (!this.interval) {
+    //     this.interval = setInterval(() => {
+    //       if (this.totalRounds >= 20) {
+    //         this.stop();
+    //       } else {
+    //         this.setNumberOfRounds(step);
+    //       }
+    //     }, 125)
+    //   }
+    // },
     decTime(step) {
       if (!this.interval) {
         this.interval = setInterval(() => {
@@ -174,16 +158,10 @@ export default {
           if (this.totalRounds <= 3) {
             this.stop();
           } else {
-            this.setTotalRounds(step)
+            this.setNumberOfRounds(step);
           }
         }, 125)
       }
-    },
-    setTime(step) {
-      this.setTime(step);
-    },
-    setAutoTime(value) {
-      this.setAutoTime(value)
     },
     ...mapActions([
       'setNumberOfRounds',

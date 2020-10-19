@@ -24,7 +24,7 @@
           </button>
         </router-link>
         <router-link to="/">
-          <button class="nav-btn nav-btn-danger btn-border-tl-none px-2" @click="init">
+          <button class="nav-btn nav-btn-danger btn-border-tl-none px-2" @click="initGame">
             <i class="fas fa-door-open"></i>
           </button>
         </router-link>
@@ -47,13 +47,10 @@ export default {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
     },
-    init() {
-      this.initGame;
-    }
-  },
-  ...mapActions([
+    ...mapActions([
       'initGame'
-  ]),
+    ]),
+  },
   computed: {
     ...mapState([
       'totalRounds',

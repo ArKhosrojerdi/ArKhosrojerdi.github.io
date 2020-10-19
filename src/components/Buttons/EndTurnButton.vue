@@ -1,14 +1,7 @@
 <template>
   <div>
-    <router-link to="/result" v-if="lastTurn">
-      <button class="nav-btn btn-border-tx-none mt-auto px-2">
-        <!--                    <i class="fa fa-angle-double-right"></i>-->
-        باشه
-      </button>
-    </router-link>
-    <router-link to="/table" v-else>
-      <button class="nav-btn btn-border-tx-none mt-auto px-2" @click="nextTurn()">
-        <!--                    <i class="fa fa-angle-double-right"></i>-->
+    <router-link v-bind:to="lastTurn ? '/result' : '/table'">
+      <button class="nav-btn btn-border-tx-none mt-auto px-2" @click="go">
         باشه
       </button>
     </router-link>
@@ -30,15 +23,13 @@ export default {
     'savedTime'
   ],
   created() {
-    this.lastTurn = this.isLastTurn();
+    this.lastTurn = this.getIsLastTurn();
     this.addPoint({point: this.points, time: this.savedTime});
   },
   methods: {
-    isLastTurn() {
-      return this.getIsLastTurn();
-    },
-    nextTurn() {
-      this.nextTurn();
+    go() {
+      if (!this.lastTurn)
+        this.nextTurn();
     },
     ...mapActions([
       'addPoint'

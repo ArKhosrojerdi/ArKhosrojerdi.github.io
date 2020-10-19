@@ -1,24 +1,33 @@
 <template>
-  <ul class="p-0 m-0">
-    <li v-for="(rank, index) in ranks" :key="index"
-        class="d-flex flex-row align-items-center justify-content-center team mb-2 round-sharp w-100 m-0"
-        :class="{'green': green(index, rank.id), 'yellow': yellow(index, rank.id)}">
-      <h4 class="ml-auto mr-4 my-0" :class="index !== 0 && !teams[rank.id].eliminated ? 'text-gray' : 'text-light'">
-        {{ teams[rank.id].name }}
-      </h4>
+  <div class="d-flex flex-column align-items-center justify-content-center flex-1 w-100">
+    <ul class="w-100 p-0 m-0">
+      <li v-for="(rank, index) in ranks" :key="index"
+          class="d-flex flex-row align-items-center justify-content-center team mb-2 round-sharp w-100 m-0"
+          :class="{'green': green(index, rank.id), 'yellow': yellow(index, rank.id)}">
+        <h4 class="ml-auto mr-4 my-0" :class="index !== 0 && !teams[rank.id].eliminated ? 'text-gray' : 'text-light'">
+          {{ teams[rank.id].name }}
+        </h4>
 
-      <h6 class="my-0 text-dark-green h-100 d-flex flex-row align-items-center"
-          :class="index === 0 && !teams[rank.id].eliminated ? 'text-dark-green' : 'text-dark-yellow'">
-        <i class="fas fa-stopwatch ml-2 mt-1"></i>
-        <b>{{ toPersian(rank.time) }}</b>
+        <h6 class="my-0 text-dark-green h-100 d-flex flex-row align-items-center"
+            :class="index === 0 && !teams[rank.id].eliminated ? 'text-dark-green' : 'text-dark-yellow'">
+          <i class="fas fa-stopwatch ml-2 mt-1"></i>
+          <b>{{ toPersian(rank.time) }}</b>
 
-      </h6>
-      <h4 class="mr-auto ml-4 my-0 text-gray"
-          :class="index === 0 && !teams[rank.id].eliminated ? 'text-light' : 'text-gray'">
-        <span class="ltr">{{ toPersian(table[rank.id].point + parseInt(table[rank.id].sec / 15)) }}</span>
-      </h4>
-    </li>
-  </ul>
+        </h6>
+        <h4 class="mr-auto ml-4 my-0 text-gray"
+            :class="index === 0 && !teams[rank.id].eliminated ? 'text-light' : 'text-gray'">
+          <span class="ltr">{{ toPersian(table[rank.id].point + parseInt(table[rank.id].sec / 15)) }}</span>
+        </h4>
+      </li>
+    </ul>
+    <div class="mt-auto">
+      <router-link to="/">
+        <button class="nav-btn btn-border-tx-none mt-auto px-2">
+          <i class="fas fa-home"></i>
+        </button>
+      </router-link>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -32,7 +41,7 @@ export default {
     }
   },
   created() {
-    this.table = this.getTable();
+    this.table = this.getTeamsPoints();
     for (let i = 0; i < this.table.length; i++) {
       this.ranks.push({id: i, point: this.table[i].point, time: this.table[i].sec})
     }
@@ -44,25 +53,16 @@ export default {
       return y.time - x.time;
     });
   },
-  mounted() {
-    this.show = true;
-  },
   methods: {
     yellow(index, rankId) {
       return index !== 0 && !this.teams[rankId].eliminated;
     },
-    // red(rankId) {
-    //   return this.teams[rankId].eliminated;
-    // },
     green(index, rankId) {
       return index === 0 && !this.teams[rankId].eliminated;
     },
     toPersian(n) {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
-    },
-    getTable() {
-      return this.getTeamsPoints();
     },
     ...mapGetters([
       'getTeamsPoints'
@@ -134,6 +134,45 @@ $light: #EFEFEF;
 
 .text-dark-yellow {
   color: darken(#F2C777, 22%);
+}
+
+.nav-btn {
+  outline: none;
+  border: 4px solid darken($primary_color, 20%);
+  background-color: $primary_color;
+  border-radius: .5rem;
+  color: $light;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  height: 4rem;
+  width: 4rem;
+  box-shadow: 0 0 8px 0 darken($light, 10%);
+}
+
+.nav-btn:hover {
+  box-shadow: 0 2px 10px 0 darken($light, 20%);
+}
+
+.nav-btn:active {
+  box-shadow: none;
+  border: none;
+}
+
+.nav-btn.btn-border-tl-none {
+  border-top: none;
+  border-left: none;
+}
+
+.nav-btn.btn-border-tx-none {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.nav-btn.btn-border-tr-none {
+  border-top: none;
+  border-right: none;
 }
 
 .d-flex.flex-column.flex-1 {

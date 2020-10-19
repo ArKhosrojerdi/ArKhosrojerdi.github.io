@@ -6,7 +6,6 @@ import words from '../data/words';
 export const store = createStore({
     state() {
         return {
-            gameName: 'Pantomim Game',
             totalRounds: 0,
             round: 0,
             turn: 0,

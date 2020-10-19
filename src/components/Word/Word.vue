@@ -85,7 +85,7 @@ import {mapState} from 'vuex';
 import {mapActions} from 'vuex';
 import {mapGetters} from 'vuex';
 
-import TurnScore from '../TurnScore.vue';
+import TurnScore from './Score.vue';
 import WordHeader from './WordHeader.vue';
 
 export default {
@@ -115,7 +115,7 @@ export default {
     this.word = this.currentWord.name;
     this.wordId = this.currentWord.id;
     this.catId = this.getCategoryId();
-    this.catName = this.getCatName();
+    this.catName = this.getCategoryName();
     this.point = this.getCategoryPoint();
   },
   methods: {
@@ -165,9 +165,6 @@ export default {
     },
     volume() {
       return this.timer * 100 / this.time;
-    },
-    getCatName() {
-      return this.getCategoryName();
     },
     fetchNewWord() {
       this.changed = 1;

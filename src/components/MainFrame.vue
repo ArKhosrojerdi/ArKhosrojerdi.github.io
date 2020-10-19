@@ -1,32 +1,24 @@
 <template>
   <div class="container main-page d-flex flex-column col-12 col-lg-6 col-sm-9 rounded-sm-0">
-    <div class="header-logo d-flex flex-column align-content-center">
-      <h1 class="my-auto" v-if="page === 'Main'">پانتونون</h1>
-      <h1 class="my-auto" v-else-if="page === 'TableBody'">جدول تیم‌ها</h1>
-      <h1 class="my-auto" v-else-if="page === 'Categories'">دسته‌بندی‌‌ها</h1>
-    </div>
+
+    <Header/>
+
     <div class="game-settings d-flex flex-column flex-1">
       <div class="mx-auto col-lg-12 col-md-12 col-sm-12 col-12 py-4 d-flex flex-column flex-1">
         <transition name="fade">
           <router-view></router-view>
         </transition>
-
-        <!--        <router-view>-->
-        <!--          <transition name="fade" mode="out-in">-->
-        <!--            <component :is="page"></component>-->
-        <!--          </transition>-->
-        <!--        </router-view>-->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Header from "@/components/Header/Header";
+
 export default {
-  computed: {
-    page() {
-      return this.$route.name;
-    }
+  components: {
+    Header
   }
 }
 </script>
@@ -51,19 +43,6 @@ $light: #EFEFEF;
   padding: 15px;
   z-index: 100;
   box-shadow: 0 0 16px 0 darken($primary_color, 7%);
-}
-
-.header-logo {
-  height: 8rem;
-  background-color: #F24B6A;
-  border-radius: 2rem 2rem 0 0;
-  box-shadow: 0 10px 8px -8px darken($light, 10%);
-  z-index: 70;
-}
-
-.header-logo h1 {
-  width: 100%;
-  color: $light;
 }
 
 .game-settings {
@@ -114,19 +93,5 @@ $light: #EFEFEF;
     border-radius: .5rem .5rem 0 0;
   }
 }
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) and (max-width: 991.98px) {
-  .main-page {
-    border-radius: 2rem;
-    box-shadow: 0 0 16px 0 darken($primary_color, 7%);
-  }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-//@media only screen and (min-width: 992px) and (max-width: 1199.98px) {...}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-//@media only screen and (min-width: 1200px) {...}
 
 </style>

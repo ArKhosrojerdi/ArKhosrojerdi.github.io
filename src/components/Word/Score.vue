@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import EndTurnButton from './Buttons/EndTurnButton.vue';
+import EndTurnButton from '../Buttons/EndTurnButton.vue';
 
 export default {
   data() {

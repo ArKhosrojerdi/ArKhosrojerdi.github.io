@@ -1,21 +1,21 @@
 import {createWebHistory, createRouter} from "vue-router";
-import Header from "../components/Header";
-import Main from "../components/Main.vue";
+import MainFrame from "../components/MainFrame";
+import Configurations from "../components/Configurations/Configurations.vue";
 import TableBody from "../components/Table/TableBody.vue";
 import Categories from "../components/Categories/Categories.vue";
 import Word from "../components/Word/Word.vue";
-import Info from "../components/Info.vue";
-import Result from "../components/Result.vue";
+import Info from "../components/Info/Info.vue";
+import Result from "../components/Result/Result.vue";
 
 const routes = [
     {
         path: "/",
-        component: Header,
+        component: MainFrame,
         children: [
             {
                 path: "",
-                name: "Main",
-                component: Main
+                name: "Configurations",
+                component: Configurations
             },
             {
                 path: "table",
@@ -27,16 +27,17 @@ const routes = [
                 name: "Categories",
                 component: Categories,
             },
+            {
+                path: "result",
+                name: "Result",
+                component: Result,
+            },
         ]
     },
     {
         path: "/word",
         name: "Word",
         component: Word,
-    },
-    {
-        path: "/result",
-        component: Result,
     },
     {
         path: "/info",

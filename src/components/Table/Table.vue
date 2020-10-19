@@ -20,15 +20,12 @@ export default {
     }
   },
   created() {
-    this.table = this.getTable();
+    this.table = this.getTeamsPoints();
   },
   methods: {
     toPersian(n) {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
-    },
-    getTable() {
-      return this.getTeamsPoints();
     },
     ...mapGetters([
       'getTeamsPoints'
