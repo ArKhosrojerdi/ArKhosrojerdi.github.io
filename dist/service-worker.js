@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.42f655fa0c4b59b4d836e05c67062b0a.js"
+  "/precache-manifest.742c3da8337bc96ecfe8f379ea558537.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "Pantomim"});
+workbox.core.setCacheNameDetails({prefix: "PantoNun"});
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
