@@ -38,22 +38,18 @@ export const store = createStore({
         getTeams(state) {
             return state.teams;
         },
-        getTeamsPoints(state) {
+        getTeamsRounds(state) {
             let points = {}, teamsStatus = [], teamLog;
             for (let i = 0; i < state.teams.length; i++) {
-                points = {
-                    point: 0,
-                    time: 0,
-                    faults: 0,
-                    changed: 0
-                };
+                points = {point: 0, time: 0, faults: 0, changed: 0};
                 for (let j = 0; j < state.teams[i].log.length; j++) {
                     teamLog = state.teams[i].log[j];
-                    console.log(teamLog)
-                    points.point += teamLog.round.point;
+                    if (teamLog.round.success)
+                        points.point += teamLog.round.point;
                     points.time += teamLog.round.time;
                     points.faults += teamLog.round.faults;
                     points.changed += teamLog.round.changed;
+                    points.success += teamLog.round.success;
                 }
                 teamsStatus.push(points);
             }
@@ -133,6 +129,7 @@ export const store = createStore({
         },
         addPoint(state, point) {
             let teamLog = state.teams[state.turn].log[state.teams[state.turn].log.length - 1];
+            teamLog.round.point = point.success;
             teamLog.round.point = point.point;
             teamLog.round.time = point.time;
             teamLog.round.faults = point.faults;
@@ -191,7 +188,7 @@ export const store = createStore({
                 {
                     wordId: wordId,
                     catId: state.currentCat.id,
-                    round: {time: 0, point: 0, faults: 0, changed: 0}
+                    round: {success: false, point: 0, time: 0, faults: 0, changed: 0}
                 }
             );
 

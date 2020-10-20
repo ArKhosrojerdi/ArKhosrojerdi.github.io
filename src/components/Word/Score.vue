@@ -6,7 +6,8 @@
           <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
             <div class="col-4">
               <h4 class="m-0">
-                <b><span v-if="point > 0">+</span>{{ toPersian(point) }}</b>
+                <b v-if="!success">۰</b>
+                <b v-else><span v-if="point > 0">+</span>{{ toPersian(point) }}</b>
               </h4>
             </div>
             <div class="col-4">
@@ -30,7 +31,7 @@
           <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
             <div class="col-4">
               <h4 class="m-0">
-                <b><span v-if="point > 0">+</span>{{ toPersian(parseInt(savedTime / 15)) }}</b>
+                <b><span v-if="parseInt(savedTime / 15) > 0">+</span>{{ toPersian(parseInt(savedTime / 15)) }}</b>
               </h4>
             </div>
             <div class="col-4 px-0">
@@ -101,10 +102,11 @@ export default {
     'faults',
     'changed',
     'savedTime',
-    'point'
+    'point',
+    'success'
   ],
   created() {
-    this.points = {point: this.point, changed: this.changed, faults: this.faults};
+    this.points = {success: this.success, point: this.point, changed: this.changed, faults: this.faults};
   },
   methods: {
     toPersian(n) {
@@ -112,7 +114,9 @@ export default {
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
     },
     totalPoint() {
-      return this.point + parseInt(this.savedTime / 15) - (this.changed + this.faults);
+      if (this.success === true)
+        return this.point + parseInt(this.savedTime / 15) - (this.changed + this.faults);
+      return -(this.changed + this.faults);
     }
   }
 }

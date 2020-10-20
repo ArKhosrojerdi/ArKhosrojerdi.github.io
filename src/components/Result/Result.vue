@@ -41,7 +41,7 @@ export default {
     }
   },
   created() {
-    this.table = this.getTeamsPoints();
+    this.table = this.getTeamsRounds();
     for (let i = 0; i < this.table.length; i++) {
       this.ranks.push({id: i, point: this.table[i].point, time: this.table[i].sec})
     }
@@ -65,7 +65,7 @@ export default {
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
     },
     ...mapGetters([
-      'getTeamsPoints'
+      'getTeamsRounds'
     ]),
   },
   computed: {

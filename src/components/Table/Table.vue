@@ -20,8 +20,7 @@ export default {
     }
   },
   created() {
-    this.table = this.getTeamsPoints();
-    console.log(this.table)
+    this.table = this.getTeamsRounds();
   },
   methods: {
     toPersian(n) {
@@ -29,11 +28,11 @@ export default {
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
     },
     totalPoints(index) {
-      let team = this.table[index];
-      return team.point + parseInt(team.time / 15) - (team.faults + team.changed);
+      let round = this.table[index];
+      return round.point + parseInt(round.time / 15) - (round.faults + round.changed);
     },
     ...mapGetters([
-      'getTeamsPoints'
+      'getTeamsRounds'
     ]),
   },
   computed: {

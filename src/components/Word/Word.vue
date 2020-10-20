@@ -68,7 +68,7 @@
               </h1>
             </div>
 
-            <TurnScore :faults="faults" :changed="changed" :savedTime="0" :point="0"/>
+            <TurnScore :faults="faults" :changed="changed" :savedTime="0" :point="point" :success="success"/>
           </div>
         </transition>
 
@@ -80,7 +80,7 @@
               </h1>
             </div>
 
-            <TurnScore :faults="faults" :changed="changed" :savedTime="savedTime" :point="point"/>
+            <TurnScore :faults="faults" :changed="changed" :savedTime="savedTime" :point="point" :success="success"/>
           </div>
         </transition>
       </div>
@@ -170,12 +170,11 @@ export default {
     failed() {
       stop();
       this.fail = true;
-      this.point = 0;
     },
     succeed() {
       stop();
       this.savedTime = this.timer;
-      if (this.point > 0)
+      if (this.point -  this.changed - this.faults + parseInt(this.savedTime / 15) > 0)
         this.success = true;
       else this.fail = true;
     },
