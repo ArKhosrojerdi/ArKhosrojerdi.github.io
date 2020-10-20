@@ -854,7 +854,7 @@ export default [
         },
         {
             id: 106,
-            name: ' دنده معکوس',
+            name: 'دنده معکوس',
             cat: {
                 catId: 2,
                 point: 4

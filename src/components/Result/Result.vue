@@ -12,18 +12,23 @@
             :class="index === 0 && !teams[rank.id].eliminated ? 'text-dark-green' : 'text-dark-yellow'">
           <i class="fas fa-stopwatch ml-2 mt-1"></i>
           <b>{{ toPersian(rank.time) }}</b>
-
         </h6>
         <h4 class="mr-auto ml-4 my-0 text-gray"
             :class="index === 0 && !teams[rank.id].eliminated ? 'text-light' : 'text-gray'">
-          <span class="ltr">{{ toPersian(table[rank.id].point + parseInt(table[rank.id].sec / 15)) }}</span>
+          <span class="ltr">{{ toPersian(getTotalPoint(rank.id)) }}</span>
         </h4>
       </li>
     </ul>
-    <div class="mt-auto">
+    <div class="d-flex flex-row w-100 justify-content-between mt-auto">
       <router-link to="/">
         <button class="nav-btn btn-border-tx-none mt-auto px-2">
           <i class="fas fa-home"></i>
+        </button>
+      </router-link>
+
+      <router-link to="/log">
+        <button class="nav-btn btn-border-tx-none mt-auto px-2">
+          <i class="fas fa-list-ul"></i>
         </button>
       </router-link>
     </div>
@@ -42,8 +47,9 @@ export default {
   },
   created() {
     this.table = this.getTeamsRounds();
+    console.log(this.table)
     for (let i = 0; i < this.table.length; i++) {
-      this.ranks.push({id: i, point: this.table[i].point, time: this.table[i].sec})
+      this.ranks.push({id: i, point: this.table[i].point, time: this.table[i].time})
     }
     this.ranks.sort(function (x, y) {
       let n = y.point - x.point;
@@ -54,6 +60,10 @@ export default {
     });
   },
   methods: {
+    getTotalPoint(index) {
+      let team = this.table[index];
+      return team.point + parseInt(team.time / 15) - (team.faults + team.changed);
+    },
     yellow(index, rankId) {
       return index !== 0 && !this.teams[rankId].eliminated;
     },

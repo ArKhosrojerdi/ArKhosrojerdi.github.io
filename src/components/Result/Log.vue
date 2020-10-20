@@ -1,10 +1,133 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="(team, index) in teams" :key="index">
-        {{team.name}} , {{team.log}}
+  <div class="d-flex flex-column flex-grow-1">
+    <ul class="m-0 mb-4 p-0">
+      <li v-for="(log, index) in logs" :key="index"
+          class="m-0 w-100 d-flex flex-column align-items-center w-100 list-item mb-3">
+        <div v-if="log !== false" class="w-100 h-100">
+          <div class="d-flex justify-content-between w-100 header p-2 p-md-4 text-white"
+               :class="log.round.success ? 'bg-green' : 'bg-red'">
+
+            <div class="d-flex flex-row align-items-center">
+              <h6 class="d-inline-block text-truncate">
+                <b>
+                  {{ teams[index % teams.length].name }}
+                </b>
+              </h6>
+            </div>
+
+            <div class="d-flex flex-row align-items-center">
+              <h6 class="d-inline-block text-truncate">
+                <b>
+                  {{ getWordById(log.catId, log.wordId) }}
+                </b>
+              </h6>
+            </div>
+
+            <div class="d-flex flex-row align-items-center">
+              <h6 class="ltr">
+                <b v-if="log.round.success">
+                  {{
+                    toPersian(log.round.point + parseInt(log.round.time / 15) - (log.round.faults + log.round.changed))
+                  }}
+                </b>
+                <b v-else>
+                  {{ toPersian(-(log.round.faults + log.round.changed)) }}
+                </b>
+                <i v-if="log.round.success" class="ml-2 fas fa-star"></i>
+                <i v-else class="ml-2 fas fa-skull-crossbones"></i>
+              </h6>
+            </div>
+
+          </div>
+
+          <div class="d-flex flex-row align-items-center justify-content-between w-100 p-2 px-md-4 py-md-3">
+
+            <div class="d-flex flex-row">
+              <h6 v-if="log.round.changedWordId !== -1" class="text-muted">
+                {{ getWordById(log.catId, log.round.changedWordId) }}
+                <i class="fas fa-exchange-alt mx-4"></i>
+              </h6>
+
+              <h6>{{ getWordById(log.catId, log.wordId) }}</h6>
+            </div>
+
+            <div class="">
+              <h6>
+                <b>
+                  {{ getCatNameById(log.catId) }}
+                </b>
+              </h6>
+            </div>
+
+          </div>
+
+          <hr class="m-0 w-100">
+
+          <div class="row w-100 ltr px-2 px-md-4 m-0 mt-2">
+            <div class="col-6 mb-2 p-0" :class="log.round.success ? 'text-dark-green' : 'text-dark-red'">
+              <div class="d-flex flex-row justify-content-start">
+                <h6 class="text-left w-25">
+                  <i class="fas fa-stopwatch"></i>
+                </h6>
+                <h6 class="text-left">
+                  <b>{{ toPersian(log.round.time) }}</b>
+                </h6>
+              </div>
+            </div>
+
+            <div class="col-6 mb-2 p-0" :class="log.round.success ? 'text-dark-green' : 'text-dark-red'">
+              <div class="d-flex flex-row justify-content-end">
+                <h6 class="text-left">
+                  <b :style="!log.round.success ? 'text-decoration: line-through' : ''">
+                    {{ toPersian(log.round.point) }}
+                  </b>
+                </h6>
+                <h6 class="text-right w-25">
+                  <i v-if="log.round.success" class="fas fa-check"></i>
+                  <i v-else class="fas fa-times"></i>
+                </h6>
+              </div>
+            </div>
+
+            <div class="col-6 mb-2 p-0 text-dark-red">
+              <div class="d-flex flex-row justify-content-start">
+                <h6 class="text-left w-25">
+                  <i class="fas fa-exclamation-circle"></i>
+                </h6>
+                <h6 class="text-left">
+                  <b>{{ toPersian(-log.round.faults) }}</b>
+                </h6>
+              </div>
+            </div>
+
+            <div class="col-6 mb-2 p-0 text-dark-red">
+              <div class="d-flex flex-row justify-content-end">
+                <h6 class="text-left">
+                  <b>{{ toPersian(-log.round.changed) }}</b>
+                </h6>
+                <h6 class="text-right w-25">
+                  <i class="fas fa-sync-alt"></i>
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
       </li>
     </ul>
+
+    <div class="d-flex flex-row w-100 justify-content-between mt-auto">
+      <router-link to="/">
+        <button class="nav-btn btn-border-tx-none mt-auto px-2">
+          <i class="fas fa-home"></i>
+        </button>
+      </router-link>
+
+      <router-link to="/result">
+        <button class="nav-btn btn-border-tx-none mt-auto px-2">
+          <i class="fas fa-list-ol"></i>
+        </button>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -14,21 +137,147 @@ import {mapGetters} from 'vuex';
 export default {
   data() {
     return {
-      teams: []
+      teams: [],
+      logs: []
     }
   },
-  created() {
+  mounted() {
     this.teams = this.getTeams();
-    },
+
+    for (let i = 0; i < this.teams[0].log.length; i++) {
+      for (let j = 0; j < this.teams.length; j++) {
+        if (this.teams[j].log[i] !== undefined)
+          this.logs.push(this.teams[j].log[i]);
+        else this.logs.push(false)
+      }
+    }
+
+    console.log(this.logs)
+  },
   methods: {
+    toPersian(n) {
+      const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+      return n.toString().replace(/\d/g, x => farsiDigits[x]);
+    },
+    getCatNameById(id) {
+      return this.$store.getters.getCategoryNameById(id);
+    },
+    getWordById(catId, wordId) {
+      return this.$store.getters.getWordNameById(catId, wordId);
+    },
     ...mapGetters([
       'getTeams'
-    ])
+    ]),
   }
 
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$primary_color: #2669BF;
+$light: #EFEFEF;
+$green: #44A666;
+$red: #F24B6A;
 
+.ltr {
+  direction: ltr;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+ul {
+  list-style: none;
+}
+
+.list-item {
+  border-radius: .5rem .5rem .75rem .75rem;
+  background-color: #DFDFDF;
+  box-shadow: 0 4px 6px 0 darken($light, 20%);
+  border-bottom: 4px solid darken($light, 30%);
+}
+
+h4, h5, h6 {
+  margin: 0;
+}
+
+.bg-green {
+  background-color: $green;
+}
+
+.bg-red {
+  background-color: darken($red, 5%);
+}
+
+.text-dark-green {
+  color: darken(#44A666, 15%);
+}
+
+.text-dark-red {
+  color: darken(#F24B6A, 22%);
+}
+
+.text-white {
+  color: $light;
+}
+
+.header {
+  border-radius: .5rem 0.5rem 0 0;
+  height: 2rem;
+  box-shadow: 0 2px 4px 0 darken($light, 20%);
+}
+
+.lined {
+  text-decoration: line-through;
+}
+
+.nav-btn {
+  outline: none;
+  border: 4px solid darken($primary_color, 20%);
+  background-color: $primary_color;
+  border-radius: .5rem;
+  color: $light;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  height: 4rem;
+  width: 4rem;
+  box-shadow: 0 0 8px 0 darken($light, 10%);
+}
+
+.nav-btn:hover {
+  box-shadow: 0 2px 10px 0 darken($light, 20%);
+}
+
+.nav-btn:active {
+  box-shadow: none;
+  border: none;
+}
+
+.nav-btn.btn-border-tl-none {
+  border-top: none;
+  border-left: none;
+}
+
+.nav-btn.btn-border-tx-none {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+/* Extra small devices (phones, 576px and down) */
+@media only screen and (max-width: 575.98px) {
+  h4 {
+    font-size: 16px;
+  }
+
+  h5 {
+    font-size: 14px;
+  }
+
+  h6 {
+    font-size: 12px;
+  }
+}
 </style>

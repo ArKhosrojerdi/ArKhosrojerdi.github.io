@@ -6,6 +6,7 @@ import Categories from "../components/Categories/Categories.vue";
 import Word from "../components/Word/Word.vue";
 import Info from "../components/Info/Info.vue";
 import Result from "../components/Result/Result.vue";
+import Log from "../components/Result/Log.vue";
 
 const routes = [
     {
@@ -36,6 +37,11 @@ const routes = [
                 path: "info",
                 name: "Info",
                 component: Info,
+            },
+            {
+                path: "/log",
+                name: "Log",
+                component: Log,
             },
         ]
     },

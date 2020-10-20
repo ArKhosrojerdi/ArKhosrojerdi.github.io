@@ -67,6 +67,19 @@ export const store = createStore({
             let validWord = state.words[cat.id].filter(word => (word.cat.catId === cat.id && word.cat.point === cat.point));
             return validWord[Math.floor(Math.random() * validWord.length)].id;
         },
+        getCategoryNameById(state) {
+            return function (catId) {
+                return state.categories[catId].name;
+            }
+        },
+        getWordNameById(state) {
+            return function (catId, wordId) {
+                return state.words[catId].filter(function (word) {
+                    if (word.id === wordId)
+                        return word.name;
+                })[0].name;
+            }
+        }
     },
     mutations: {
         initTeams(state) {
@@ -76,7 +89,7 @@ export const store = createStore({
             ];
         },
         initGame(state) {
-            state.totalRounds = 5;
+            state.totalRounds = 1;
             state.round = 1;
             state.turn = 0;
             state.autoTime = true;
@@ -129,16 +142,18 @@ export const store = createStore({
         },
         addPoint(state, point) {
             let teamLog = state.teams[state.turn].log[state.teams[state.turn].log.length - 1];
-            teamLog.round.point = point.success;
+            teamLog.round.success = point.success;
             teamLog.round.point = point.point;
             teamLog.round.time = point.time;
             teamLog.round.faults = point.faults;
             teamLog.round.changed = point.changed;
         },
         changeLastWordPlayed(state, newWordId) {
-            let team = state.teams[state.turn]
+            let team = state.teams[state.turn];
+            team.log[team.log.length - 1].round.changedWordId = team.log[team.log.length - 1].wordId;
             team.log[team.log.length - 1].wordId = newWordId;
             team.log[team.log.length - 1].catId = state.currentCat.id;
+
         },
         setCurrentWord(state, word) {
             state.currentWord = {
@@ -188,7 +203,7 @@ export const store = createStore({
                 {
                     wordId: wordId,
                     catId: state.currentCat.id,
-                    round: {success: false, point: 0, time: 0, faults: 0, changed: 0}
+                    round: {success: false, point: 0, time: 0, faults: 0, changed: 0, changedWordId: -1}
                 }
             );
 

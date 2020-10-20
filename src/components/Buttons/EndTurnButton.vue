@@ -24,7 +24,6 @@ export default {
   ],
   created() {
     this.lastTurn = this.getIsLastTurn();
-    console.log(this.points);
     this.addPoint({
       success: this.points.success,
       point: this.points.point,
