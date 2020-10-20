@@ -115,54 +115,6 @@ export default {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
     },
-    stop() {
-      clearInterval(this.interval);
-      this.interval = false;
-    },
-    incTime(step) {
-      if (!this.interval) {
-        this.interval = setInterval(() => {
-          if (this.time >= 30) {
-            this.stop();
-          } else {
-            this.setTime(step)
-          }
-        }, 125)
-      }
-    },
-    // incTotalRounds(step) {
-    //   if (!this.interval) {
-    //     this.interval = setInterval(() => {
-    //       if (this.totalRounds >= 20) {
-    //         this.stop();
-    //       } else {
-    //         this.setNumberOfRounds(step);
-    //       }
-    //     }, 125)
-    //   }
-    // },
-    decTime(step) {
-      if (!this.interval) {
-        this.interval = setInterval(() => {
-          if (this.time <= 300) {
-            this.stop();
-          } else {
-            this.setTime(step)
-          }
-        }, 125)
-      }
-    },
-    decTotalRounds(step) {
-      if (!this.interval) {
-        this.interval = setInterval(() => {
-          if (this.totalRounds <= 3) {
-            this.stop();
-          } else {
-            this.setNumberOfRounds(step);
-          }
-        }, 125)
-      }
-    },
     ...mapActions([
       'setNumberOfRounds',
       'addTeam',

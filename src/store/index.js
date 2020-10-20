@@ -35,18 +35,29 @@ export const store = createStore({
         getCategoryPoint(state) {
             return state.currentCat.point;
         },
+        getTeams(state) {
+            return state.teams;
+        },
         getTeamsPoints(state) {
-            let points, secs, arrRound = [];
+            let points = {}, teamsStatus = [], teamLog;
             for (let i = 0; i < state.teams.length; i++) {
-                points = 0;
-                secs = 0;
+                points = {
+                    point: 0,
+                    time: 0,
+                    faults: 0,
+                    changed: 0
+                };
                 for (let j = 0; j < state.teams[i].log.length; j++) {
-                    points += state.teams[i].log[j].round.point;
-                    secs += state.teams[i].log[j].round.sec;
+                    teamLog = state.teams[i].log[j];
+                    console.log(teamLog)
+                    points.point += teamLog.round.point;
+                    points.time += teamLog.round.time;
+                    points.faults += teamLog.round.faults;
+                    points.changed += teamLog.round.changed;
                 }
-                arrRound.push({point: points, sec: secs});
+                teamsStatus.push(points);
             }
-            return arrRound;
+            return teamsStatus;
         },
         getIsLastTurn(state) {
             if (state.round === state.totalRounds && state.turn === state.teams.length - 1)
@@ -121,8 +132,11 @@ export const store = createStore({
             state.turn++;
         },
         addPoint(state, point) {
-            state.teams[state.turn].log[state.teams[state.turn].log.length - 1].round.point = point.point;
-            state.teams[state.turn].log[state.teams[state.turn].log.length - 1].round.sec = point.time;
+            let teamLog = state.teams[state.turn].log[state.teams[state.turn].log.length - 1];
+            teamLog.round.point = point.point;
+            teamLog.round.time = point.time;
+            teamLog.round.faults = point.faults;
+            teamLog.round.changed = point.changed;
         },
         changeLastWordPlayed(state, newWordId) {
             let team = state.teams[state.turn]
@@ -177,7 +191,7 @@ export const store = createStore({
                 {
                     wordId: wordId,
                     catId: state.currentCat.id,
-                    round: {sec: 0, point: 0}
+                    round: {time: 0, point: 0, faults: 0, changed: 0}
                 }
             );
 

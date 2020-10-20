@@ -91,7 +91,7 @@ import EndTurnButton from '../Buttons/EndTurnButton.vue';
 export default {
   data() {
     return {
-      points: 0
+      points: {}
     }
   },
   components: {
@@ -104,7 +104,7 @@ export default {
     'point'
   ],
   created() {
-    this.points = this.point - (this.changed + this.faults);
+    this.points = {point: this.point, changed: this.changed, faults: this.faults};
   },
   methods: {
     toPersian(n) {

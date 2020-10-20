@@ -4,7 +4,7 @@
        :class="{'turn': team.id === turn, 'eliminated': team.eliminated, 'wait': !team.eliminated && team.id > turn, 'pass': !team.eliminated && team.id < turn}">
     <h4 class="ml-auto mr-4 my-0">{{ team.name }}</h4>
     <h4 class="mr-auto ml-4 my-0">
-      <span class="ltr">{{ toPersian(table[index].point + parseInt(table[index].sec / 15)) }}</span>
+      <span class="ltr">{{ toPersian(totalPoints(index)) }}</span>
       <span class="mr-4">امتیاز</span>
     </h4>
   </div>
@@ -21,11 +21,16 @@ export default {
   },
   created() {
     this.table = this.getTeamsPoints();
+    console.log(this.table)
   },
   methods: {
     toPersian(n) {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
+    },
+    totalPoints(index) {
+      let team = this.table[index];
+      return team.point + parseInt(team.time / 15) - (team.faults + team.changed);
     },
     ...mapGetters([
       'getTeamsPoints'

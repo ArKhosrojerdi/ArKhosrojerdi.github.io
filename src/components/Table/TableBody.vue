@@ -11,6 +11,8 @@
 
     <Table/>
 
+    <Log/>
+
     <div class="d-flex flex-column flex-1">
       <div class="mt-auto d-flex justify-content-between">
         <router-link to="/categories">
@@ -35,12 +37,14 @@
 
 <script>
 import Table from './Table.vue';
+import Log from '../Result/Log.vue';
 import {mapState} from "vuex";
 import {mapActions} from "vuex";
 
 export default {
   components: {
-    Table
+    Table,
+    Log
   },
   methods: {
     toPersian(n) {

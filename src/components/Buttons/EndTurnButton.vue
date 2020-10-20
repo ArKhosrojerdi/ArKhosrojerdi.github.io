@@ -24,7 +24,13 @@ export default {
   ],
   created() {
     this.lastTurn = this.getIsLastTurn();
-    this.addPoint({point: this.points, time: this.savedTime});
+    console.log(this.points);
+    this.addPoint({
+      point: this.points.point,
+      time: this.savedTime,
+      faults: this.points.faults,
+      changed: this.points.changed
+    });
   },
   methods: {
     go() {
