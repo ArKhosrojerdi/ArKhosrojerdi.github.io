@@ -19,6 +19,7 @@
         </h4>
       </li>
     </ul>
+
     <div class="d-flex flex-row w-100 justify-content-between mt-auto">
       <router-link to="/">
         <button class="nav-btn btn-border-tx-none mt-auto px-2">
