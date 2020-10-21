@@ -89,7 +89,9 @@
     <div class="d-flex flex-column flex-1 mt-4">
       <div class="mt-auto">
         <router-link to="/table">
-          <button class="mt-auto nav-btn btn-border-tx-none wink px-2">برو!</button>
+          <button class="mt-auto nav-btn btn-border-tx-none wink px-2">
+            <i class="fas fa-angle-double-right"></i>
+          </button>
         </router-link>
       </div>
     </div>
