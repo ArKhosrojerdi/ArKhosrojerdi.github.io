@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.1d05c20fd36c465e6828c3a867e6a385.js"
+  "/precache-manifest.be8fceab4fa3f0e53eb9ff953ab3b0ff.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "PantoNun"});
