@@ -22,11 +22,17 @@
       <h6>تعداد تیم‌ها</h6>
       <div class="num-bar">
         <div class="d-flex">
-          <button class="btn-set btn-inc px-2" @click="addTeam" :disabled="teams.length >= 6">
+          <button class="btn-set btn-inc px-2" @mousedown="startIncTeams()"
+                  @mouseleave="stopTeams"
+                  @mouseup="stopTeams" @touchstart.prevent="startIncTeams()" @touchend="stopTeams"
+                  :class="{active:interval.teams.inc}" :disabled="teams.length >= maxTeams">
             <i class="fa fa-plus"></i>
           </button>
           <h3 class="m-auto w-100">{{ toPersian(teams.length) }}</h3>
-          <button class="btn-set btn-dec px-2" @click="removeTeam" :disabled="teams.length <= 2">
+          <button class="btn-set btn-dec px-2" @mousedown="startDecTeams()"
+                  @mouseleave="stopTeams"
+                  @mouseup="stopTeams" @touchstart.prevent="startDecTeams()" @touchend="stopTeams"
+                  :class="{active:interval.teams.dec}" :disabled="teams.length <= minTeams">
             <i class="fa fa-minus"></i>
           </button>
         </div>
@@ -42,13 +48,17 @@
     <div class="mt-4">
       <h6>تعداد دورها</h6>
       <div class="d-flex num-bar">
-        <button class="btn-set btn-inc px-2" :disabled="totalRounds >= 20" @click="setNumberOfRounds(1)"
-                :class="{active:interval}">
+        <button class="btn-set btn-inc px-2" :disabled="totalRounds >= maxRounds" @mousedown="startIncRounds(1)"
+                @mouseleave="stopRounds"
+                @mouseup="stopRounds" @touchstart.prevent="startIncRounds(1)" @touchend="stopRounds"
+                :class="{active:interval.rounds.inc}">
           <i class="fa fa-plus"></i>
         </button>
         <h3 class="m-auto">{{ toPersian(totalRounds) }}</h3>
-        <button class="btn-set btn-dec px-2" :disabled="totalRounds <= 3" @click="setNumberOfRounds(-1)"
-                :class="{active:interval}">
+        <button class="btn-set btn-dec px-2" :disabled="totalRounds <= minRounds" @mousedown="startDecRounds(1)"
+                @mouseleave="stopRounds"
+                @mouseup="stopRounds" @touchstart.prevent="startDecRounds(1)" @touchend="stopRounds"
+                :class="{active:interval.rounds.dec}">
           <i class="fa fa-minus"></i>
         </button>
       </div>
@@ -67,11 +77,17 @@
       <transition name="fade" mode="out-in">
         <div v-if="!autoTime" class="mt-2">
           <div class="d-flex num-bar">
-            <button class="btn-set btn-inc px-2" :disabled="time >= 300" @click="setTime(15)">
+            <button class="btn-set btn-inc px-2" :disabled="time >= maxTime" @mousedown="startIncTime(15)"
+                    @mouseleave="stopTime"
+                    @mouseup="stopTime" @touchstart.prevent="startIncTime(15)" @touchend="stopTime"
+                    :class="{active:interval.time.inc}">
               <i class="fa fa-plus"></i>
             </button>
             <h3 class="m-auto">{{ toPersian(time) }} ثانیه</h3>
-            <button class="btn-set btn-dec px-2" :disabled="time <= 30" @click="setTime(-15)">
+            <button class="btn-set btn-dec px-2" :disabled="time <= minTime" @mousedown="startDecTime(15)"
+                    @mouseleave="stopTime"
+                    @mouseup="stopTime" @touchstart.prevent="startDecTime(15)" @touchend="stopTime"
+                    :class="{active:interval.time.dec}">
               <i class="fa fa-minus"></i>
             </button>
           </div>
@@ -106,7 +122,20 @@ export default {
   data() {
     return {
       gameTypesAppended: false,
-      interval: false
+      interval: {
+        time: {
+          dec: false,
+          inc: false
+        },
+        rounds: {
+          dec: false,
+          inc: false
+        },
+        teams: {
+          dec: false,
+          inc: false
+        }
+      }
     };
   },
   created() {
@@ -116,6 +145,108 @@ export default {
     toPersian(n) {
       const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return n.toString().replace(/\d/g, x => farsiDigits[x]);
+    },
+    stopRounds() {
+      clearInterval(this.interval.rounds.inc);
+      this.interval.rounds.inc = false;
+      clearInterval(this.interval.rounds.dec);
+      this.interval.rounds.dec = false;
+    },
+    stopTime() {
+      clearInterval(this.interval.time.inc);
+      this.interval.time.inc = false;
+      clearInterval(this.interval.time.dec);
+      this.interval.time.dec = false;
+    },
+    stopTeams() {
+      clearInterval(this.interval.teams.inc);
+      this.interval.teams.inc = false;
+      clearInterval(this.interval.teams.dec);
+      this.interval.teams.dec = false;
+    },
+    startIncRounds(step) {
+      if (this.totalRounds < this.maxRounds) {
+        this.setNumberOfRounds(step);
+      }
+      if (!this.interval.rounds.inc) {
+        this.interval.rounds.inc = setInterval(() => {
+          if (this.totalRounds < this.maxRounds) {
+            this.setNumberOfRounds(step);
+          } else {
+            this.stopRounds();
+          }
+        }, 150)
+      }
+    },
+    startDecRounds(step) {
+      if (this.totalRounds > this.minRounds) {
+        this.setNumberOfRounds(-step);
+      }
+      if (!this.interval.rounds.dec) {
+        this.interval.rounds.dec = setInterval(() => {
+          if (this.totalRounds > this.minRounds) {
+            this.setNumberOfRounds(-step);
+          } else {
+            this.stopRounds();
+          }
+        }, 150)
+      }
+    },
+    startIncTime(step) {
+      if (this.time < this.maxTime) {
+        this.setTime(step);
+      }
+      if (!this.interval.time.inc) {
+        this.interval.time.inc = setInterval(() => {
+          if (this.time < this.maxTime) {
+            this.setTime(step);
+          } else {
+            this.stopTime();
+          }
+        }, 150)
+      }
+    },
+    startDecTime(step) {
+      if (this.time > this.minTime) {
+        this.setTime(-step);
+      }
+      if (!this.interval.time.dec) {
+        this.interval.time.dec = setInterval(() => {
+          if (this.time > this.minTime) {
+            this.setTime(-step);
+          } else {
+            this.stopTime();
+          }
+        }, 150)
+      }
+    },
+    startIncTeams() {
+      if (this.teams.length < this.maxTeams) {
+        this.addTeam();
+      }
+      if (!this.interval.teams.inc) {
+        this.interval.teams.inc = setInterval(() => {
+          if (this.teams.length < this.maxTeams) {
+            this.addTeam();
+          } else {
+            this.stopTime();
+          }
+        }, 200)
+      }
+    },
+    startDecTeams() {
+      if (this.teams.length > this.minTeams) {
+        this.removeTeam();
+      }
+      if (!this.interval.teams.dec) {
+        this.interval.teams.dec = setInterval(() => {
+          if (this.teams.length > this.minTeams) {
+            this.removeTeam();
+          } else {
+            this.stopTeams();
+          }
+        }, 200)
+      }
     },
     ...mapActions([
       'setNumberOfRounds',
@@ -134,7 +265,13 @@ export default {
       'autoTime',
       'time',
       'gameTypes',
-      'gameType'
+      'gameType',
+      'maxRounds',
+      'minRounds',
+      'maxTime',
+      'minTime',
+      'maxTeams',
+      'minTeams'
     ]),
   },
 }
@@ -254,7 +391,7 @@ $light: #EFEFEF;
 
 .btn-set {
   outline: none;
-  border: 4px solid darken($primary_color, 20%);
+  border: 4px solid darken($primary_color, 10%);
   border-radius: .5rem;
   height: 2.5rem;
   width: 2.5rem;
@@ -295,8 +432,12 @@ $light: #EFEFEF;
   box-shadow: 0 0 8px 0 darken($light, 25%);
 }
 
-.btn-set:focus:active:enabled {
-  border: none
+//.btn-set:focus:active:enabled {
+//  border: none
+//}
+
+.btn-set.active {
+  transform: scale(1.1);
 }
 
 .btn-set:disabled {
@@ -324,7 +465,7 @@ $light: #EFEFEF;
 
 .nav-btn {
   outline: none;
-  border: 4px solid darken($primary_color, 20%);
+  border: 4px solid darken($primary_color, 10%);
   background-color: $primary_color;
   border-radius: .5rem;
   color: $light;
@@ -352,6 +493,10 @@ $light: #EFEFEF;
 .nav-btn:active:enabled, .nav-btn:focus {
   border: none;
   outline: none;
+}
+
+.nav-btn.active {
+  transform: scale(1.1) !important;
 }
 
 .list-enter-active,

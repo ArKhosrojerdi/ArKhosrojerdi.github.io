@@ -19,7 +19,13 @@ export const store = createStore({
             pts: [2, 4, 6],
             playedWords: [],
             currentCat: {},
-            currentWord: {}
+            currentWord: {},
+            maxRounds: 30,
+            minRounds: 3,
+            minTime: 30,
+            maxTime: 300,
+            minTeams: 2,
+            maxTeams: 6
         }
     },
     getters: {
