@@ -24,14 +24,14 @@
         <div class="d-flex">
           <button class="btn-set btn-inc px-2" @mousedown="startIncTeams()"
                   @mouseleave="stopTeams"
-                  @mouseup="stopTeams" @touchstart="startIncTeams()" @touchend="stopTeams"
+                  @mouseup="stopTeams" @touchstart.prevent="startIncTeams()" @touchend="stopTeams"
                   :class="{active:interval.teams.inc}" :disabled="teams.length >= maxTeams">
             <i class="fa fa-plus"></i>
           </button>
           <h3 class="m-auto w-100">{{ toPersian(teams.length) }}</h3>
           <button class="btn-set btn-dec px-2" @mousedown="startDecTeams()"
                   @mouseleave="stopTeams"
-                  @mouseup="stopTeams" @touchstart="startDecTeams()" @touchend="stopTeams"
+                  @mouseup="stopTeams" @touchstart.prevent="startDecTeams()" @touchend="stopTeams"
                   :class="{active:interval.teams.dec}" :disabled="teams.length <= minTeams">
             <i class="fa fa-minus"></i>
           </button>
@@ -50,14 +50,14 @@
       <div class="d-flex num-bar">
         <button class="btn-set btn-inc px-2" :disabled="totalRounds >= maxRounds" @mousedown="startIncRounds(1)"
                 @mouseleave="stopRounds"
-                @mouseup="stopRounds" @touchstart="startIncRounds(1)" @touchend="stopRounds"
+                @mouseup="stopRounds" @touchstart.prevent="startIncRounds(1)" @touchend="stopRounds"
                 :class="{active:interval.rounds.inc}">
           <i class="fa fa-plus"></i>
         </button>
         <h3 class="m-auto">{{ toPersian(totalRounds) }}</h3>
         <button class="btn-set btn-dec px-2" :disabled="totalRounds <= minRounds" @mousedown="startDecRounds(1)"
                 @mouseleave="stopRounds"
-                @mouseup="stopRounds" @touchstart="startDecRounds(1)" @touchend="stopRounds"
+                @mouseup="stopRounds" @touchstart.prevent="startDecRounds(1)" @touchend="stopRounds"
                 :class="{active:interval.rounds.dec}">
           <i class="fa fa-minus"></i>
         </button>
@@ -79,14 +79,14 @@
           <div class="d-flex num-bar">
             <button class="btn-set btn-inc px-2" :disabled="time >= maxTime" @mousedown="startIncTime(15)"
                     @mouseleave="stopTime"
-                    @mouseup="stopTime" @touchstart="startIncTime(15)" @touchend="stopTime"
+                    @mouseup="stopTime" @touchstart.prevent="startIncTime(15)" @touchend="stopTime"
                     :class="{active:interval.time.inc}">
               <i class="fa fa-plus"></i>
             </button>
             <h3 class="m-auto">{{ toPersian(time) }} ثانیه</h3>
             <button class="btn-set btn-dec px-2" :disabled="time <= minTime" @mousedown="startDecTime(15)"
                     @mouseleave="stopTime"
-                    @mouseup="stopTime" @touchstart="startDecTime(15)" @touchend="stopTime"
+                    @mouseup="stopTime" @touchstart.prevent="startDecTime(15)" @touchend="stopTime"
                     :class="{active:interval.time.dec}">
               <i class="fa fa-minus"></i>
             </button>
