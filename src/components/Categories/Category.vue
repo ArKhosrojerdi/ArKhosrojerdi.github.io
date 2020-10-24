@@ -2,7 +2,7 @@
   <div>
     <ul class="categories-list d-flex flex-column justify-content-center align-content-center p-0 mb-0">
       <li class="categories-item d-flex align-items-center justify-content-center"
-          :class="{'mb-2': index !== categories.length - 1}">
+          :class="{'mb-2': index !== 16}">
         <h5 class="m-0 mr-2 w-100 text-right text-gray"><b>{{ cat.name }}</b></h5>
         <div class="h-100 w-100 d-flex flex-row align-items-center">
           <router-link to="/word" v-for="(pt, ind) in pts" :key="ind" :class="{'mr-auto': ind === 0}"

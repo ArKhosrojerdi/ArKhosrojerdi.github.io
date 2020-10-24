@@ -4,10 +4,10 @@
       <li v-for="(log, index) in logs" :key="index"
           class="m-0 w-100 d-flex flex-column align-items-center w-100 list-item mb-3">
         <div v-if="log !== false" class="w-100 h-100">
-          <div class="d-flex justify-content-between w-100 header p-2 p-md-4 text-white"
+          <div class="row m-0 w-100 header text-white"
                :class="log.round.success ? 'bg-green' : 'bg-red'">
 
-            <div class="d-flex flex-row align-items-center">
+            <div class="col-3 p-0 py-2 d-flex flex-column justify-content-center text-right">
               <h6 class="d-inline-block text-truncate">
                 <b>
                   {{ teams[index % teams.length].name }}
@@ -15,15 +15,15 @@
               </h6>
             </div>
 
-            <div class="d-flex flex-row align-items-center">
-              <h6 class="d-inline-block text-truncate">
+            <div class="col-7 p-0 d-flex flex-column justify-content-center">
+              <h6 class="d-inline-block text-truncate h-100 d-flex justify-content-center align-items-center">
                 <b>
                   {{ getWordById(log.catId, log.wordId) }}
                 </b>
               </h6>
             </div>
 
-            <div class="d-flex flex-row align-items-center">
+            <div class="col-2 p-0 py-2 d-flex flex-column justify-content-center text-left">
               <h6 class="ltr">
                 <b v-if="log.round.success">
                   {{
@@ -194,7 +194,7 @@ ul {
 .list-item {
   border-radius: .5rem .5rem .75rem .75rem;
   background-color: #DFDFDF;
-  box-shadow: 0 4px 6px 0 darken($light, 20%);
+  box-shadow: 0 2px 8px 2px darken($light, 20%);
   border-bottom: 4px solid darken($light, 30%);
 }
 
@@ -224,7 +224,7 @@ h4, h5, h6 {
 
 .header {
   border-radius: .5rem 0.5rem 0 0;
-  height: 2rem;
+  //height: 2rem;
   box-shadow: 0 2px 4px 0 darken($light, 20%);
 }
 
