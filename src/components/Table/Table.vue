@@ -29,7 +29,7 @@ export default {
     },
     totalPoints(index) {
       let round = this.table[index];
-      return round.point + parseInt(round.time / 15) - (round.faults + round.changed);
+      return round.point + parseInt(round.time / 30) - (round.faults + round.changed);
     },
     ...mapGetters([
       'getTeamsRounds'

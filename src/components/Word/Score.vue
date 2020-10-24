@@ -31,7 +31,7 @@
           <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
             <div class="col-4">
               <h4 class="m-0">
-                <b><span v-if="parseInt(savedTime / 15) > 0">+</span>{{ toPersian(parseInt(savedTime / 15)) }}</b>
+                <b><span v-if="parseInt(savedTime / 30) > 0">+</span>{{ toPersian(parseInt(savedTime / 30)) }}</b>
               </h4>
             </div>
             <div class="col-4 px-0">
@@ -115,7 +115,7 @@ export default {
     },
     totalPoint() {
       if (this.success === true)
-        return this.point + parseInt(this.savedTime / 15) - (this.changed + this.faults);
+        return this.point + parseInt(this.savedTime / 30) - (this.changed + this.faults);
       return -(this.changed + this.faults);
     }
   }

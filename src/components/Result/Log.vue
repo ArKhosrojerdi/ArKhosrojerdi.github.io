@@ -27,7 +27,7 @@
               <h6 class="ltr">
                 <b v-if="log.round.success">
                   {{
-                    toPersian(log.round.point + parseInt(log.round.time / 15) - (log.round.faults + log.round.changed))
+                    toPersian(log.round.point + parseInt(log.round.time / 30) - (log.round.faults + log.round.changed))
                   }}
                 </b>
                 <b v-else>

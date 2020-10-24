@@ -63,7 +63,7 @@ export default {
   methods: {
     getTotalPoint(index) {
       let team = this.table[index];
-      return team.point + parseInt(team.time / 15) - (team.faults + team.changed);
+      return team.point + parseInt(team.time / 30) - (team.faults + team.changed);
     },
     yellow(index, rankId) {
       return index !== 0 && !this.teams[rankId].eliminated;

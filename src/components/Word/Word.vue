@@ -174,7 +174,7 @@ export default {
     succeed() {
       stop();
       this.savedTime = this.timer;
-      if (this.point -  this.changed - this.faults + parseInt(this.savedTime / 15) > 0)
+      if (this.point -  this.changed - this.faults + parseInt(this.savedTime / 30) > 0)
         this.success = true;
       else this.fail = true;
     },
