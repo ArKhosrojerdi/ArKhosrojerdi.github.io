@@ -7,9 +7,13 @@
         <div class="h-100 w-100 d-flex flex-row align-items-center">
           <router-link to="/word" v-for="(pt, ind) in pts" :key="ind" :class="{'mr-auto': ind === 0}"
                        class="ml-2">
-            <button class="btn-point btn-border-tl-none px-2" :disabled="checkPoint(index, pt)"
+            <button v-if="cat.id !== 10" class="btn-point btn-border-tl-none px-2" :disabled="checkPoint(index, pt)"
                     @click="setCurrentCat({id: cat.id, name: cat.name, point: pt})">
               {{ toPersian(pt) }}
+            </button>
+            <button v-else class="btn-point btn-border-tl-none px-2" :disabled="checkPoint(index, pt + 1)"
+                    @click="setCurrentCat({id: cat.id, name: cat.name, point: pt + 1})">
+              {{ toPersian(pt + 1) }}
             </button>
           </router-link>
         </div>
@@ -39,7 +43,7 @@ export default {
   },
   methods: {
     checkPoint(catId, point) {
-      if (catId === 9 || catId === 10 || catId === 11 || catId === 15 || catId === 16)
+      if (catId === 9 || catId === 11 || catId === 15 || catId === 16)
         return true;
 
       let team = this.teams[this.turn];
