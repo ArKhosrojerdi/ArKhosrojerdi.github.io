@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Category v-for="(cat, index) in categories" :key="index" :cat="cat" :index="index"/>
+    <Category v-for="(cat, index) in categories" :key="index" :cat="cat" :index="cat.id"/>
   </div>
 </template>
 

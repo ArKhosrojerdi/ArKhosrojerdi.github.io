@@ -1,5 +1,9 @@
 export default [
     {
+        id: 10,
+        name: 'ضرب المثل'
+    },
+    {
         id: 0,
         name: 'اشیاء'
     },
@@ -38,10 +42,6 @@ export default [
     {
         id: 9,
         name: 'شهر و کشور'
-    },
-    {
-        id: 10,
-        name: 'ضرب المثل'
     },
     {
         id: 11,
