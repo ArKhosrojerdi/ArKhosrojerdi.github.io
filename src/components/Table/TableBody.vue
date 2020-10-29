@@ -57,7 +57,7 @@ export default {
       'totalRounds',
       'round'
     ])
-  }
+  },
 }
 </script>
 

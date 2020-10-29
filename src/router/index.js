@@ -7,6 +7,7 @@ import Word from "../components/Word/Word.vue";
 import Info from "../components/Info/Info.vue";
 import Result from "../components/Result/Result.vue";
 import Log from "../components/Result/Log.vue";
+// import MyChart from "../components/Chart/MyChart.vue";
 
 const routes = [
     {
@@ -50,6 +51,11 @@ const routes = [
         name: "Word",
         component: Word,
     },
+    // {
+    //     path: "/c",
+    //     name: "MyChart",
+    //     component: MyChart,
+    // },
 ];
 
 const router = createRouter({

@@ -44,8 +44,7 @@
 
             <transition name="warning" mode="out-in">
               <div v-if="!alert" class="d-inline-block">
-                <button class="nav-btn nav-btn-warning btn-border-tx-none mt-auto px-2"
-                        @click="submitFault">
+                <button class="nav-btn nav-btn-warning btn-border-tx-none mt-auto px-2" @click="submitFault">
                   <i class="fas fa-exclamation-triangle"></i>
                 </button>
               </div>

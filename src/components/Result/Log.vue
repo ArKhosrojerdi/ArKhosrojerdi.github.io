@@ -2,28 +2,29 @@
   <div class="d-flex flex-column flex-grow-1">
     <ul class="m-0 mb-4 p-0">
       <li v-for="(log, index) in logs" :key="index"
-          class="m-0 w-100 d-flex flex-column align-items-center w-100 list-item mb-3">
+          class="m-0 w-100 d-flex flex-column align-items-center w-100 list-item mb-3" :class="{'bb': active[index][1]}">
         <div v-if="log !== false" class="w-100 h-100">
-          <div class="row m-0 w-100 header text-white"
-               :class="log.round.success ? 'bg-green' : 'bg-red'">
+          <div class="row m-0 w-100 header text-white py-1 py-md-2"
+               :class="[log.round.success ? 'bg-green' : 'bg-red', {'rh': !active[index][1]}]"
+               @click="toggle(index)">
 
-            <div class="col-3 p-0 py-2 d-flex flex-column justify-content-center text-right">
-              <h6 class="d-inline-block text-truncate">
-                <b>
+            <div class="col-3 p-0 py-2 d-flex flex-column justify-content-center text-right pr-2 pr-md-4">
+              <h6 class="h-100">
+                <b class="h-100 my-auto w-100 d-flex align-items-center text-truncate">
                   {{ teams[index % teams.length].name }}
                 </b>
               </h6>
             </div>
 
-            <div class="col-7 p-0 d-flex flex-column justify-content-center">
-              <h6 class="d-inline-block text-truncate h-100 d-flex justify-content-center align-items-center">
-                <b>
+            <div class="col-6 p-0 d-flex flex-column justify-content-center">
+              <h6 class="h-100">
+                <b class="h-100 my-auto w-100 d-flex align-items-center justify-content-center text-truncate">
                   {{ getWordById(log.catId, log.wordId) }}
                 </b>
               </h6>
             </div>
 
-            <div class="col-2 p-0 py-2 d-flex flex-column justify-content-center text-left">
+            <div class="col-3 p-0 py-2 d-flex flex-column justify-content-center text-left pl-2 pl-md-4">
               <h6 class="ltr">
                 <b v-if="log.round.success">
                   {{
@@ -40,77 +41,81 @@
 
           </div>
 
-          <div class="d-flex flex-row align-items-center justify-content-between w-100 p-2 px-md-4 py-md-3">
+          <transition name="fade" mode="out-in">
+            <div v-if="active[index][0]">
+              <div class="d-flex flex-row align-items-center justify-content-between w-100 p-2 px-md-4 py-md-3">
 
-            <div class="d-flex flex-row">
-              <h6 v-if="log.round.changedWordId !== -1" class="text-muted">
-                {{ getWordById(log.catId, log.round.changedWordId) }}
-                <i class="fas fa-exchange-alt mx-4"></i>
-              </h6>
+                <div class="d-flex flex-row">
+                  <h6 v-if="log.round.changedWordId !== -1" class="text-muted">
+                    {{ getWordById(log.catId, log.round.changedWordId) }}
+                    <i class="fas fa-exchange-alt mx-4"></i>
+                  </h6>
 
-              <h6>{{ getWordById(log.catId, log.wordId) }}</h6>
-            </div>
+                  <h6>{{ getWordById(log.catId, log.wordId) }}</h6>
+                </div>
 
-            <div class="">
-              <h6>
-                <b>
-                  {{ getCatNameById(log.catId) }}
-                </b>
-              </h6>
-            </div>
+                <div class="">
+                  <h6>
+                    <b>
+                      {{ getCatNameById(log.catId) }}
+                    </b>
+                  </h6>
+                </div>
 
-          </div>
+              </div>
 
-          <hr class="m-0 w-100">
+              <hr class="m-0 w-100">
 
-          <div class="row w-100 ltr px-2 px-md-4 m-0 mt-2">
-            <div class="col-6 mb-2 p-0" :class="log.round.success ? 'text-dark-green' : 'text-dark-red'">
-              <div class="d-flex flex-row justify-content-start">
-                <h6 class="text-left w-25">
-                  <i class="fas fa-stopwatch"></i>
-                </h6>
-                <h6 class="text-left">
-                  <b>{{ toPersian(log.round.time) }}</b>
-                </h6>
+              <div class="row w-100 ltr px-2 px-md-4 m-0 mt-2">
+                <div class="col-6 mb-2 p-0" :class="log.round.success ? 'text-dark-green' : 'text-dark-red'">
+                  <div class="d-flex flex-row justify-content-start">
+                    <h6 class="text-left w-25">
+                      <i class="fas fa-stopwatch"></i>
+                    </h6>
+                    <h6 class="text-left">
+                      <b>{{ toPersian(log.round.time) }}</b>
+                    </h6>
+                  </div>
+                </div>
+
+                <div class="col-6 mb-2 p-0" :class="log.round.success ? 'text-dark-green' : 'text-dark-red'">
+                  <div class="d-flex flex-row justify-content-end">
+                    <h6 class="text-left">
+                      <b :style="!log.round.success ? 'text-decoration: line-through' : ''">
+                        {{ toPersian(log.round.point) }}
+                      </b>
+                    </h6>
+                    <h6 class="text-right w-25">
+                      <i v-if="log.round.success" class="fas fa-check"></i>
+                      <i v-else class="fas fa-times"></i>
+                    </h6>
+                  </div>
+                </div>
+
+                <div class="col-6 mb-2 p-0 text-dark-red">
+                  <div class="d-flex flex-row justify-content-start">
+                    <h6 class="text-left w-25">
+                      <i class="fas fa-exclamation-circle"></i>
+                    </h6>
+                    <h6 class="text-left">
+                      <b>{{ toPersian(-log.round.faults) }}</b>
+                    </h6>
+                  </div>
+                </div>
+
+                <div class="col-6 mb-2 p-0 text-dark-red">
+                  <div class="d-flex flex-row justify-content-end">
+                    <h6 class="text-left">
+                      <b>{{ toPersian(-log.round.changed) }}</b>
+                    </h6>
+                    <h6 class="text-right w-25">
+                      <i class="fas fa-sync-alt"></i>
+                    </h6>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div class="col-6 mb-2 p-0" :class="log.round.success ? 'text-dark-green' : 'text-dark-red'">
-              <div class="d-flex flex-row justify-content-end">
-                <h6 class="text-left">
-                  <b :style="!log.round.success ? 'text-decoration: line-through' : ''">
-                    {{ toPersian(log.round.point) }}
-                  </b>
-                </h6>
-                <h6 class="text-right w-25">
-                  <i v-if="log.round.success" class="fas fa-check"></i>
-                  <i v-else class="fas fa-times"></i>
-                </h6>
-              </div>
-            </div>
-
-            <div class="col-6 mb-2 p-0 text-dark-red">
-              <div class="d-flex flex-row justify-content-start">
-                <h6 class="text-left w-25">
-                  <i class="fas fa-exclamation-circle"></i>
-                </h6>
-                <h6 class="text-left">
-                  <b>{{ toPersian(-log.round.faults) }}</b>
-                </h6>
-              </div>
-            </div>
-
-            <div class="col-6 mb-2 p-0 text-dark-red">
-              <div class="d-flex flex-row justify-content-end">
-                <h6 class="text-left">
-                  <b>{{ toPersian(-log.round.changed) }}</b>
-                </h6>
-                <h6 class="text-right w-25">
-                  <i class="fas fa-sync-alt"></i>
-                </h6>
-              </div>
-            </div>
-          </div>
+          </transition>
         </div>
       </li>
     </ul>
@@ -138,7 +143,8 @@ export default {
   data() {
     return {
       teams: [],
-      logs: []
+      logs: [],
+      active: []
     }
   },
   mounted() {
@@ -146,13 +152,14 @@ export default {
 
     for (let i = 0; i < this.teams[0].log.length; i++) {
       for (let j = 0; j < this.teams.length; j++) {
-        if (this.teams[j].log[i] !== undefined)
+        if (this.teams[j].log[i] !== undefined) {
           this.logs.push(this.teams[j].log[i]);
-        else this.logs.push(false)
+          this.active.push([false, false])
+        } else this.logs.push(false)
       }
     }
 
-    console.log(this.logs)
+    // console.log(this.logs)
   },
   methods: {
     toPersian(n) {
@@ -164,6 +171,16 @@ export default {
     },
     getWordById(catId, wordId) {
       return this.$store.getters.getWordNameById(catId, wordId);
+    },
+    toggle(index) {
+      this.active[index][0] = !this.active[index][0];
+      if (this.active[index][1] === true) {
+        setTimeout(() => {
+          this.active[index][1] = false;
+        }, 200);
+      }  else {
+        this.active[index][1] = true;
+      }
     },
     ...mapGetters([
       'getTeams'
@@ -191,11 +208,41 @@ ul {
   list-style: none;
 }
 
+.fade-enter-active {
+  transition: all .2s ease;
+  transform: translateY(-1rem);
+  opacity: 0;
+  height: 0;
+}
+
+.fade-leave-active {
+  transition: all .2s ease;
+  transform: translateY(0);
+  height: 7.125rem;
+  opacity: 1;
+}
+
+.fade-enter-to {
+  transform: translateY(0);
+  height: 7.125rem;
+  opacity: 1;
+}
+
+.fade-leave-to {
+  transform: translateY(-1rem);
+  opacity: 0;
+  height: 0;
+}
+
 .list-item {
-  border-radius: .5rem .5rem .75rem .75rem;
+  //transition: all .2s ease;
+  border-radius: .5rem;
   background-color: #DFDFDF;
-  box-shadow: 0 2px 8px 2px darken($light, 20%);
-  border-bottom: 4px solid darken($light, 30%);
+  box-shadow: 0 2px 4px 2px darken($light, 20%);
+}
+
+.list-item .bb {
+  border-bottom: 4px solid darken($light, 30%) !important;
 }
 
 h4, h5, h6 {
@@ -223,9 +270,15 @@ h4, h5, h6 {
 }
 
 .header {
-  border-radius: .5rem 0.5rem 0 0;
-  //height: 2rem;
-  box-shadow: 0 2px 4px 0 darken($light, 20%);
+  //transition: all .2s ease;
+  border-radius: .5rem .5rem 0 0;
+  cursor: pointer;
+}
+
+.rh {
+  border-radius: .5rem !important;
+  transition: all .2s ease;
+  //border-bottom: 4px solid darken($green, 5%);
 }
 
 .lined {
@@ -269,15 +322,23 @@ h4, h5, h6 {
 /* Extra small devices (phones, 576px and down) */
 @media only screen and (max-width: 575.98px) {
   h4 {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   h5 {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   h6 {
-    font-size: 12px;
+    font-size: 14px;
+  }
+
+  .fade-enter-to {
+    height: 5.5625rem !important;
+  }
+
+  .fade-leave-active {
+    height: 5.5625rem !important;
   }
 }
 </style>
