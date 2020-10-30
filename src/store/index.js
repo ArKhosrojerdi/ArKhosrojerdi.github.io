@@ -75,7 +75,10 @@ export const store = createStore({
         },
         getCategoryNameById(state) {
             return function (catId) {
-                return state.categories[catId].name;
+                return state.categories.filter(function (cat) {
+                    if (cat.id === catId)
+                        return cat.name;
+                })[0].name;
             }
         },
         getWordNameById(state) {

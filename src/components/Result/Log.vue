@@ -10,15 +10,15 @@
 
             <div class="col-3 p-0 py-2 d-flex flex-column justify-content-center text-right pr-2 pr-md-4">
               <h6 class="h-100">
-                <b class="h-100 my-auto w-100 d-flex align-items-center text-truncate">
+                <b class="h-100 my-auto w-100 d-inline-block text-right text-truncate">
                   {{ teams[index % teams.length].name }}
                 </b>
               </h6>
             </div>
 
             <div class="col-6 p-0 d-flex flex-column justify-content-center">
-              <h6 class="h-100">
-                <b class="h-100 my-auto w-100 d-flex align-items-center justify-content-center text-truncate">
+              <h6 class="h-100 text-center">
+                <b class="h-100 w-100 d-inline-block text-truncate" style="line-height: normal">
                   {{ getWordById(log.catId, log.wordId) }}
                 </b>
               </h6>
@@ -26,6 +26,8 @@
 
             <div class="col-3 p-0 py-2 d-flex flex-column justify-content-center text-left pl-2 pl-md-4">
               <h6 class="ltr">
+                <i v-if="log.round.success" class="mr-2 fas fa-star"></i>
+                <i v-else class="mr-2 fas fa-skull-crossbones"></i>
                 <b v-if="log.round.success">
                   {{
                     toPersian(log.round.point + parseInt(log.round.time / 30) - (log.round.faults + log.round.changed))
@@ -34,8 +36,6 @@
                 <b v-else>
                   {{ toPersian(-(log.round.faults + log.round.changed)) }}
                 </b>
-                <i v-if="log.round.success" class="ml-2 fas fa-star"></i>
-                <i v-else class="ml-2 fas fa-skull-crossbones"></i>
               </h6>
             </div>
 
@@ -54,7 +54,7 @@
                   <h6>{{ getWordById(log.catId, log.wordId) }}</h6>
                 </div>
 
-                <div class="">
+                <div>
                   <h6>
                     <b>
                       {{ getCatNameById(log.catId) }}
@@ -159,7 +159,7 @@ export default {
       }
     }
 
-    // console.log(this.logs)
+    // console.log(this.teams)
   },
   methods: {
     toPersian(n) {
@@ -270,14 +270,14 @@ h4, h5, h6 {
 }
 
 .header {
-  //transition: all .2s ease;
+  transition: all .2s ease;
   border-radius: .5rem .5rem 0 0;
   cursor: pointer;
 }
 
 .rh {
   border-radius: .5rem !important;
-  transition: all .2s ease;
+  //transition: all .2s ease;
   //border-bottom: 4px solid darken($green, 5%);
 }
 
@@ -317,6 +317,10 @@ h4, h5, h6 {
   border-top: none;
   border-left: none;
   border-right: none;
+}
+
+.d-inline-block {
+  vertical-align: middle;
 }
 
 /* Extra small devices (phones, 576px and down) */
