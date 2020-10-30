@@ -107,6 +107,9 @@ export const store = createStore({
             state.gameType = 'عادی';
             state.words = words;
             state.categories = categories;
+            state.playedWords = [];
+            state.currentWord = {};
+            state.currentCat = {};
         },
         setCurrentCat(state, cat) {
             if (state.autoTime)
@@ -197,13 +200,15 @@ export const store = createStore({
         setCurrentCat({commit}, cat) {
             commit("setCurrentCat", cat)
         },
+        addPoint({commit}, point) {
+            commit("addPoint", point)
+        },
         findWord({state, commit, getters}) {
             let wordId;
             let flag = true;
             while (flag) {
                 wordId = getters.getRandomWord;
                 if (state.playedWords.includes(wordId)) {
-                    state.playedWords.pop();
                     continue;
                 }
                 flag = false;
@@ -222,9 +227,6 @@ export const store = createStore({
             })
             state.playedWords.push(wordId);
         },
-        addPoint({commit}, point) {
-            commit("addPoint", point)
-        },
         changeWord({state, commit, getters}) {
             let wordId;
             let flag = true;
@@ -239,6 +241,7 @@ export const store = createStore({
             commit("changeLastWordPlayed", wordId);
             state.currentWord.id = wordId;
             state.currentWord.name = state.words[state.currentCat.id].filter(word => word.id === wordId)[0].name;
+            console.log(state.playedWords)
         },
     }
 })
