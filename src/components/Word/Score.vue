@@ -11,7 +11,8 @@
               </h4>
             </div>
             <div class="col-4">
-              <i class="fas fa-star text-dark-green"></i>
+              <i v-if="totalPoint() > 0" class="fas fa-check text-dark-green"></i>
+              <i v-else class="fas fa-times text-dark-green"></i>
             </div>
           </div>
         </li>
@@ -64,11 +65,15 @@
       <div class="h-100 w-100 mt-3 mt-sm-4 row px-0 mx-0 justify-content-between">
         <div class="col-4">
           <h2 class="m-0">
-            <b>
-              <i class="fas fa-chart-bar" :class="totalPoint() > 0 ? 'text-green' : 'text-red'"></i>
+            <b v-if="totalPoint() > 0">
+              <i class="fas fa-star text-green"></i>
+            </b>
+            <b v-else>
+              <i class="fas fa-skull text-red"></i>
             </b>
           </h2>
         </div>
+
         <div class="col-4">
           <h2 class="m-0" :class="totalPoint() > 0 ? 'text-green' : 'text-red'">
             <b>

@@ -2,21 +2,24 @@
   <div class="d-flex flex-column align-items-center justify-content-center flex-1 w-100">
     <ul class="w-100 p-0 m-0">
       <li v-for="(rank, index) in ranks" :key="index"
-          class="d-flex flex-row align-items-center justify-content-center team mb-2 round-sharp w-100 m-0"
-          :class="{'green': green(index, rank.id), 'yellow': yellow(index, rank.id)}">
-        <h4 class="ml-auto mr-4 my-0" :class="index !== 0 && !teams[rank.id].eliminated ? 'text-gray' : 'text-light'">
-          {{ teams[rank.id].name }}
-        </h4>
+          class="d-flex flex-row align-items-center team mb-2 round-sharp w-100 m-0"
+          :class="{'green': green(index, rank.id), 'gray': gray(index, rank.id)}">
+        <h5 class="col-6 text-right my-0 p-0 px-2 px-md-3"
+            :class="index !== 0 && !teams[rank.id].eliminated ? 'text-dark-gray' : 'text-light'">
+          <b>{{ teams[rank.id].name }}</b>
+        </h5>
 
-        <h6 class="my-0 text-dark-green h-100 d-flex flex-row align-items-center"
-            :class="index === 0 && !teams[rank.id].eliminated ? 'text-dark-green' : 'text-dark-yellow'">
-          <i class="fas fa-stopwatch ml-2 mt-1"></i>
+        <h5 class="col-3 p-0 my-0 text-dark-green h-100 d-flex flex-row align-items-center justify-content-end"
+            :class="index === 0 && !teams[rank.id].eliminated ? 'text-light' : 'text-dark-gray'">
           <b>{{ toPersian(rank.time) }}</b>
-        </h6>
-        <h4 class="mr-auto ml-4 my-0 text-gray"
-            :class="index === 0 && !teams[rank.id].eliminated ? 'text-light' : 'text-gray'">
-          <span class="ltr">{{ toPersian(getTotalPoint(rank.id)) }}</span>
-        </h4>
+          <i class="fas fa-clock mr-2"></i>
+        </h5>
+
+        <h5 class="col-3 p-0 my-0 text-gray text-left px-2 px-md-3"
+            :class="index === 0 && !teams[rank.id].eliminated ? 'text-light' : 'text-dark-gray'">
+          <b class="ltr">{{ toPersian(getTotalPoint(rank.id)) }}</b>
+          <i class="fas fa-star mr-2"></i>
+        </h5>
       </li>
     </ul>
 
@@ -59,13 +62,15 @@ export default {
       }
       return y.time - x.time;
     });
+
+    console.log(this.ranks)
   },
   methods: {
     getTotalPoint(index) {
       let team = this.table[index];
       return team.point + parseInt(team.time / 30) - (team.faults + team.changed);
     },
-    yellow(index, rankId) {
+    gray(index, rankId) {
       return index !== 0 && !this.teams[rankId].eliminated;
     },
     green(index, rankId) {
@@ -138,13 +143,13 @@ $light: #EFEFEF;
   color: darken(#44A666, 15%);
 }
 
-.team.yellow {
-  background-color: #F2C777;
-  border-bottom: 4px solid darken(#F2C777, 22%);
+.team.gray {
+  background-color: #CFCFCF;
+  border-bottom: 4px solid darken(#CFCFCF, 35%);
 }
 
-.text-dark-yellow {
-  color: darken(#F2C777, 22%);
+.text-dark-gray {
+  color: darken(#CFCFCF, 35%);
 }
 
 .nav-btn {
@@ -158,7 +163,7 @@ $light: #EFEFEF;
   line-height: 100%;
   height: 4rem;
   width: 4rem;
-  box-shadow: 0 0 8px 0 darken($light, 10%);
+  box-shadow: 0 2px 6px 0 darken($light, 10%);
 }
 
 .nav-btn:hover {
@@ -194,6 +199,22 @@ $light: #EFEFEF;
 @media only screen and (max-width: 575.98px) {
   .team {
     height: 3.25rem;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  h5 {
+    font-size: 16px;
+  }
+
+  h6 {
+    font-size: 14px;
+  }
+
+  .fas.fa-star {
+    font-size: 16px !important;
   }
 }
 </style>

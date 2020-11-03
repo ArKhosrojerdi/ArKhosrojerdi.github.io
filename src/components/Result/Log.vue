@@ -2,33 +2,32 @@
   <div class="d-flex flex-column flex-grow-1">
     <ul class="m-0 mb-4 p-0">
       <li v-for="(log, index) in logs" :key="index"
-          class="m-0 w-100 d-flex flex-column align-items-center w-100 list-item mb-3" :class="{'bb': active[index][1]}">
+          class="m-0 w-100 d-flex flex-column align-items-center w-100 list-item mb-2">
         <div v-if="log !== false" class="w-100 h-100">
-          <div class="row m-0 w-100 header text-white py-1 py-md-2"
-               :class="[log.round.success ? 'bg-green' : 'bg-red', {'rh': !active[index][1]}]"
+          <div class="row m-0 w-100 header text-white py-1"
+               :class="[{'bb rh': !active[index][1]}, log.round.success ? 'bg-green bbg': 'bg-red bbr']"
                @click="toggle(index)">
 
-            <div class="col-3 p-0 py-2 d-flex flex-column justify-content-center text-right pr-2 pr-md-4">
-              <h6 class="h-100">
+            <div class="col-3 p-0 py-2 d-flex flex-column justify-content-center text-right pr-2 pr-md-3">
+              <h5 class="h-100">
                 <b class="h-100 my-auto w-100 d-inline-block text-right text-truncate">
                   {{ teams[index % teams.length].name }}
                 </b>
-              </h6>
+              </h5>
             </div>
 
             <div class="col-6 p-0 d-flex flex-column justify-content-center">
-              <h6 class="h-100 text-center">
+              <h5 class="h-100 text-center">
                 <b class="h-100 w-100 d-inline-block text-truncate" style="line-height: normal">
                   {{ getWordById(log.catId, log.wordId) }}
                 </b>
-              </h6>
+              </h5>
             </div>
 
-            <div class="col-3 p-0 py-2 d-flex flex-column justify-content-center text-left pl-2 pl-md-4">
-              <h6 class="ltr">
-                <i v-if="log.round.success" class="mr-2 fas fa-star"></i>
-                <i v-else class="mr-2 fas fa-skull-crossbones"></i>
-                <b v-if="log.round.success">
+            <div class="col-3 p-0 d-flex flex-column justify-content-center text-left pl-2 pl-md-3">
+              <h5 class="ltr d-flex flex-row align-items-center">
+                <i class="mr-2 fas" :class="log.round.success ? 'fa-star' : 'fa-skull-crossbones'"></i>
+                <b class="h-100 d-inline-block" v-if="log.round.success">
                   {{
                     toPersian(log.round.point + parseInt(log.round.time / 30) - (log.round.faults + log.round.changed))
                   }}
@@ -36,14 +35,14 @@
                 <b v-else>
                   {{ toPersian(-(log.round.faults + log.round.changed)) }}
                 </b>
-              </h6>
+              </h5>
             </div>
 
           </div>
 
           <transition name="fade" mode="out-in">
-            <div v-if="active[index][0]">
-              <div class="d-flex flex-row align-items-center justify-content-between w-100 p-2 px-md-4 py-md-3">
+            <div v-if="active[index][0]" class="log-body">
+              <div class="d-flex flex-row align-items-center justify-content-between w-100 p-2 px-md-3 py-md-3">
 
                 <div class="d-flex flex-row">
                   <h6 v-if="log.round.changedWordId !== -1" class="text-muted">
@@ -66,11 +65,11 @@
 
               <hr class="m-0 w-100">
 
-              <div class="row w-100 ltr px-2 px-md-4 m-0 mt-2">
+              <div class="row w-100 ltr px-2 px-md-3 m-0 mt-2">
                 <div class="col-6 mb-2 p-0" :class="log.round.success ? 'text-dark-green' : 'text-dark-red'">
                   <div class="d-flex flex-row justify-content-start">
                     <h6 class="text-left w-25">
-                      <i class="fas fa-stopwatch"></i>
+                      <i class="fas fa-clock"></i>
                     </h6>
                     <h6 class="text-left">
                       <b>{{ toPersian(log.round.time) }}</b>
@@ -178,7 +177,7 @@ export default {
         setTimeout(() => {
           this.active[index][1] = false;
         }, 200);
-      }  else {
+      } else {
         this.active[index][1] = true;
       }
     },
@@ -236,13 +235,28 @@ ul {
 
 .list-item {
   //transition: all .2s ease;
+  border: none;
   border-radius: .5rem;
-  background-color: #DFDFDF;
+  background-color: #CFCFCF;
   box-shadow: 0 2px 4px 2px darken($light, 20%);
 }
 
 .list-item .bb {
-  border-bottom: 4px solid darken($light, 30%) !important;
+  border-bottom: 4px solid;
+}
+
+.list-item .bbg {
+  border-bottom-color: darken($green, 15%) !important;
+}
+
+.list-item .bbr {
+  border-bottom-color: darken($red, 22%) !important;
+}
+
+.log-body {
+  border-bottom: 4px solid;
+  border-radius: .5rem;
+  border-bottom-color: darken(#CFCFCF, 25%) !important;
 }
 
 h4, h5, h6 {

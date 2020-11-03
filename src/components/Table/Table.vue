@@ -2,10 +2,10 @@
   <div v-for="(team, index) in teams" :key="index"
        class="d-flex flex-row align-items-center justify-content-center team mb-2 round-sharp"
        :class="{'turn': team.id === turn, 'eliminated': team.eliminated, 'wait': !team.eliminated && team.id > turn, 'pass': !team.eliminated && team.id < turn}">
-    <h4 class="ml-auto mr-4 my-0">{{ team.name }}</h4>
-    <h4 class="mr-auto ml-4 my-0">
-      <span class="ltr">{{ toPersian(totalPoints(index)) }}</span>
-      <span class="mr-4">امتیاز</span>
+    <h4 class="ml-auto mr-2 mr-md-3 my-0">{{ team.name }}</h4>
+    <h4 class="mr-auto ml-2 ml-md-3 my-0">
+      <b class="ltr">{{ toPersian(totalPoints(index)) }}</b>
+      <i class="fas fa-star mr-2"></i>
     </h4>
   </div>
 </template>
@@ -67,7 +67,7 @@ $light: #EFEFEF;
 .team.turn {
   border-bottom: 4px solid darken($primary_color, 15%);
   background-color: $primary_color;
-  box-shadow: 0 4px 8px 0 darken($light, 20%);
+  box-shadow: 0 2px 6px 0 darken($light, 40%);
 }
 
 .team.turn h4 {
@@ -91,7 +91,9 @@ $light: #EFEFEF;
 }
 
 .team.pass {
+  border-bottom: 4px solid darken(#44A666, 15%);
   background-color: #44A666;
+  box-shadow: 0 2px 4px 0 darken($light, 40%);
 }
 
 .team.pass h4 {
@@ -106,6 +108,18 @@ $light: #EFEFEF;
 @media only screen and (max-width: 575.98px) {
   .team {
     height: 3.25rem;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  h5 {
+    font-size: 16px;
+  }
+
+  h6 {
+    font-size: 14px;
   }
 }
 </style>
