@@ -11,7 +11,7 @@
               </h4>
             </div>
             <div class="col-4">
-              <i v-if="totalPoint() > 0" class="fas fa-check text-dark-green"></i>
+              <i v-if="succeed" class="fas fa-check text-dark-green"></i>
               <i v-else class="fas fa-times text-dark-green"></i>
             </div>
           </div>
@@ -35,16 +35,8 @@
                 <b><span v-if="parseInt(savedTime / 30) > 0">+</span>{{ toPersian(parseInt(savedTime / 30)) }}</b>
               </h4>
             </div>
-            <div class="col-4 px-0">
-              <h6 class="m-0">
-                <b class="rtl text-dark-green">
-                  {{ toPersian(savedTime) }}
-                  ثانیه
-                </b>
-              </h6>
-            </div>
             <div class="col-4">
-              <i class="fas fa-stopwatch text-dark-green"></i>
+              <i class="fas fa-clock text-dark-green"></i>
             </div>
           </div>
         </li>
@@ -56,31 +48,29 @@
               </h4>
             </div>
             <div class="col-4">
-              <i class="fas fa-exclamation-triangle text-dark-red"></i>
+              <i class="fas fa-exclamation text-dark-red"></i>
             </div>
           </div>
         </li>
       </ul>
 
-      <div class="h-100 w-100 mt-3 mt-sm-4 row px-0 mx-0 justify-content-between">
-        <div class="col-4">
-          <h2 class="m-0">
-            <b v-if="totalPoint() > 0">
-              <i class="fas fa-star text-green"></i>
+      <div class="w-100 mt-3 mt-sm-4 row px-0 mx-0 justify-content-between total-body"
+           :class="succeed ? 'green' : 'red'">
+        <div class="d-flex flex-row align-items-center justify-content-between h-100 w-100">
+          <div class="col-4">
+            <b v-if="succeed">
+              <i class="fas fa-star text-dark-green"></i>
             </b>
             <b v-else>
-              <i class="fas fa-skull text-red"></i>
+              <i class="fas fa-skull-crossbones text-dark-red"></i>
             </b>
-          </h2>
-        </div>
+          </div>
 
-        <div class="col-4">
-          <h2 class="m-0" :class="totalPoint() > 0 ? 'text-green' : 'text-red'">
-            <b>
-              <span v-if="totalPoint() > 0">+</span>
-              {{ toPersian(totalPoint()) }}
-            </b>
-          </h2>
+          <div class="col-4">
+            <h4 class="m-0 d-inline-block ltr">
+              <b><span v-if="total > 0">+</span>{{ toPersian(total) }}</b>
+            </h4>
+          </div>
         </div>
       </div>
     </div>
@@ -97,7 +87,9 @@ import EndTurnButton from '../Buttons/EndTurnButton.vue';
 export default {
   data() {
     return {
-      points: {}
+      points: {},
+      succeed: false,
+      total: 0
     }
   },
   components: {
@@ -112,6 +104,8 @@ export default {
   ],
   created() {
     this.points = {success: this.success, point: this.point, changed: this.changed, faults: this.faults};
+    this.totalPoint() > 0 ? this.succeed = true : this.succeed = false;
+    this.total = this.totalPoint();
   },
   methods: {
     toPersian(n) {
@@ -149,16 +143,25 @@ ul li {
   list-style: none;
   background-color: #CFCFCF;
   border-radius: .5rem;
-  height: 4rem;
+  height: 3.5rem;
   width: 100%;
   direction: ltr;
   display: inline-block;
-  box-shadow: 0 2px 4px darken($light, 20%);
+  box-shadow: 0 2px 6px darken($light, 40%);
+}
+
+.total-body {
+  height: 3.5rem;
+  border-radius: .5rem;
+  box-shadow: 0 2px 6px darken($light, 40%);
 }
 
 .rtl {
   direction: rtl;
-  display: block;
+}
+
+.ltr {
+  direction: ltr;
 }
 
 .green {
@@ -187,9 +190,17 @@ ul li {
   color: #F24B6A;
 }
 
+.bh {
+  border-radius: .5rem;
+}
+
 /* Extra small devices (phones, 576px and down) */
 @media only screen and (max-width: 575.98px) {
   ul li {
+    height: 3rem;
+  }
+
+  .total-body {
     height: 3rem;
   }
 }
@@ -197,6 +208,10 @@ ul li {
 /* Small devices (portrait tablets and large phones, 576px and up) */
 @media only screen and (min-width: 576px) and (max-width: 767.98px) {
   ul li {
+    height: 3rem;
+  }
+
+  .total-body {
     height: 3rem;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column flex-1 col-xl-6 col-lg-9 col-md-9 col-sm-12 col-12 mx-auto p-0">
+  <div class="d-flex flex-column flex-1 col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 mx-auto p-0">
     <div>
       <h6>نوع بازی</h6>
       <div>
@@ -286,7 +286,7 @@ $light: #EFEFEF;
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .2s ease-in;
+  transition: opacity .1s ease-in;
 }
 
 .fade-enter, .fade-leave-to {

@@ -11,7 +11,7 @@
 
     <Table/>
 
-    <div class="d-flex flex-column flex-1">
+    <div class="d-flex flex-column flex-grow-1">
       <div class="mt-auto d-flex justify-content-between">
         <router-link to="/categories">
           <button class="nav-btn btn-border-tr-none wink px-2">
@@ -64,6 +64,9 @@ export default {
 <style lang="scss" scoped>
 $primary_color: #2669BF;
 $light: #EFEFEF;
+$green: #44A666;
+$red: #F24B6A;
+$gray: #CFCFCF;
 
 .nav-btn {
   outline: none;
@@ -105,8 +108,8 @@ $light: #EFEFEF;
 }
 
 .nav-btn.nav-btn-danger {
-  background-color: darken(#F24B6A, 5%);
-  border-color: darken(#F24B6A, 20%);
+  background-color: darken($red, 5%);
+  border-color: darken($red, 20%);
 }
 
 .wink {

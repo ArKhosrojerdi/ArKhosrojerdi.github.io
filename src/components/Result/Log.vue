@@ -94,7 +94,7 @@
                 <div class="col-6 mb-2 p-0 text-dark-red">
                   <div class="d-flex flex-row justify-content-start">
                     <h6 class="text-left w-25">
-                      <i class="fas fa-exclamation-circle"></i>
+                      <i class="fas fa-exclamation-triangle"></i>
                     </h6>
                     <h6 class="text-left">
                       <b>{{ toPersian(-log.round.faults) }}</b>

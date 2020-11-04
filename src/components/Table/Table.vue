@@ -2,8 +2,8 @@
   <div v-for="(team, index) in teams" :key="index"
        class="d-flex flex-row align-items-center justify-content-center team mb-2 round-sharp"
        :class="{'turn': team.id === turn, 'eliminated': team.eliminated, 'wait': !team.eliminated && team.id > turn, 'pass': !team.eliminated && team.id < turn}">
-    <h4 class="ml-auto mr-2 mr-md-3 my-0">{{ team.name }}</h4>
-    <h4 class="mr-auto ml-2 ml-md-3 my-0">
+    <h4 class="ml-auto mr-3 mr-md-3 my-0">{{ team.name }}</h4>
+    <h4 class="mr-auto ml-3 ml-md-3 my-0">
       <b class="ltr">{{ toPersian(totalPoints(index)) }}</b>
       <i class="fas fa-star mr-2"></i>
     </h4>
@@ -76,6 +76,8 @@ $light: #EFEFEF;
 
 .team.wait {
   background-color: #cfcfcf;
+  border-bottom: 4px solid darken(#cfcfcf, 15%);
+  box-shadow: 0 2px 6px 0 darken($light, 40%);
 }
 
 .team.wait h4 {
