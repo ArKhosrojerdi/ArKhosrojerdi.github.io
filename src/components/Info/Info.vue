@@ -1,135 +1,43 @@
 <template>
   <div class="d-flex flex-column flex-1 col-xl-10 col-12 mx-auto p-0">
     <ul class="p-0 mb-4">
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 green"></div>
-        <h6 class="text-justify m-0 mr-2">
-          اگه توی صفحه "جدول تیم‌ها" دور تیمت این رنگی بود
-          یعنی نوبتت رو توی اون دور بازی کردی
-          اما اگه توی صفحه "رده بندی" دور تیمت این رنگی بود
-          یعنی تیمت اول شده.
-        </h6>
-      </li>
+      <InfoItem :icon="''" :color="'green'"
+                :text=" 'اگه توی صفحه جدول تیم‌ها دور تیمت این رنگی بود یعنی نوبتت رو توی اون دور بازی کردی اما اگه توی صفحه رده بندی دور تیمت این رنگی بود یعنی تیمت اول شده.' "/>
+
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 blue"></div>
-        <h6 class="text-justify m-0 mr-2">
-          اگه دور تیمت این رنگی بود
-          یعنی نوبت تیم توعه.
-        </h6>
-      </li>
+      <InfoItem :icon="''" :color="'blue'" :text="'اگه دور تیمت این رنگی بود یعنی نوبت تیم توعه.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 gray"></div>
-        <h6 class="text-justify m-0 mr-2">
-          اگه توی صفحه "جدول تیم‌ها" دور تیمت این رنگی بود
-          یعنی هنوز نوبت تیمت نشده و باید منتظر بمونی
-          اما اگه توی صفحه "رده بندی" دور تیمت این رنگی بود
-          یعنی تیمت اول نشده.
-        </h6>
-      </li>
+      <InfoItem :icon="''" :color="'gray'"
+                :text="'اگه توی صفحه جدول تیم‌ها دور تیمت این رنگی بود یعنی هنوز نوبت تیمت نشده و باید منتظر بمونی اما اگه توی صفحه رده بندی دور تیمت این رنگی بود یعنی تیمت اول نشده.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 red"></div>
-        <h6 class="text-justify m-0 mr-2">
-          اگه دور تیمت این رنگی بود
-          یعنی تیمت از بازی حذف شده.
-        </h6>
-      </li>
+      <InfoItem :icon="''" :color="'red'" :text="'اگه دور تیمت این رنگی بود یعنی تیمت از بازی حذف شده.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 yellow c-light d-flex flex-column align-items-center">
-          <h5 class="h-100 my-auto"><i class="fas fa-sync-alt"></i></h5>
-        </div>
-        <h6 class="text-justify m-0 mr-2">
-          با این دکمه می‌تونی
-          کلمه‌ای که بازی برات آوردرو عوض کنی.
-        </h6>
-      </li>
+      <InfoItem :icon="'fa-play'" :color="'blue'"
+                :text="'وقتی آماده بودی و خواستی شروع کنی به اجرای کلمه، این دکمرو میزنی.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 yellow c-light d-flex flex-column align-items-center">
-          <h5 class="h-100 my-auto"><i class="fas fa-exclamation-triangle"></i></h5>
-        </div>
-        <h6 class="text-justify m-0 mr-2">
-          با این دکمه می‌تونی
-          برای تیم حریف خطا ثبت کنی.
-        </h6>
-      </li>
+      <InfoItem :icon="'fa-check'" :color="'blue'"
+                :text="'اگه تیم حریف تونست کلمرو حدس بزنه این دکمرو میزنی تا امتیازش ثبت بشه.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 blue c-light d-flex flex-column align-items-center">
-          <h5 class="h-100 my-auto"><i class="fas fa-play"></i></h5>
-        </div>
-        <h6 class="text-justify m-0 mr-2">
-          وقتی آماده بودی و خواستی شروع کنی به اجرای کلمه، این دکمرو میزنی.
-        </h6>
-      </li>
+      <InfoItem :icon="'fa-info-circle'" :color="'blue'"
+                :text="'اینکه دیگه توضیح نمیخواد! همین دکمرو زدی که اومدی اینجا دیگه.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 blue c-light d-flex flex-column align-items-center">
-          <h5 class="h-100 my-auto"><i class="fas fa-check"></i></h5>
-        </div>
-        <h6 class="text-justify m-0 mr-2">
-          اگه تیم حریف تونست کلمرو حدس بزنه این دکمرو میزنی تا امتیازش ثبت بشه.
-        </h6>
-      </li>
+      <InfoItem :icon="'fa-list-ul'" :color="'blue'"
+                :text="'لیست کلماتی که بازی کردید رو توی صفحه آمار میتونی ببینی. این کلمه تو رو به صفحه آمار میبره.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 blue c-light d-flex flex-column align-items-center">
-          <h5 class="h-100 my-auto"><i class="fas fa-info-circle"></i></h5>
-        </div>
-        <h6 class="text-justify m-0 mr-2">
-          اینکه دیگه توضیح نمیخواد! همین دکمرو زدی که اومدی اینجا دیگه.
-        </h6>
-      </li>
+      <InfoItem :icon="'fa-list-ol'" :color="'blue'"
+                :text="'رتبه‌بندی تیما رو می‌تونی تو صفحه رده‌بندی ببینی. با این دکمه به صفحه رده‌بندی میری.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 blue c-light d-flex flex-column align-items-center">
-          <h5 class="h-100 my-auto"><i class="fas fa-list-ul"></i></h5>
-        </div>
-        <h6 class="text-justify m-0 mr-2">
-          لیست کلماتی که بازی کردید رو توی صفحه آمار میتونی ببینی.
-          این کلمه تو رو به صفحه آمار میبره.
-        </h6>
-      </li>
+      <InfoItem :icon="'fa-home'" :color="'blue'" :text="'با این دکمه به صفحه اول بازی برمیگردی.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 blue c-light d-flex flex-column align-items-center">
-          <h5 class="h-100 my-auto"><i class="fas fa-list-ol"></i></h5>
-        </div>
-        <h6 class="text-justify m-0 mr-2">
-          رتبه‌بندی تیما رو می‌تونی تو صفحه رده‌بندی ببینی.
-          با این دکمه به صفحه رده‌بندی میری.
-        </h6>
-      </li>
+      <InfoItem :icon="'fa-sync-alt'" :color="'yellow'"
+                :text="'با این دکمه می‌تونی کلمه‌ای که بازی برات آوردرو عوض کنی.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 blue c-light d-flex flex-column align-items-center">
-          <h5 class="h-100 my-auto"><i class="fas fa-home"></i></h5>
-        </div>
-        <h6 class="text-justify m-0 mr-2">
-          با این دکمه به صفحه اول بازی برمیگردی.
-        </h6>
-      </li>
+      <InfoItem :icon="'fa-exclamation-triangle'" :color="'yellow'"
+                :text="'با این دکمه می‌تونی برای تیم حریف خطا ثبت کنی.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center mb-2 mb-md-3">
-        <div class="round shadow square3 red c-light d-flex flex-column align-items-center">
-          <h5 class="h-100 my-auto"><i class="fas fa-times"></i></h5>
-        </div>
-        <h6 class="text-justify m-0 mr-2">
-          اگه حریف نتونست کلمرو حدس بزنه این دکمرو میزنی.
-        </h6>
-      </li>
+      <InfoItem :icon="'fa-times'" :color="'red'" :text="'اگه حریف نتونست کلمرو حدس بزنه این دکمرو میزنی.'"/>
       <hr>
-      <li class="d-flex flex-row align-items-center">
-        <div class="round shadow square3 red c-light d-flex flex-column align-items-center">
-          <h5 class="h-100 my-auto"><i class="fas fa-door-open"></i></h5>
-        </div>
-        <h6 class="text-justify m-0 mr-2">
-          اگه خواستی بازیو تموم کنی این دکمرو میزنی.
-        </h6>
-      </li>
+      <InfoItem :icon="'fa-door-open'" :color="'red'" :text="'اگه خواستی بازیو تموم کنی این دکمرو میزنی.'"/>
     </ul>
 
     <div class="d-flex flex-column flex-grow-1 justify-content-end">
@@ -143,7 +51,13 @@
 </template>
 
 <script>
-export default {}
+import InfoItem from "@/components/Info/InfoItem";
+
+export default {
+  components: {
+    InfoItem
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -187,47 +101,5 @@ ul li {
   border-top: none;
   border-left: none;
   border-right: none;
-}
-
-.green {
-  background-color: $green;
-  border-bottom: 4px solid darken($green, 22%);
-}
-
-.red {
-  background-color: darken($red, 5%);
-  border-bottom: 4px solid darken($red, 20%);
-}
-
-.blue {
-  background-color: $primary_color;
-  border-bottom: 4px solid darken($primary_color, 20%);
-}
-
-.gray {
-  background-color: $gray;
-  border-bottom: 4px solid darken($gray, 20%);
-}
-
-.yellow {
-  background-color: $yellow;
-  border-bottom: 4px solid darken($yellow, 20%);
-}
-
-.c-light {
-  color: $light;
-}
-
-.square3 {
-  min-height: 3rem;
-  min-width: 3rem;
-}
-
-.round {
-  border-radius: .5rem;
-}
-
-.shadow {
-  box-shadow: 0 2px 6px 0 darken($light, 40%);
 }
 </style>
